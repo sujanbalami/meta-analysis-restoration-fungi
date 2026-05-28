@@ -1,0 +1,171 @@
+﻿ID,Year,Location,Latitude,Longitude,Ecosystem,Prior_land_use,Restoration_strategy
+SB001,2006,China,24.78333333,113.6,Forest,Mining,Active restoration
+SB002,2006,Netherlands,52.147,5.8777,Forest,Agriculture,Natural regeneration
+SB003,2012,USA,43.07597,-107.29028,Grassland,Mining,Natural regeneration
+SB004,2012,China,22.56666667,112.8333333,Forest,Deforestation,Active restoration
+SB005,2013,China,36.8583333,109.3063889,Grassland,Agriculture,Natural regeneration
+SB006,2014,China,23.12286111,113.9508,Grassland,Pasture,Natural regeneration
+SB007,2015,UK,53.54,-1.87,Forest,Others,Active restoration
+SB008,2015,China,24.71666667,102.5666667,Forest,Mining,Active restoration
+SB009,2015,USA,39.7684,-86.1581,Forest,Mining,Natural regeneration
+SB009,2015,USA,35.5175,-86.5804,Forest,Mining,Natural regeneration
+SB009,2015,USA,43.0003,-107.5546,Grassland,Mining,Natural regeneration
+SB009,2015,USA,40.6331,-89.3985,Grassland,Mining,Natural regeneration
+SB010,2015,China,36.84166667,109.3230556,Grassland,Agriculture,Natural regeneration
+SB011,2016,China,36.833333,109.5583333,Forest,Agriculture,Active restoration
+SB012,2016,Brazil,-10.17186389,-62.78768611,Forest,Deforestation,Natural regeneration
+SB013,2016,China,36.77638889,109.2294444,Forest,Agriculture,Active restoration
+SB014,2016,Australia,-37,146,Forest,Agriculture,Active restoration
+SB015,2016,Australia,-38.373,145.836,Forest,Pasture,Active restoration
+SB016,2016,Australia,-37,146,Forest,Pasture,Active restoration
+SB018,2016,China,32.75,111.2166667,Forest,Deforestation,Active restoration
+SB020,2017,USA,36.961639,-82.720048,Forest,Mining,Active restoration
+SB021,2017,China,35.75,109.916666,Forest,Erosion,Active restoration
+SB022,2017,China,36.158333,106.46666,Grassland,Agriculture,Active restoration
+SB023,2017,China,47.583333,133.516666,Grassland,Agriculture,Natural regeneration
+SB024,2017,China,36.83333333,108.75,Forest,Agriculture,Active restoration
+SB025,2017,China,36.76666667,109.2666667,Grassland,Agriculture,Natural regeneration
+SB027,2018,China,36.225,106.4,Grassland,Pasture,Natural regeneration
+SB028,2018,China,35.416666,108.283333,Forest,Agriculture,Active restoration
+SB029,2018,China,34.816666,108.125,Forest,Agriculture,Active restoration
+SB030,2018,China,34.816666,108.125,Forest,Deforestation,Active restoration
+SB031,2018,China,24.908333,107.941666,Forest,Agriculture,Active restoration
+SB032,2018,China,24.716666,102.566666,Forest,Mining,Active restoration
+SB033,2018,China,46.483333,131.48333,Forest,Mining,Active restoration
+SB034,2018,China,33.54455,107.8184,Forest,Agriculture,Natural regeneration
+SB035,2018,China,34.555,107.9305556,Forest,Agriculture,Natural regeneration
+SB037,2019,China,35.8333333,108.65,Forest,Agriculture,Natural regeneration
+SB038,2019,USA,33.2,-81.4,Forest,Agriculture,Active restoration
+SB040,2019,China,28.5833333,114.61666,Forest,Deforestation,Active restoration
+SB041,2019,China,36.7763888,109.248472,Grassland,Agriculture,Active restoration
+SB042,2019,China,21.463611,110.905,Forest,Erosion,Active restoration
+SB043,2019,China,37.55,109.555,Grassland,Agriculture,Natural regeneration
+SB044,2019,China,21.4,99.8,Forest,Agriculture,Active restoration
+SB045,2019,Costa Rica,10.45158333,-84.27342222,Forest,Deforestation,Natural regeneration
+SB047,2020,China,29.68111111,115.8225,Forest,Mining,Active restoration
+SB048,2020,China,31.755,102.708,Grassland,Deforestation,Natural regeneration
+SB049,2020,China,41.455833,123.638333,Forest,Mining,Active restoration
+SB050,2020,China,35.141666,101.35,Grassland,Pasture,Natural regeneration
+SB052,2020,China,43.033333,119.65,Grassland,Others,Natural regeneration
+SB053,2020,China,36.075,109.158333,Forest,Agriculture,Natural regeneration
+SB054,2020,China,36.8583333,109.341666,Forest,Agriculture,Natural regeneration
+SB056,2020,China,34.158333,105.041666,Forest,Deforestation,Active restoration
+SB057,2020,China,36.862608,109.352788,Forest,Agriculture,Active restoration
+SB058,2020,China,39.276145,110.3190722,Grassland,Mining,Active restoration
+SB059,2020,China,35.833333,108.733333,Forest,Agriculture,Natural regeneration
+SB060,2020,China,24.9,107.95,Forest,Agriculture,Active restoration
+SB061,2020,China,25.6488611,116.449,Forest,Erosion,Natural regeneration
+SB062,2020,China,25.6488611,116.449,Grassland,Erosion,Active restoration
+SB063,2020,China,37.71666667,107.35,Grassland,Pasture,Natural regeneration
+SB064,2020,China,40.7425,122.8638889,Forest,Mining,Active restoration
+SB066,2020,USA,39.62916667,-79.95611111,Grassland,Mining,Active restoration
+SB068,2021,Papua New Guinea,-5.2405555,145.092222,Forest,Agriculture,Natural regeneration
+SB069,2021,China,36.915,108.766944,Forest,Agriculture,Active restoration
+SB070,2021,Papua New Guinea,-5.2405555,145.0930556,Forest,Agriculture,Natural regeneration
+SB071,2021,Nepal,27.69,86,Forest,Agriculture,Natural regeneration
+SB072,2021,China,31.6202777,107.247638,Forest,Monoculture plantation,Active restoration
+SB073,2021,China,19.646666,110.966944,Forest,Mining,Active restoration
+SB074,2021,China,26.73333,115.06666,Forest,Monoculture plantation,Active restoration
+SB075,2021,China,32.35,91.6666,Grassland,Pasture,Natural regeneration
+SB076,2021,China,23.1,103.68333,Forest,Agriculture,Natural regeneration
+SB077,2021,China,22.05,106.85,Forest,Monoculture plantation,Active restoration
+SB078,2021,China,28.4029972,115.79,Forest,Erosion,Active restoration
+SB079,2021,China,26.22,110.32,Grassland,Pasture,Natural regeneration
+SB080,2021,China,22.133333,106.816666,Forest,Monoculture plantation,Active restoration
+SB081,2021,China,18.068333,108.841666,Forest,Deforestation,Natural regeneration
+SB082,2021,China,27.0583333,105.158333,Forest,Deforestation,Active restoration
+SB083,2021,China,25.1416666,108.283333,Forest,Agriculture,Natural regeneration
+SB084,2021,China,49.5416667,117.541667,Forest,Mining,Natural regeneration
+SB085,2021,China,28.391666,113.3666,Forest,Monoculture plantation,Natural regeneration
+SB086,2021,China,31.53575,102.434333,Forest,Deforestation,Natural regeneration
+SB088,2021,China,39.71666667,111.2166667,Grassland,Mining,Active restoration
+SB089,2021,China,36.8644,109.3293,Forest,Agriculture,Active restoration
+SB090,2022,China,36.01222222,109.0155556,Forest,Agriculture,Natural regeneration
+SB091,2022,China,46.0583,119.2833,Grassland,Pasture,Active restoration
+SB092,2022,China,26.265,106.065,Forest,Agriculture,Active restoration
+SB092,2022,China,26.265,106.065,Forest,Agriculture,Active restoration
+SB093,2022,China,40.0245833,117.136527,Forest,Mining,Active restoration
+SB094,2022,China,39.3776388,110.08375,Grassland,Mining,Active restoration
+SB095,2022,China,27.466666,119.416666,Forest,Monoculture plantation,Active restoration
+SB096,2022,China,25.1,114.8,Forest,Erosion,Active restoration
+SB097,2022,Australia,-37.78,145.49,Forest,Pasture,Active restoration
+SB098,2022,China,34.433333,100.558333,Grassland,Pasture,Active restoration
+SB099,2022,China,39.08333,106.11666,Forest,Mining,Active restoration
+SB100,2022,China,38.941666,115.98333,Forest,Agriculture,Active restoration
+SB101,2022,China,36.694027,109.60833,Grassland,Agriculture,Natural regeneration
+SB102,2022,China,27.55388889,114.505555,Forest,Monoculture plantation,Natural regeneration
+SB103,2022,China,47.35416667,123.92,Grassland,Pasture,Natural regeneration
+SB104,2022,China,47.9057,134.23907,Forest,Agriculture,Active restoration
+SB105,2022,China,33.6,111.833333,Forest,Deforestation,Active restoration
+SB106,2022,Vietnam,14.35,108.5666666,Forest,Deforestation,Active restoration
+SB107,2019,China,32.75,110.21666,Forest,Agriculture,Active restoration
+SB108,2022,China,26.2630555,105.81,Forest,Agriculture,Natural regeneration
+SB109,2022,China,23.86666,108.083333,Forest,Monoculture plantation,Active restoration
+SB110,2022,China,21.45,110.9,Forest,Deforestation,Active restoration
+SB111,2022,Canada,46.61,-81.43,Grassland,Mining,Active restoration
+SB112,2022,China,48.66666667,126.375,Forest,Deforestation,Natural regeneration
+SB113,2022,China,36.01916667,109.0155556,Forest,Agriculture,Natural regeneration
+SB114,2022,China,22.85,104.4333333,Forest,Deforestation,Natural regeneration
+SB115,2023,Poland,52.24,21.3,Forest,Agriculture,Natural regeneration
+SB116,2023,China,31.716,102.766,Grassland,Deforestation,Active restoration
+SB117,2023,China,48.116,129.108,Forest,Deforestation,Natural regeneration
+SB118,2023,China,34.47,100.21,Grassland,Agriculture,Active restoration
+SB119,2023,China,34.47,100.21,Grassland,Mining,Active restoration
+SB120,2023,China,29.7765277,106.354583,Forest,Others,Natural regeneration
+SB121,2023,China,33.016666,102.616666,Grassland,Pasture,Active restoration
+SB122,2023,China,40.0245833,117.136527,Forest,Mining,Active restoration
+SB123,2023,China,25.2,116.55,Forest,Monoculture plantation,Active restoration
+SB124,2023,China,32.2530555,100.699166,Grassland,Agriculture,Active restoration
+SB125,2023,China,21.26666,110.08333,Forest,Monoculture plantation,Active restoration
+SB127,2023,China,33.925,96.06666,Grassland,Pasture,Active restoration
+SB128,2023,China,44.53333,116.51666,Grassland,Mining,Natural regeneration
+SB130,2023,China ,34.816666,108.125,Forest,Monoculture plantation,Active restoration
+SB131,2023,China,44.005,89.2,Grassland,Pasture,Natural regeneration
+SB132,2023,China,27.7416666,109.16666,Forest,Erosion,Active restoration
+SB133,2023,China,38.54328333,100.254616,Grassland,Pasture,Active restoration
+SB135,2023,China,27.79,114.91,Forest,Deforestation,Active restoration
+SB136,2023,China,24.869444,113.2111,Forest,Agriculture,Natural regeneration
+SB137,2023,China,27.625,111.108333,Forest,Agriculture,Active restoration
+SB138,2023,China,25.2916666,106.61666,Forest,Agriculture,Active restoration
+SB140,2023,China,42.91666667,120.6833333,Grassland,Pasture,Natural regeneration
+SB141,2023,China,42.41666667,116.8833333,Forest,Deforestation,Active restoration
+SB142,2023,China,26.63333333,115.2833333,Forest,Monoculture plantation,Active restoration
+SB143,2023,China,36.21666667,106.4333333,Grassland,Agriculture,Natural regeneration
+SB144,2024,China,25.67,116.35,Forest,Erosion,Active restoration
+SB145,2024,China,34.516,108.085,Forest,Agriculture,Active restoration
+SB146,2024,China,25.677,116.471,Forest,Erosion,Active restoration
+SB147,2024,China,36.05,104.7,Grassland,Agriculture,Active restoration
+SB148,2024,China,37.616666,101.316666,Grassland,Pasture,Natural regeneration
+SB149,2024,China,28.75,116.01666,Forest,Agriculture,Natural regeneration
+SB150,2024,China,34.783333,100.35,Grassland,Pasture,Active restoration
+SB151,2024,China,44.583333,123.5,Grassland,Pasture,Natural regeneration
+SB152,2024,China,34.916666,102.883333,Grassland,Agriculture,Natural regeneration
+SB153,2024,China,43.593333,116.707638,Grassland,Pasture,Natural regeneration
+SB154,2024,China,34.816666,108.125,Forest,Agriculture,Active restoration
+SB155,2024,China,25.63333333,116.3916667,Forest,Erosion,Active restoration
+SB156,2024,China,29.763,106.315,Forest,Deforestation,Active restoration
+SB157,2024,China,26.63333333,115.2833333,Forest,Monoculture plantation,Active restoration
+SB158,2024,China,36.85,109.3166667,Grassland,Agriculture,Natural regeneration
+SB159,2024,China,24.71666667,108.3,Forest,Agriculture,Active restoration
+SB160,2024,China,46.5,132.3780556,Grassland,Agriculture,Natural regeneration
+SB161,2024,Brazil,-3.746111,-39.783333,Forest,Pasture,Natural regeneration
+SB162,2024,China,36.8644,109.3293,Grassland,Agriculture,Natural regeneration
+SB163,2024,China,22.69833333,112.6405556,Forest,Monoculture plantation,Active restoration
+SB164,2024,Spain,40.82444444,-2.28555556,Forest,Agriculture,Natural regeneration
+SB165,2024,China,33.333,108.35,Forest,Deforestation,Natural regeneration
+SB166,2024,China,37.2,121.62,Forest,Deforestation,Natural regeneration
+SB170,2025,China,36.16666667,106.35,Grassland,Pasture,Natural regeneration
+SB171,2025,China,38.08333333,99.25,Grassland,Mining,Active restoration
+SB172,2025,China,33.17861111,102.6261111,Grassland,Pasture,Active restoration
+SB173,2025,Spain,46.51666667,13.5,Forest,Pasture,Natural regeneration
+SB174,2025,China,35.83333333,120.0333333,Forest,Deforestation,Active restoration
+SB175,2025,China,29.05,110.3833333,Forest,Erosion,Active restoration
+SB176,2025,China,49.13,120.16,Grassland,Pasture,Natural regeneration
+SB177,2025,China,26.33333333,115.0166667,Forest,Erosion,Active restoration
+SB179,2025,China,37.7843,107.4072,Forest,Pasture,Active restoration
+SB180,2025,China,38.63944444,99.15111111,Grassland,Pasture,Active restoration
+SB182,2025,China,40.5775,111.7655556,Grassland,Agriculture,Active restoration
+SB183,2025,China,23.1725,112.5441667,Forest,Deforestation,Active restoration
+SB184,2025,China,32.51666667,96.93333333,Grassland,Pasture,Active restoration
+SB185,2025,China,40.03205833,112.4533722,Grassland,Agriculture,Active restoration
+SB186,2023,China,36.225,106.4,Grassland,Pasture,Natural regeneration

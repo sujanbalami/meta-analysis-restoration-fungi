@@ -1,0 +1,19 @@
+Restoration_strategy,Metrics,Comparison
+Active,Shannon index,175
+Active,Ascomycota,170
+Active,Basidiomycota,165
+Active,Beta diversity,166
+Active,Structure,166
+Active,Chao1 richness,124
+Active,OTU richness,104
+Active,PLFA content,91
+Active,Simpson index,53
+Passive,Shannon index,128
+Passive,Beta diversity,109
+Passive,Structure,109
+Passive,Ascomycota,102
+Passive,Basidiomycota,98
+Passive,Chao1 richness,90
+Passive,OTU richness,80
+Passive,PLFA content,58
+Passive,Simpson index,37

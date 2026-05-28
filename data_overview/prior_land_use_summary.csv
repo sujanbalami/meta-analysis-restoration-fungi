@@ -1,0 +1,62 @@
+Prior_land_use,Metrics,Comparison
+Agriculture,Ascomycota,103
+Agriculture,Shannon index,103
+Agriculture,Basidiomycota,101
+Agriculture,Beta diversity,90
+Agriculture,Structure,90
+Agriculture,Chao1 richness,69
+Agriculture,OTU richness,62
+Agriculture,PLFA content,61
+Agriculture,Simpson index,25
+Deforestation,Shannon index,47
+Deforestation,Beta diversity,44
+Deforestation,Structure,44
+Deforestation,Ascomycota,43
+Deforestation,Basidiomycota,43
+Deforestation,Chao1 richness,32
+Deforestation,OTU richness,27
+Deforestation,Simpson index,17
+Deforestation,PLFA content,16
+Erosion,Shannon index,21
+Erosion,Ascomycota,18
+Erosion,Basidiomycota,18
+Erosion,Beta diversity,20
+Erosion,Chao1 richness,15
+Erosion,Structure,20
+Erosion,PLFA content,16
+Erosion,Simpson index,5
+Erosion,OTU richness,8
+Mining,Beta diversity,48
+Mining,Structure,48
+Mining,Ascomycota,45
+Mining,Basidiomycota,45
+Mining,Shannon index,44
+Mining,PLFA content,43
+Mining,Chao1 richness,36
+Mining,OTU richness,28
+Mining,Simpson index,24
+Monoculture plantation,Beta diversity,23
+Monoculture plantation,Shannon index,23
+Monoculture plantation,Structure,23
+Monoculture plantation,Ascomycota,21
+Monoculture plantation,Basidiomycota,21
+Monoculture plantation,Chao1 richness,18
+Monoculture plantation,OTU richness,13
+Monoculture plantation,PLFA content,6
+Monoculture plantation,Simpson index,6
+Others,Ascomycota,6
+Others,Basidiomycota,6
+Others,Beta diversity,5
+Others,Shannon index,5
+Others,Structure,5
+Others,Chao1 richness,3
+Others,OTU richness,3
+Pasture,Shannon index,60
+Pasture,Beta diversity,45
+Pasture,Structure,45
+Pasture,OTU richness,51
+Pasture,Chao1 richness,41
+Pasture,Ascomycota,36
+Pasture,Basidiomycota,29
+Pasture,Simpson index,13
+Pasture,PLFA content,7
