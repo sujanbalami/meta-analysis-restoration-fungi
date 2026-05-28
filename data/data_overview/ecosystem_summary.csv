@@ -1,0 +1,19 @@
+Ecosystem,Metrics,Comparison
+Forest,Shannon index,193
+Forest,Beta diversity,187
+Forest,Structure,187
+Forest,Ascomycota,174
+Forest,Basidiomycota,174
+Forest,Chao1 richness,132
+Forest,PLFA content,108
+Forest,OTU richness,99
+Forest,Simpson index,54
+Grassland,Shannon index,110
+Grassland,Ascomycota,98
+Grassland,Basidiomycota,89
+Grassland,Beta diversity,88
+Grassland,Structure,88
+Grassland,Chao1 richness,82
+Grassland,OTU richness,85
+Grassland,PLFA content,41
+Grassland,Simpson index,36
