@@ -1,0 +1,218 @@
+﻿ID,Ecosystem,Prior_land_use,Restoration_strategy,Restoration_time,Fungal group,Metrics,Restored_Mean,Degraded_Mean,Restored_SD,Degraded_SD,Restored_SS,Degraded_SS
+SB140,Grassland,Pasture,Passive,33,Basidiomycota,Relative abundance,0.03,0.009,0.003,0.0009,9,9
+SB127,Grassland,Pasture,Active,4,Basidiomycota,Relative abundance,0.146,0.146,0.121243557,0.324,3,4
+SB186,Grassland,Pasture,Passive,20,Basidiomycota,Relative abundance,0.116,0.15,0.024,0.062609903,4,5
+SB186,Grassland,Pasture,Passive,40,Basidiomycota,Relative abundance,0.066,0.15,0.016,0.062609903,4,5
+SB078,Forest,Erosion,Active,1,Basidiomycota,Relative abundance,0.541,0.437,0.51441909,0.594,3,4
+SB078,Forest,Erosion,Active,6,Basidiomycota,Relative abundance,0.693,0.437,0.225166605,0.594,3,4
+SB078,Forest,Erosion,Active,11,Basidiomycota,Relative abundance,0.425,0.437,0.405299889,0.594,3,4
+SB078,Forest,Erosion,Active,16,Basidiomycota,Relative abundance,0.427,0.437,0.497098582,0.594,3,4
+SB030,Forest,Deforestation,Active,26,Basidiomycota,Relative abundance,0.576,0.506,0.070710678,0.081,8,9
+SB130,Forest,Monoculture plantation,Active,7,Basidiomycota,Relative abundance,0.45,0.56,0.207846097,0.2,3,4
+SB130,Forest,Monoculture plantation,Active,13,Basidiomycota,Relative abundance,0.39,0.56,0.08660254,0.2,3,4
+SB130,Forest,Monoculture plantation,Active,23,Basidiomycota,Relative abundance,0.31,0.56,0.121243557,0.2,3,4
+SB047,Forest,Mining,Active,4,Basidiomycota,Relative abundance,0.5,1,0.05,0.1,20,21
+SB072,Forest,Monoculture plantation,Active,2,Basidiomycota,Relative abundance,4,2,0.4,0.2,3,3
+SB072,Forest,Monoculture plantation,Active,2,Basidiomycota,Relative abundance,2,2,0.2,0.2,3,3
+SB058,Grassland,Mining,Active,5,Basidiomycota,Relative abundance,17,3,1.7,0.3,3,4
+SB058,Grassland,Mining,Active,5,Basidiomycota,Relative abundance,4,3,0.4,0.3,3,4
+SB058,Grassland,Mining,Active,5,Basidiomycota,Relative abundance,6,3,0.6,0.3,3,4
+SB058,Grassland,Mining,Active,5,Basidiomycota,Relative abundance,17,3,1.7,0.3,3,4
+SB058,Grassland,Mining,Active,5,Basidiomycota,Relative abundance,25,3,2.5,0.3,3,4
+SB058,Grassland,Mining,Active,5,Basidiomycota,Relative abundance,6,3,0.6,0.3,3,4
+SB096,Forest,Erosion,Active,2.5,Basidiomycota,Relative abundance,44,3,4.4,0.3,3,4
+SB103,Grassland,Pasture,Passive,3,Basidiomycota,Relative abundance,60,3,6,0.3,3,4
+SB171,Grassland,Mining,Active,2,Basidiomycota,Relative abundance,9,3,0.9,0.3,7,7
+SB171,Grassland,Mining,Active,6,Basidiomycota,Relative abundance,14,3,1.4,0.3,7,7
+SB185,Grassland,Agriculture,Active,17.5,Basidiomycota,Relative abundance,15,3,1.5,0.3,3,3
+SB185,Grassland,Agriculture,Active,17.5,Basidiomycota,Relative abundance,27,3,2.7,0.3,3,3
+SB185,Grassland,Agriculture,Active,17.5,Basidiomycota,Relative abundance,6.25,3,0.625,0.3,3,3
+SB076,Forest,Agriculture,Passive,3,Basidiomycota,Relative abundance,24.22,4.52,2.422,0.452,3,4
+SB076,Forest,Agriculture,Passive,6,Basidiomycota,Relative abundance,16.86,4.52,1.686,0.452,3,4
+SB076,Forest,Agriculture,Passive,20,Basidiomycota,Relative abundance,27.82,4.52,2.782,0.452,3,4
+SB076,Forest,Agriculture,Passive,40,Basidiomycota,Relative abundance,19.32,4.52,1.932,0.452,3,4
+SB047,Forest,Mining,Active,3,Basidiomycota,Relative abundance,1,5,0.1,0.5,20,21
+SB059,Forest,Agriculture,Passive,30,Basidiomycota,Relative abundance,50,5,5,0.5,3,4
+SB059,Forest,Agriculture,Passive,60,Basidiomycota,Relative abundance,30,5,3,0.5,3,4
+SB059,Forest,Agriculture,Passive,110,Basidiomycota,Relative abundance,30,5,3,0.5,3,4
+SB089,Forest,Agriculture,Active,29,Basidiomycota,Relative abundance,12.5,5,1.25,0.5,9,9
+SB100,Forest,Agriculture,Active,1.5,Basidiomycota,Relative abundance,15,5,1.5,0.5,5,6
+SB100,Forest,Agriculture,Active,15,Basidiomycota,Relative abundance,37,5,3.7,0.5,5,6
+SB100,Forest,Agriculture,Active,1.5,Basidiomycota,Relative abundance,4,5,0.4,0.5,5,6
+SB100,Forest,Agriculture,Active,15,Basidiomycota,Relative abundance,10,5,1,0.5,5,6
+SB037,Forest,Agriculture,Passive,11,Basidiomycota,Relative abundance,18.205,5.504,2.76547392,0.5504,6,7
+SB037,Forest,Agriculture,Passive,35,Basidiomycota,Relative abundance,13.407,5.504,2.76547392,0.5504,6,7
+SB037,Forest,Agriculture,Passive,60,Basidiomycota,Relative abundance,27.096,5.504,2.76547392,0.5504,6,7
+SB037,Forest,Agriculture,Passive,100,Basidiomycota,Relative abundance,36.834,5.504,2.76547392,0.5504,6,7
+SB037,Forest,Agriculture,Passive,150,Basidiomycota,Relative abundance,30.625,5.504,2.76547392,0.5504,6,7
+SB151,Grassland,Pasture,Passive,20,Basidiomycota,Relative abundance,4.243,6.77,0.926647182,1.458,3,4
+SB158,Grassland,Agriculture,Passive,10,Basidiomycota,Relative abundance,4.89,6.91,0.489,0.691,3,3
+SB158,Grassland,Agriculture,Passive,20,Basidiomycota,Relative abundance,24.91,6.91,2.491,0.691,3,3
+SB158,Grassland,Agriculture,Passive,30,Basidiomycota,Relative abundance,9.34,6.91,0.934,0.691,3,3
+SB158,Grassland,Agriculture,Passive,40,Basidiomycota,Relative abundance,9.56,6.91,0.956,0.691,3,3
+SB158,Grassland,Agriculture,Passive,50,Basidiomycota,Relative abundance,15,6.91,1.5,0.691,3,3
+SB064,Forest,Mining,Active,12,Basidiomycota,Relative abundance,6,7,0.6,0.7,4,4
+SB054,Forest,Agriculture,Passive,10,Basidiomycota,Relative abundance,20,8,2,0.8,3,4
+SB054,Forest,Agriculture,Passive,20,Basidiomycota,Relative abundance,18,8,1.8,0.8,3,4
+SB054,Forest,Agriculture,Passive,30,Basidiomycota,Relative abundance,11,8,1.1,0.8,3,4
+SB054,Forest,Agriculture,Passive,40,Basidiomycota,Relative abundance,14,8,1.4,0.8,3,4
+SB054,Forest,Agriculture,Passive,50,Basidiomycota,Relative abundance,10,8,1,0.8,3,4
+SB132,Forest,Erosion,Active,57,Basidiomycota,Relative abundance,62,8,6.2,0.8,4,5
+SB132,Forest,Erosion,Active,57,Basidiomycota,Relative abundance,35,8,3.5,0.8,4,5
+SB132,Forest,Erosion,Active,57,Basidiomycota,Relative abundance,6,8,0.6,0.8,4,5
+SB156,Forest,Deforestation,Active,15,Basidiomycota,Relative abundance,9,8,0.9,0.8,4,4
+SB156,Forest,Deforestation,Active,12,Basidiomycota,Relative abundance,12.5,8,1.25,0.8,4,4
+SB090,Forest,Agriculture,Passive,110,Basidiomycota,Relative abundance,32,8.19,12.14,3.331741286,4,5
+SB090,Forest,Agriculture,Passive,30,Basidiomycota,Relative abundance,12.69,8.19,2.72,3.331741286,4,5
+SB090,Forest,Agriculture,Passive,15,Basidiomycota,Relative abundance,17.43,8.19,10.1,3.331741286,4,5
+SB090,Forest,Agriculture,Passive,50,Basidiomycota,Relative abundance,8.28,8.19,2.46,3.331741286,4,5
+SB069,Forest,Agriculture,Active,17,Basidiomycota,Relative abundance,10.095,8.571,1.978002022,2.666,3,4
+SB069,Forest,Agriculture,Active,28,Basidiomycota,Relative abundance,13.523,8.571,1.648912369,2.666,3,4
+SB069,Forest,Agriculture,Active,34,Basidiomycota,Relative abundance,3.619,8.571,0.989001011,2.666,3,4
+SB069,Forest,Agriculture,Active,45,Basidiomycota,Relative abundance,28.571,8.571,4.617647453,2.666,3,4
+SB118,Grassland,Agriculture,Active,2.5,Basidiomycota,Relative abundance,11,9,1.1,0.9,5,6
+SB118,Grassland,Agriculture,Active,11,Basidiomycota,Relative abundance,18,9,1.8,0.9,5,6
+SB118,Grassland,Agriculture,Active,16,Basidiomycota,Relative abundance,11,9,1.1,0.9,5,6
+SB136,Forest,Agriculture,Passive,7,Basidiomycota,Relative abundance,5,9,0.5,0.9,3,4
+SB136,Forest,Agriculture,Passive,21,Basidiomycota,Relative abundance,12,9,1.2,0.9,3,4
+SB136,Forest,Agriculture,Active,7,Basidiomycota,Relative abundance,10,9,1,0.9,3,4
+SB136,Forest,Agriculture,Active,7,Basidiomycota,Relative abundance,10,9,1,0.9,3,4
+SB174,Forest,Deforestation,Active,50,Basidiomycota,Relative abundance,28,9,2.8,0.9,4,4
+SB174,Forest,Deforestation,Active,35,Basidiomycota,Relative abundance,13,9,1.3,0.9,4,4
+SB162,Grassland,Agriculture,Passive,5,Basidiomycota,Relative abundance,13.402062,9.690722,1.0713716,3.5712388,3,3
+SB162,Grassland,Agriculture,Passive,15,Basidiomycota,Relative abundance,15.463918,9.690722,3.2141149,3.5712388,3,3
+SB162,Grassland,Agriculture,Passive,20,Basidiomycota,Relative abundance,5.154639,9.690722,0.7142478,3.5712388,3,3
+SB162,Grassland,Agriculture,Passive,40,Basidiomycota,Relative abundance,39.381443,9.690722,2.856991,3.5712388,3,3
+SB150,Grassland,Pasture,Active,5,Basidiomycota,Relative abundance,40,10,4,1,3,4
+SB150,Grassland,Pasture,Active,14,Basidiomycota,Relative abundance,50,10,5,1,3,4
+SB150,Grassland,Pasture,Active,16,Basidiomycota,Relative abundance,37,10,3.7,1,3,4
+SB150,Grassland,Pasture,Active,19,Basidiomycota,Relative abundance,40,10,4,1,3,4
+SB034,Forest,Agriculture,Passive,9,Basidiomycota,Relative abundance,22.59,10.87,10.23890619,4.815267386,8,7
+SB034,Forest,Agriculture,Passive,16.2,Basidiomycota,Relative abundance,32.73,10.87,9.9505025,4.815267386,5,7
+SB034,Forest,Agriculture,Passive,52.4,Basidiomycota,Relative abundance,63.75,10.87,20.7,4.815267386,9,7
+SB159,Forest,Agriculture,Active,18,Basidiomycota,Relative abundance,12,11,1.2,1.1,3,3
+SB041,Grassland,Agriculture,Active,17,Basidiomycota,Relative abundance,15.5,11.5,6.84160069,2,3,4
+SB041,Grassland,Agriculture,Active,27,Basidiomycota,Relative abundance,10.9,11.5,1.576166235,2,3,4
+SB041,Grassland,Agriculture,Active,42,Basidiomycota,Relative abundance,11.8,11.5,3.550704156,2,3,4
+SB137,Forest,Agriculture,Active,17.5,Basidiomycota,Relative abundance,42.2,11.51,13.05966309,3.54,3,4
+SB021,Forest,Erosion,Active,12,Basidiomycota,Relative abundance,26.666,11.972,15.00848826,2.028113656,5,5
+SB021,Forest,Erosion,Active,29,Basidiomycota,Relative abundance,75.102,11.972,15.41321657,2.028113656,5,5
+SB021,Forest,Erosion,Active,53,Basidiomycota,Relative abundance,76.009,11.972,24.33736387,2.028113656,5,5
+SB074,Forest,Monoculture plantation,Active,12,Basidiomycota,Relative abundance,19.29,11.99,3.52,2.303150017,4,5
+SB079,Grassland,Pasture,Passive,5,Basidiomycota,Relative abundance,10,12,1,1.2,3,4
+SB079,Grassland,Pasture,Passive,10,Basidiomycota,Relative abundance,10,12,1,1.2,3,4
+SB079,Grassland,Pasture,Passive,15,Basidiomycota,Relative abundance,10,12,1,1.2,3,4
+SB079,Grassland,Pasture,Passive,25,Basidiomycota,Relative abundance,15,12,1.5,1.2,3,4
+SB079,Grassland,Pasture,Passive,30,Basidiomycota,Relative abundance,5,12,0.5,1.2,3,4
+SB082,Forest,Deforestation,Active,10,Basidiomycota,Relative abundance,55,12,5.5,1.2,5,6
+SB082,Forest,Deforestation,Active,16,Basidiomycota,Relative abundance,38,12,3.8,1.2,5,6
+SB082,Forest,Deforestation,Active,22,Basidiomycota,Relative abundance,53,12,5.3,1.2,5,6
+SB082,Forest,Deforestation,Active,47,Basidiomycota,Relative abundance,37,12,3.7,1.2,5,6
+SB114,Forest,Deforestation,Passive,30,Basidiomycota,Relative abundance,15,12,1.5,1.2,3,3
+SB114,Forest,Deforestation,Passive,30,Basidiomycota,Relative abundance,17.5,12,1.75,1.2,3,3
+SB114,Forest,Deforestation,Passive,30,Basidiomycota,Relative abundance,21,12,2.1,1.2,3,3
+SB115,Forest,Agriculture,Passive,8,Basidiomycota,Relative abundance,18,12,1.8,1.2,2,3
+SB115,Forest,Agriculture,Passive,33,Basidiomycota,Relative abundance,52,12,5.2,1.2,2,3
+SB115,Forest,Agriculture,Passive,40,Basidiomycota,Relative abundance,67,12,6.7,1.2,2,3
+SB154,Forest,Agriculture,Active,24,Basidiomycota,Relative abundance,18,12,1.8,1.2,3,4
+SB154,Forest,Agriculture,Active,24,Basidiomycota,Relative abundance,71,12,7.1,1.2,3,4
+SB154,Forest,Agriculture,Active,24,Basidiomycota,Relative abundance,35,12,3.5,1.2,3,4
+SB154,Forest,Agriculture,Active,24,Basidiomycota,Relative abundance,25,12,2.5,1.2,3,4
+SB154,Forest,Agriculture,Active,24,Basidiomycota,Relative abundance,18,12,1.8,1.2,3,4
+SB154,Forest,Agriculture,Active,24,Basidiomycota,Relative abundance,85,12,8.5,1.2,3,4
+SB160,Grassland,Agriculture,Passive,2,Basidiomycota,Relative abundance,14,12,1.4,1.2,3,3
+SB160,Grassland,Agriculture,Passive,8,Basidiomycota,Relative abundance,6,12,0.6,1.2,3,3
+SB049,Forest,Mining,Active,6,Basidiomycota,Relative abundance,20,12.5,2,1.25,4,5
+SB049,Forest,Mining,Active,6,Basidiomycota,Relative abundance,40,12.5,4,1.25,4,5
+SB049,Forest,Mining,Active,6,Basidiomycota,Relative abundance,6.5,12.5,0.65,1.25,4,5
+SB097,Forest,Pasture,Active,6,Basidiomycota,Relative abundance,18,12.5,1.8,1.25,9,10
+SB184,Grassland,Pasture,Active,5,Basidiomycota,Relative abundance,12.5,12.5,1.25,1.25,9,8
+SB184,Grassland,Pasture,Active,10,Basidiomycota,Relative abundance,15,12.5,1.5,1.25,6,8
+SB028,Forest,Agriculture,Active,15,Basidiomycota,Relative abundance,33.75,13.84,7.517100505,3.32,3,4
+SB028,Forest,Agriculture,Active,30,Basidiomycota,Relative abundance,66.57,13.84,15.31132914,3.32,3,4
+SB028,Forest,Agriculture,Active,45,Basidiomycota,Relative abundance,53.91,13.84,12.79985547,3.32,3,4
+SB155,Forest,Erosion,Active,43,Basidiomycota,Relative abundance,62,14,6.2,1.4,4,4
+SB155,Forest,Erosion,Active,43,Basidiomycota,Relative abundance,30,14,3,1.4,4,4
+SB155,Forest,Erosion,Active,43,Basidiomycota,Relative abundance,32,14,3.2,1.4,4,4
+SB029,Forest,Agriculture,Active,5,Basidiomycota,Relative abundance,16.271,14.406,1.467047034,2.71,3,4
+SB029,Forest,Agriculture,Active,15,Basidiomycota,Relative abundance,16.61,14.406,1.172598397,2.71,3,4
+SB029,Forest,Agriculture,Active,25,Basidiomycota,Relative abundance,18.983,14.406,2.346928844,2.71,3,4
+SB029,Forest,Agriculture,Active,35,Basidiomycota,Relative abundance,11.694,14.406,0.87988181,2.71,3,4
+SB074,Forest,Monoculture plantation,Active,12,Basidiomycota,Relative abundance,20.58,14.77,1.54,2.728002933,4,5
+SB092,Forest,Agriculture,Active,15,Basidiomycota,Relative abundance,45,15,4.5,1.5,18,19
+SB092,Forest,Agriculture,Passive,15,Basidiomycota,Relative abundance,45,15,4.5,1.5,18,19
+SB092,Forest,Agriculture,Active,15,Basidiomycota,Relative abundance,30,15,3,1.5,18,19
+SB092,Forest,Agriculture,Passive,15,Basidiomycota,Relative abundance,32,15,3.2,1.5,18,19
+SB104,Forest,Agriculture,Active,7,Basidiomycota,Relative abundance,86,15,8.6,1.5,3,4
+SB143,Grassland,Agriculture,Passive,5,Basidiomycota,Relative abundance,15,16,1.5,1.6,3,3
+SB143,Grassland,Agriculture,Passive,10,Basidiomycota,Relative abundance,12,16,1.2,1.6,3,3
+SB143,Grassland,Agriculture,Passive,15,Basidiomycota,Relative abundance,12,16,1.2,1.6,3,3
+SB143,Grassland,Agriculture,Passive,25,Basidiomycota,Relative abundance,12,16,1.2,1.6,3,3
+SB143,Grassland,Agriculture,Passive,30,Basidiomycota,Relative abundance,12,16,1.2,1.6,3,3
+SB121,Grassland,Pasture,Active,14,Basidiomycota,Relative abundance,7.125,17,0.7125,1.7,4,5
+SB121,Grassland,Pasture,Active,14,Basidiomycota,Relative abundance,25.25,17,2.525,1.7,4,5
+SB121,Grassland,Pasture,Active,14,Basidiomycota,Relative abundance,19.5,17,1.95,1.7,4,5
+SB077,Forest,Monoculture plantation,Active,11,Basidiomycota,Relative abundance,28.03,18.03,32.45863213,8.54,3,4
+SB077,Forest,Monoculture plantation,Active,11,Basidiomycota,Relative abundance,78.76,18.03,12.21095819,8.54,3,4
+SB099,Forest,Mining,Active,2,Basidiomycota,Relative abundance,31.468,18.58,32.37,20.77530758,4,5
+SB099,Forest,Mining,Active,2,Basidiomycota,Relative abundance,2.994,18.58,3.596,20.77530758,4,5
+SB099,Forest,Mining,Active,2,Basidiomycota,Relative abundance,57.8444,18.58,38.964,20.77530758,4,5
+SB056,Forest,Deforestation,Active,43,Basidiomycota,Relative abundance,5.35,18.7,4.114365079,19.10601999,5,6
+SB142,Forest,Monoculture plantation,Active,5,Basidiomycota,Relative abundance,13,20,1.3,2,3,3
+SB142,Forest,Monoculture plantation,Active,10,Basidiomycota,Relative abundance,15,20,1.5,2,3,3
+SB071,Forest,Agriculture,Passive,5,Basidiomycota,Relative abundance,11.044,20.004,1.1044,2.0004,5,5
+SB071,Forest,Agriculture,Passive,17.5,Basidiomycota,Relative abundance,12.031,20.004,1.2031,2.0004,5,5
+SB071,Forest,Agriculture,Passive,35,Basidiomycota,Relative abundance,9.672,20.004,0.9672,2.0004,5,5
+SB146,Forest,Erosion,Active,25,Basidiomycota,Relative abundance,28,23,2.8,2.3,3,4
+SB146,Forest,Erosion,Active,25,Basidiomycota,Relative abundance,20,23,2,2.3,3,4
+SB133,Grassland,Pasture,Active,31,Basidiomycota,Relative abundance,52.52,23.64,20.10910988,34.68,3,4
+SB133,Grassland,Pasture,Active,48,Basidiomycota,Relative abundance,37.88,23.64,11.10244568,34.68,3,4
+SB101,Grassland,Agriculture,Passive,24,Basidiomycota,Relative abundance,18,25,1.8,2.5,9,10
+SB101,Grassland,Agriculture,Active,24,Basidiomycota,Relative abundance,16,25,1.6,2.5,9,10
+SB101,Grassland,Agriculture,Active,24,Basidiomycota,Relative abundance,15,25,1.5,2.5,9,10
+SB101,Grassland,Agriculture,Active,24,Basidiomycota,Relative abundance,22,25,2.2,2.5,9,10
+SB101,Grassland,Agriculture,Passive,24,Basidiomycota,Relative abundance,15,25,1.5,2.5,9,10
+SB183,Forest,Deforestation,Active,10,Basidiomycota,Relative abundance,42,25,4.2,2.5,15,15
+SB183,Forest,Deforestation,Active,30,Basidiomycota,Relative abundance,55,25,5.5,2.5,15,15
+SB183,Forest,Deforestation,Active,50,Basidiomycota,Relative abundance,45,25,4.5,2.5,15,15
+SB057,Forest,Agriculture,Active,13,Basidiomycota,Relative abundance,10.45,25.49,1.229756073,12.24,3,4
+SB057,Forest,Agriculture,Active,29,Basidiomycota,Relative abundance,9.13,25.49,2.476832655,2.549,3,4
+SB057,Forest,Agriculture,Active,44,Basidiomycota,Relative abundance,13.94,25.49,4.156921938,12.24,3,4
+SB172,Grassland,Pasture,Active,3,Basidiomycota,Relative abundance,16,26,1.6,2.6,8,8
+SB102,Forest,Monoculture plantation,Passive,30,Basidiomycota,Relative abundance,39,27,3.9,2.7,3,4
+SB102,Forest,Monoculture plantation,Passive,40,Basidiomycota,Relative abundance,23,27,2.3,2.7,3,4
+SB102,Forest,Monoculture plantation,Passive,55,Basidiomycota,Relative abundance,62,27,6.2,2.7,3,4
+SB166,Forest,Deforestation,Passive,40,Basidiomycota,Relative abundance,44.53,29.28,21.24264579,5.299481107,5,5
+SB166,Forest,Deforestation,Active,40,Basidiomycota,Relative abundance,24.39,29.28,2.593838854,5.299481107,5,5
+SB096,Forest,Erosion,Active,2.5,Basidiomycota,Relative abundance,25,30,2.5,3,3,4
+SB141,Forest,Deforestation,Active,59,Basidiomycota,Relative abundance,51,30,5.1,3,15,15
+SB141,Forest,Deforestation,Active,59,Basidiomycota,Relative abundance,96,30,9.6,3,15,15
+SB141,Forest,Deforestation,Active,59,Basidiomycota,Relative abundance,73.5,30,7.35,3,15,15
+SB050,Grassland,Pasture,Passive,5,Basidiomycota,Relative abundance,26.379,30.651,9.138300061,13.064,3,4
+SB050,Grassland,Pasture,Passive,10,Basidiomycota,Relative abundance,11.304,30.651,2.175455814,13.064,3,4
+SB050,Grassland,Pasture,Passive,15,Basidiomycota,Relative abundance,15.575,30.651,4.785656381,13.064,3,4
+SB122,Forest,Mining,Active,5,Basidiomycota,Relative abundance,24.19,30.99,2.419,3.099,7,8
+SB122,Forest,Mining,Active,5,Basidiomycota,Relative abundance,15.32,30.99,1.532,3.099,7,8
+SB122,Forest,Mining,Active,5,Basidiomycota,Relative abundance,6.98,30.99,0.698,3.099,7,8
+SB122,Forest,Mining,Active,5,Basidiomycota,Relative abundance,3.5,30.99,0.35,3.099,7,8
+SB093,Forest,Mining,Active,10,Basidiomycota,Relative abundance,20.575,31.176,2.0575,3.1176,7,8
+SB093,Forest,Mining,Active,10,Basidiomycota,Relative abundance,7.079,31.176,0.7079,3.1176,7,8
+SB093,Forest,Mining,Active,10,Basidiomycota,Relative abundance,31.047,31.176,3.1047,3.1176,7,8
+SB093,Forest,Mining,Active,10,Basidiomycota,Relative abundance,14.122,31.176,1.4122,3.1176,7,8
+SB093,Forest,Mining,Active,10,Basidiomycota,Relative abundance,4.4247,31.176,0.44247,3.1176,7,8
+SB075,Grassland,Pasture,Passive,9,Basidiomycota,Relative abundance,52,32,5.2,3.2,5,6
+SB075,Grassland,Pasture,Active,9,Basidiomycota,Relative abundance,40,32,4,3.2,5,6
+SB125,Forest,Monoculture plantation,Active,3,Basidiomycota,Relative abundance,41.4,35.38,4.14,3.538,4,5
+SB125,Forest,Monoculture plantation,Active,3,Basidiomycota,Relative abundance,63.14,35.38,6.314,3.538,4,5
+SB123,Forest,Monoculture plantation,Active,20,Basidiomycota,Relative abundance,42,40,4.2,4,3,4
+SB123,Forest,Monoculture plantation,Active,20,Basidiomycota,Relative abundance,68,40,6.8,4,3,4
+SB123,Forest,Monoculture plantation,Active,40,Basidiomycota,Relative abundance,42,42,4.2,4.2,3,4
+SB123,Forest,Monoculture plantation,Active,40,Basidiomycota,Relative abundance,68,42,6.8,4.2,3,4
+SB007,Forest,Others,Active,2,Basidiomycota,Relative abundance,18,45,1.8,4.5,3,4
+SB007,Forest,Others,Active,1,Basidiomycota,Relative abundance,40,45,4,4.5,3,4
+SB007,Forest,Others,Active,25,Basidiomycota,Relative abundance,20,45,2,4.5,3,4
+SB024,Forest,Agriculture,Passive,78,Basidiomycota,Relative abundance,32,45.5,3.2,4.55,3,3
+SB024,Forest,Agriculture,Active,78,Basidiomycota,Relative abundance,32,45.5,3.2,4.55,3,3
+SB024,Grassland,Agriculture,Passive,78,Basidiomycota,Relative abundance,29.5,45.5,2.95,4.55,3,3
+SB177,Forest,Erosion,Active,37,Basidiomycota,Relative abundance,56,50,5.6,5,3,3
+SB080,Forest,Monoculture plantation,Active,13,Basidiomycota,Relative abundance,56.174,65.965,2.092,2.882291623,4,5

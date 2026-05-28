@@ -1,0 +1,181 @@
+﻿ID,Ecosystem,Prior_land_use,Restoration_strategy,Restoration_time,Fungal group,Metrics,Restored_Mean,Degraded_Mean,Restored_SD,Degraded_SD,Restored_SS,Degraded_SS
+SB127,Grassland,Pasture,Active,4,Total,Richness_Chao1,10.389,9.478,2.682946701,2.704,3,4
+SB172,Grassland,Pasture,Active,3,Total,Richness_Chao1,41.707215,30.268456,4.8998442,7.2470225,8,8
+SB163,Forest,Monoculture plantation,Active,11,Total,Richness_Chao1,65.5760369,57.9723502,12.28118058,9.16462221,9,9
+SB078,Forest,Erosion,Active,1,Total,Richness_Chao1,50.72,60.976,38.90012909,105.62,3,4
+SB078,Forest,Erosion,Active,6,Total,Richness_Chao1,38.941,60.976,13.1861028,105.62,3,4
+SB078,Forest,Erosion,Active,11,Total,Richness_Chao1,137.098,60.976,56.65711397,105.62,3,4
+SB078,Forest,Erosion,Active,16,Total,Richness_Chao1,185.495,60.976,91.13878144,105.62,3,4
+SB123,Forest,Monoculture plantation,Active,40,Total,Richness_Chao1,53.899,66.842,2.456048045,5.318,3,4
+SB123,Forest,Monoculture plantation,Active,40,Total,Richness_Chao1,51.948,66.842,3.990645061,5.318,3,4
+SB123,Forest,Monoculture plantation,Active,20,Total,Richness_Chao1,53.899,67.019,2.456048045,3.546,3,4
+SB123,Forest,Monoculture plantation,Active,20,Total,Richness_Chao1,51.948,67.019,3.990645061,3.546,3,4
+SB177,Forest,Erosion,Active,37,Total,Richness_Chao1,253.6,83.15,54.40371587,15.72702133,3,3
+SB028,Forest,Agriculture,Active,15,Total,Richness_Chao1,125,124,19.05255888,12,3,4
+SB028,Forest,Agriculture,Active,30,Total,Richness_Chao1,109,124,6.92820323,12,3,4
+SB028,Forest,Agriculture,Active,45,Total,Richness_Chao1,109,124,10.39230485,12,3,4
+SB155,Forest,Erosion,Active,43,Total,Richness_Chao1,288.94,140.44,14.002,14.002,4,4
+SB155,Forest,Erosion,Active,43,Total,Richness_Chao1,288.94,140.44,16.82,14.002,4,4
+SB155,Forest,Erosion,Active,43,Total,Richness_Chao1,513.11,140.44,16.8,14.002,4,4
+SB104,Forest,Agriculture,Active,7,Total,Richness_Chao1,221.1,165.2,22.11,16.52,3,4
+SB115,Forest,Agriculture,Passive,8,Total,Richness_Chao1,194,184,19.4,18.4,2,3
+SB115,Forest,Agriculture,Passive,33,Total,Richness_Chao1,226,184,22.6,18.4,2,3
+SB115,Forest,Agriculture,Passive,40,Total,Richness_Chao1,204,184,20.4,18.4,2,3
+SB160,Grassland,Agriculture,Passive,2,Total,Richness_Chao1,291,198,23,34.8,3,3
+SB160,Grassland,Agriculture,Passive,8,Total,Richness_Chao1,351,198,35.5,34.8,3,3
+SB137,Forest,Agriculture,Active,17.5,Total,Richness_Chao1,248,251,27.71281292,94,3,4
+SB047,Forest,Mining,Active,4,Total,Richness_Chao1,304,254,67.08203932,22.45462091,20,21
+SB047,Forest,Mining,Active,3,Total,Richness_Chao1,447,304,80.49844719,35.28583285,20,21
+SB058,Grassland,Mining,Active,5,Total,Richness_Chao1,485.4,311.41,48.54,31.141,3,4
+SB058,Grassland,Mining,Active,5,Total,Richness_Chao1,602.27,311.41,60.227,31.141,3,4
+SB058,Grassland,Mining,Active,5,Total,Richness_Chao1,331.7,311.41,33.17,31.141,3,4
+SB058,Grassland,Mining,Active,5,Total,Richness_Chao1,487.95,311.41,48.795,31.141,3,4
+SB058,Grassland,Mining,Active,5,Total,Richness_Chao1,535.7,311.41,53.57,31.141,3,4
+SB058,Grassland,Mining,Active,5,Total,Richness_Chao1,520.78,311.41,52.078,31.141,3,4
+SB144,Forest,Erosion,Active,2,Total,Richness_Chao1,935.36,333.55,7.2919339,107.66,3,4
+SB144,Forest,Erosion,Active,2,Total,Richness_Chao1,636.31,333.55,48.49742261,107.66,3,4
+SB144,Forest,Erosion,Active,2,Total,Richness_Chao1,945.05,333.55,136.191155,107.66,3,4
+SB049,Forest,Mining,Active,6,Total,Richness_Chao1,505.56,345.19,50.556,34.519,4,5
+SB049,Forest,Mining,Active,6,Total,Richness_Chao1,353.63,345.19,35.363,34.519,4,5
+SB049,Forest,Mining,Active,6,Total,Richness_Chao1,345.19,345.19,34.519,34.519,4,5
+SB024,Forest,Agriculture,Passive,17,Total,Richness_Chao1,429,385,23,15,3,3
+SB024,Forest,Agriculture,Active,17,Total,Richness_Chao1,431,385,12,15,3,3
+SB024,Grassland,Agriculture,Passive,78,Total,Richness_Chao1,432,385,18,15,3,3
+SB080,Forest,Monoculture plantation,Active,13,Total,Richness_Chao1,403.81,387.42,10.68,8.497058314,4,5
+SB075,Grassland,Pasture,Passive,9,Total,Richness_Chao1,474.39,406.91,50.49041493,123.5767575,5,6
+SB075,Grassland,Pasture,Active,9,Total,Richness_Chao1,483.71,406.91,31.66272256,123.5767575,5,6
+SB096,Forest,Erosion,Active,2.5,Total,Richness_Chao1,471.137,421.137,123.2406111,161.538,3,4
+SB057,Forest,Agriculture,Active,13,Total,Richness_Chao1,577.505,432.31,90.32125346,87.934,3,4
+SB057,Forest,Agriculture,Active,29,Total,Richness_Chao1,543.762,432.31,30.10650714,87.934,3,4
+SB057,Forest,Agriculture,Active,44,Total,Richness_Chao1,531.492,432.31,24.79257526,87.934,3,4
+SB072,Forest,Monoculture plantation,Active,2,Total,Richness_Chao1,498.01,478.54,64.61753941,287.6460825,6,7
+SB072,Forest,Monoculture plantation,Active,2,Total,Richness_Chao1,467.03,478.54,82.96523368,217.44,3,4
+SB136,Forest,Agriculture,Passive,7,Total,Richness_Chao1,552.735,481.869,55.2735,48.1869,3,4
+SB136,Forest,Agriculture,Passive,21,Total,Richness_Chao1,741.712,481.869,74.1712,48.1869,3,4
+SB136,Forest,Agriculture,Active,7,Total,Richness_Chao1,503.129,481.869,50.3129,48.1869,3,4
+SB136,Forest,Agriculture,Active,7,Total,Richness_Chao1,526.751,481.869,52.6751,48.1869,3,4
+SB095,Forest,Monoculture plantation,Active,12,Total,Richness_Chao1,466.09,488.85,46.609,48.885,3,4
+SB174,Forest,Deforestation,Active,50,Total,Richness_Chao1,335,490,192,240,4,4
+SB174,Forest,Deforestation,Active,35,Total,Richness_Chao1,213,490,126,240,4,4
+SB171,Grassland,Mining,Active,2,Total,Richness_Chao1,459.79,506.07,72.01,80.6,7,7
+SB171,Grassland,Mining,Active,6,Total,Richness_Chao1,340.76,506.07,95.44,80.6,7,7
+SB147,Grassland,Agriculture,Active,35,Total,Richness_Chao1,769.988,525.991,174.0780344,224.4844,3,4
+SB147,Grassland,Agriculture,Passive,34,Total,Richness_Chao1,667.07,525.991,223.3548798,224.4844,3,4
+SB096,Forest,Erosion,Active,2.5,Total,Richness_Chao1,644.241,526.906,56.624205,138.46,3,4
+SB141,Forest,Deforestation,Active,59,Total,Richness_Chao1,312.02046,534.526854,102.184475,100.6441427,15,15
+SB141,Forest,Deforestation,Active,59,Total,Richness_Chao1,104.347826,534.526854,29.5161278,100.6441427,15,15
+SB141,Forest,Deforestation,Active,59,Total,Richness_Chao1,325.831202,534.526854,112.4981408,100.6441427,15,15
+SB101,Grassland,Agriculture,Passive,24,Total,Richness_Chao1,623,562,48,72.73238618,9,10
+SB101,Grassland,Agriculture,Active,24,Total,Richness_Chao1,598,562,96,72.73238618,9,10
+SB101,Grassland,Agriculture,Active,24,Total,Richness_Chao1,587,562,78,72.73238618,9,10
+SB101,Grassland,Agriculture,Active,24,Total,Richness_Chao1,553,562,57,72.73238618,9,10
+SB101,Grassland,Agriculture,Passive,24,Total,Richness_Chao1,604,562,81,72.73238618,9,10
+SB133,Grassland,Pasture,Active,31,Total,Richness_Chao1,586.37,567.76,138.7892312,62.5,3,4
+SB133,Grassland,Pasture,Active,48,Total,Richness_Chao1,662.69,567.76,43.66500086,62.5,3,4
+SB111,Grassland,Mining,Active,15,Total,Richness_Chao1,677.32,571.84,67.732,57.184,10,10
+SB111,Grassland,Mining,Active,15,Total,Richness_Chao1,571.64,571.84,57.164,57.184,10,10
+SB059,Forest,Agriculture,Passive,30,Total,Richness_Chao1,634.2,591,98.55369095,43.6,3,4
+SB059,Forest,Agriculture,Passive,60,Total,Richness_Chao1,783.7,591,97.68766555,43.6,3,4
+SB059,Forest,Agriculture,Passive,110,Total,Richness_Chao1,630.7,591,34.46781107,43.6,3,4
+SB093,Forest,Mining,Active,10,Total,Richness_Chao1,593.599,592.243,59.3599,59.2243,7,8
+SB093,Forest,Mining,Active,10,Total,Richness_Chao1,666.34,592.243,66.634,59.2243,7,8
+SB093,Forest,Mining,Active,10,Total,Richness_Chao1,621.611,592.243,62.1611,59.2243,7,8
+SB093,Forest,Mining,Active,10,Total,Richness_Chao1,585.24,592.243,58.524,59.2243,7,8
+SB093,Forest,Mining,Active,10,Total,Richness_Chao1,808.659,592.243,80.8659,59.2243,7,8
+SB162,Grassland,Agriculture,Passive,5,Total,Richness_Chao1,725.233645,593.146417,56.11628785,129.4991258,3,3
+SB162,Grassland,Agriculture,Passive,15,Total,Richness_Chao1,595.638629,593.146417,17.26655011,129.4991258,3,3
+SB162,Grassland,Agriculture,Passive,20,Total,Richness_Chao1,722.741433,593.146417,12.94991258,129.4991258,3,3
+SB162,Grassland,Agriculture,Passive,40,Total,Richness_Chao1,548.286604,593.146417,21.58318763,129.4991258,3,3
+SB148,Grassland,Pasture,Passive,5,Total,Richness_Chao1,904.06,610.16,90.406,61.016,1,2
+SB148,Grassland,Pasture,Passive,13,Total,Richness_Chao1,707.63,610.16,70.763,61.016,1,2
+SB148,Grassland,Pasture,Passive,22,Total,Richness_Chao1,717.43,610.16,71.743,61.016,1,2
+SB148,Grassland,Pasture,Passive,39,Total,Richness_Chao1,725.28,610.16,72.528,61.016,1,2
+SB122,Forest,Mining,Active,5,Total,Richness_Chao1,792.285,667.018,57.78585438,105.1269794,7,8
+SB122,Forest,Mining,Active,5,Total,Richness_Chao1,691.429,667.018,74.78216081,105.1269794,7,8
+SB122,Forest,Mining,Active,5,Total,Richness_Chao1,579.651,667.018,45.88791074,105.1269794,7,8
+SB122,Forest,Mining,Active,5,Total,Richness_Chao1,709.416,667.018,59.48442673,105.1269794,7,8
+SB180,Grassland,Pasture,Active,4,Total,Richness_Chao1,974.025974,678.571429,11.2470832,61.8589574,3,3
+SB142,Forest,Monoculture plantation,Active,5,Total,Richness_Chao1,768.49,681.17,33.36,80.7,3,3
+SB142,Forest,Monoculture plantation,Active,10,Total,Richness_Chao1,826.32,681.17,130.59,80.7,3,3
+SB079,Grassland,Pasture,Passive,5,Total,Richness_Chao1,621,692,60.62177826,46,3,4
+SB079,Grassland,Pasture,Passive,10,Total,Richness_Chao1,628,692,45.033321,46,3,4
+SB079,Grassland,Pasture,Passive,15,Total,Richness_Chao1,790,692,31.17691454,46,3,4
+SB079,Grassland,Pasture,Passive,25,Total,Richness_Chao1,928,692,45.033321,46,3,4
+SB079,Grassland,Pasture,Passive,30,Total,Richness_Chao1,987,692,53.69357503,46,3,4
+SB143,Grassland,Agriculture,Passive,5,Total,Richness_Chao1,921,692,35,23,3,3
+SB143,Grassland,Agriculture,Passive,10,Total,Richness_Chao1,928,692,26,23,3,3
+SB143,Grassland,Agriculture,Passive,15,Total,Richness_Chao1,790,692,18,23,3,3
+SB143,Grassland,Agriculture,Passive,25,Total,Richness_Chao1,928,692,26,23,3,3
+SB143,Grassland,Agriculture,Passive,30,Total,Richness_Chao1,987,692,31,23,3,3
+SB098,Grassland,Pasture,Active,1,Total,Richness_Chao1,612.96,697.05,64.46,87.29609384,4,5
+SB098,Grassland,Pasture,Active,5,Total,Richness_Chao1,685.43,697.05,64.9,87.29609384,4,5
+SB098,Grassland,Pasture,Active,10,Total,Richness_Chao1,502.24,697.05,88.08,87.29609384,4,5
+SB090,Forest,Agriculture,Passive,110,Total,Richness_Chao1,1000,705,136,67.08203932,4,5
+SB090,Forest,Agriculture,Passive,30,Total,Richness_Chao1,846,705,106,67.08203932,4,5
+SB090,Forest,Agriculture,Passive,15,Total,Richness_Chao1,934,705,58,67.08203932,4,5
+SB090,Forest,Agriculture,Passive,50,Total,Richness_Chao1,938,705,64,67.08203932,4,5
+SB082,Forest,Deforestation,Active,10,Total,Richness_Chao1,487.5,721.875,80.57223743,43.15755978,5,6
+SB082,Forest,Deforestation,Active,16,Total,Richness_Chao1,240.953,721.875,55.80554851,43.15755978,5,6
+SB082,Forest,Deforestation,Active,22,Total,Richness_Chao1,488.815,721.875,104.2969187,43.15755978,5,6
+SB082,Forest,Deforestation,Passive,47,Total,Richness_Chao1,469.901,721.875,38.84050077,43.15755978,5,6
+SB159,Forest,Agriculture,Active,18,Total,Richness_Chao1,885.649203,738.041002,75.7525638,85.2216343,3,3
+SB034,Forest,Agriculture,Passive,9,Total,Richness_Chao1,1118.32,781.13,364.52,221.24,8,7
+SB034,Forest,Agriculture,Passive,16.2,Total,Richness_Chao1,1403.41,781.13,281.52,221.24,5,7
+SB034,Forest,Agriculture,Passive,52.4,Total,Richness_Chao1,973.24,781.13,267.66,221.24,9,7
+SB103,Grassland,Pasture,Passive,3,Total,Richness_Chao1,637.71,785.36,238.9537294,194.58,3,4
+SB150,Grassland,Pasture,Active,5,Total,Richness_Chao1,851,838,33.77499075,28,3,4
+SB150,Grassland,Pasture,Active,14,Total,Richness_Chao1,679,838,17.14730299,28,3,4
+SB150,Grassland,Pasture,Active,16,Total,Richness_Chao1,673,838,37.75870761,28,3,4
+SB150,Grassland,Pasture,Active,19,Total,Richness_Chao1,674,838,14.16817561,28,3,4
+SB029,Forest,Agriculture,Active,5,Total,Richness_Chao1,765,859,71.01408311,34,3,4
+SB029,Forest,Agriculture,Active,15,Total,Richness_Chao1,872,859,117.7794549,34,3,4
+SB029,Forest,Agriculture,Active,25,Total,Richness_Chao1,934,859,192.2576396,34,3,4
+SB029,Forest,Agriculture,Active,35,Total,Richness_Chao1,791,859,126.439709,34,3,4
+SB121,Grassland,Pasture,Active,14,Total,Richness_Chao1,896.87,875.469,46.692,178.3621983,4,5
+SB121,Grassland,Pasture,Active,14,Total,Richness_Chao1,819.049,875.469,140.076,178.3621983,4,5
+SB121,Grassland,Pasture,Active,14,Total,Richness_Chao1,920.216,875.469,167.314,178.3621983,4,5
+SB170,Grassland,Pasture,Passive,5,Total,Richness_Chao1,1117.03,899.87,111.703,89.987,4,4
+SB170,Grassland,Pasture,Passive,15,Total,Richness_Chao1,1097.82,899.87,109.782,89.987,4,4
+SB170,Grassland,Pasture,Passive,28,Total,Richness_Chao1,1044.57,899.87,104.457,89.987,4,4
+SB170,Grassland,Pasture,Passive,36,Total,Richness_Chao1,1204.89,899.87,120.489,89.987,4,4
+SB166,Forest,Deforestation,Passive,40,Total,Richness_Chao1,966.503268,945.2614379,127.7008264,69.39047349,5,5
+SB166,Forest,Deforestation,Active,40,Total,Richness_Chao1,811.2745098,945.2614379,53.38079222,69.39047349,5,5
+SB102,Forest,Monoculture plantation,Passive,30,Total,Richness_Chao1,848.227,951.852,39.88393395,107.462,3,4
+SB102,Forest,Monoculture plantation,Passive,40,Total,Richness_Chao1,1143.75,951.852,199.4248659,107.462,3,4
+SB102,Forest,Monoculture plantation,Passive,55,Total,Richness_Chao1,878.931,951.852,172.8344219,107.462,3,4
+SB071,Forest,Agriculture,Passive,5,Total,Richness_Chao1,975.49,1051.77,97.549,105.177,5,5
+SB071,Forest,Agriculture,Passive,17.5,Total,Richness_Chao1,1037.9,1051.77,103.79,105.177,5,5
+SB071,Forest,Agriculture,Passive,35,Total,Richness_Chao1,1265.83,1051.77,126.583,105.177,5,5
+SB125,Forest,Monoculture plantation,Active,3,Total,Richness_Chao1,996.468,1088.577,23.584,67.88925986,4,5
+SB125,Forest,Monoculture plantation,Active,3,Total,Richness_Chao1,498.89,1088.577,115.452,67.88925986,4,5
+SB146,Forest,Erosion,Active,25,Total,Richness_Chao1,1340,1150,90.8408687,125.882,3,4
+SB146,Forest,Erosion,Active,25,Total,Richness_Chao1,1190,1150,98.84467549,125.882,3,4
+SB156,Forest,Deforestation,Active,15,Total,Richness_Chao1,996.932515,1157.97546,214.7239264,383.4355828,4,4
+SB156,Forest,Deforestation,Active,12,Total,Richness_Chao1,950.920245,1157.97546,475.4601227,383.4355828,4,4
+SB077,Forest,Monoculture plantation,Active,11,Total,Richness_Chao1,1193.668,1198.051,225.67756,299.636,3,4
+SB077,Forest,Monoculture plantation,Active,11,Total,Richness_Chao1,1330.032,1198.051,369.4204565,299.636,3,4
+SB114,Forest,Deforestation,Passive,30,Total,Richness_Chao1,1106,1255,418.1343855,504.5290797,3,3
+SB114,Forest,Deforestation,Passive,30,Total,Richness_Chao1,1486,1255,183.3548985,504.5290797,3,3
+SB114,Forest,Deforestation,Passive,30,Total,Richness_Chao1,1428,1255,166.3808006,504.5290797,3,3
+SB025,Grassland,Agriculture,Passive,5,Total,Richness_Chao1,1346,1299,284.0563324,259.8076211,3,3
+SB025,Grassland,Agriculture,Passive,10,Total,Richness_Chao1,1131,1299,183.5973856,259.8076211,3,3
+SB025,Grassland,Agriculture,Passive,15,Total,Richness_Chao1,1155,1299,264.9,259.8076211,3,3
+SB025,Grassland,Agriculture,Passive,20,Total,Richness_Chao1,1261,1299,135.099963,259.8076211,3,3
+SB025,Grassland,Agriculture,Passive,30,Total,Richness_Chao1,1141,1299,183.5973856,259.8076211,3,3
+SB027,Grassland,Pasture,Passive,10,Total,Richness_Chao1,1388,1622.3,201.7839191,72,3,4
+SB027,Grassland,Pasture,Passive,25,Total,Richness_Chao1,1676.9,1622.3,95.4359995,72,3,4
+SB027,Grassland,Pasture,Passive,35,Total,Richness_Chao1,1085.7,1622.3,91.62548772,72,3,4
+SB153,Grassland,Pasture,Passive,22,Total,Richness_Chao1,1627.63,1752.88,198.0426893,257.62,3,4
+SB006,Grassland,Pasture,Passive,20,Total,Richness_Chao1,1938,2173,193.8,217.3,3,3
+SB006,Grassland,Pasture,Active,20,Total,Richness_Chao1,205,2173,20.5,217.3,3,3
+SB006,Grassland,Pasture,Active,20,Total,Richness_Chao1,2269,2173,226.9,217.3,3,3
+SB006,Grassland,Pasture,Active,20,Total,Richness_Chao1,2047,2173,204.7,217.3,3,3
+SB186,Grassland,Pasture,Passive,20,Total,Richness_Chao1,2717.1,2367.2,271.71,23.67,4,5
+SB186,Grassland,Pasture,Passive,40,Total,Richness_Chao1,2445.1,2367.2,244.51,23.67,4,5
+SB100,Forest,Agriculture,Active,1.5,Total,Richness_Chao1,2438.356,2703.196,326.7297807,626.3516737,5,6
+SB100,Forest,Agriculture,Active,15,Total,Richness_Chao1,2767.123,2703.196,918.9300239,626.3516737,5,6
+SB100,Forest,Agriculture,Active,1.5,Total,Richness_Chao1,3369.863,2703.196,1490.697078,626.3516737,5,6
+SB100,Forest,Agriculture,Active,15,Total,Richness_Chao1,2748.858,2703.196,469.6748983,626.3516737,5,6
+SB118,Grassland,Agriculture,Active,2.5,Total,Richness_Chao1,4090,4081,207.9543219,342.928564,5,6
+SB118,Grassland,Agriculture,Active,11,Total,Richness_Chao1,3867,4081,172.1772343,342.928564,5,6
+SB118,Grassland,Agriculture,Active,16,Total,Richness_Chao1,3958,4081,268.3281573,342.928564,5,6

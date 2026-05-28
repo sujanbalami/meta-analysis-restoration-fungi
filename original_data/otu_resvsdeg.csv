@@ -1,0 +1,157 @@
+﻿ID,Ecosystem,Prior_land_use,Restoration_strategy,Restoration_time,Fungal group,Metrics,Restored_Mean,Degraded_Mean,Restored_SD,Degraded_SD,Restored_SS,Degraded_SS
+SB172,Grassland,Pasture,Active,3,Total,Richness_OTU,38.194444,29.734848,4.2548333,6.5516131,8,8
+SB145,Forest,Agriculture,Active,45,Total,Richness_OTU,93.94198,61.43345,7.5876717,6.406493453,6,6
+SB145,Forest,Agriculture,Active,35,Total,Richness_OTU,93.22526,61.43345,4.196228227,6.406493453,6,6
+SB145,Forest,Agriculture,Active,25,Total,Richness_OTU,99.12969,61.43345,3.181443818,6.406493453,6,6
+SB145,Forest,Agriculture,Active,15,Total,Richness_OTU,95.83618,61.43345,5.609387849,6.406493453,6,6
+SB092,Forest,Agriculture,Active,15,Total,Richness_OTU,439.981,72.899,71.01331982,74.89460165,18,19
+SB092,Forest,Agriculture,Passive,15,Total,Richness_OTU,457.819,72.899,55.00159387,74.89460165,18,19
+SB099,Forest,Mining,Active,2,Total,Richness_OTU,158.2021,79.69,205.82,94.66393783,4,5
+SB099,Forest,Mining,Active,2,Total,Richness_OTU,208.674,79.69,67.92,94.66393783,4,5
+SB099,Forest,Mining,Active,2,Total,Richness_OTU,243.171,79.69,88.664,94.66393783,4,5
+SB122,Forest,Mining,Active,5,Total,Richness_OTU,152,95,15.2,9.5,7,8
+SB122,Forest,Mining,Active,5,Total,Richness_OTU,119,95,11.9,9.5,7,8
+SB122,Forest,Mining,Active,5,Total,Richness_OTU,127,95,12.7,9.5,7,8
+SB122,Forest,Mining,Active,5,Total,Richness_OTU,198,95,19.8,9.5,7,8
+SB047,Forest,Mining,Active,4,Total,Richness_OTU,193,137,53.66563146,8.70689382,20,21
+SB088,Grassland,Mining,Active,5,Total,Richness_OTU,273,143,27.3,14.3,5,5
+SB088,Grassland,Mining,Active,10,Total,Richness_OTU,443,143,44.3,14.3,5,5
+SB088,Grassland,Mining,Active,15,Total,Richness_OTU,459,143,45.9,14.3,5,5
+SB088,Grassland,Mining,Active,20,Total,Richness_OTU,554,143,55.4,14.3,5,5
+SB044,Forest,Agriculture,Active,31,Total,Richness_OTU,136.793,148.09,47.474,72.129,12,6
+SB047,Forest,Mining,Active,3,Total,Richness_OTU,290,172,67.08203932,23.37113604,20,21
+SB091,Grassland,Pasture,Active,4,Total,Richness_OTU,209.68,176.305,45.53484828,28.272,8,9
+SB143,Grassland,Agriculture,Passive,5,Total,Richness_OTU,197,187,19.7,18.7,3,3
+SB143,Grassland,Agriculture,Passive,10,Total,Richness_OTU,205,187,20.5,18.7,3,3
+SB143,Grassland,Agriculture,Passive,15,Total,Richness_OTU,213,187,21.3,18.7,3,3
+SB143,Grassland,Agriculture,Passive,25,Total,Richness_OTU,224,187,22.4,18.7,3,3
+SB143,Grassland,Agriculture,Passive,30,Total,Richness_OTU,215,187,21.5,18.7,3,3
+SB091,Grassland,Pasture,Active,4,Total,Richness_OTU,339.65,187.69,247.6712212,11.778,8,9
+SB056,Forest,Deforestation,Active,43,Total,Richness_OTU,222,204,22.2,20.4,5,6
+SB184,Grassland,Pasture,Active,5,Total,Richness_OTU,260.631443,214.125143,43.2989691,36.2868085,9,8
+SB184,Grassland,Pasture,Active,10,Total,Richness_OTU,206.106816,214.125143,66.7787582,36.2868085,6,8
+SB137,Forest,Agriculture,Active,17.5,Total,Richness_OTU,222,230,32.90896534,72,3,4
+SB012,Forest,Deforestation,Passive,17,Total,Richness_OTU,389.916,251.26,64.04084656,51.50529997,12,13
+SB012,Forest,Deforestation,Passive,12,Total,Richness_OTU,277.31,251.26,69.86400137,51.50529997,12,13
+SB176,Grassland,Pasture,Passive,3.5,Total,Richness_OTU,354.1284,268.8073,51.43103,61.03062,168,168
+SB176,Grassland,Pasture,Passive,8,Total,Richness_OTU,466.5138,268.8073,50.40528,61.03062,168,168
+SB176,Grassland,Pasture,Passive,19.5,Total,Richness_OTU,524.3119,268.8073,187.55311,61.03062,168,168
+SB179,Forest,Pasture,Active,7,Total,Richness_OTU,349.875931,275.434243,17.19157129,30.08524976,3,3
+SB179,Forest,Pasture,Active,7,Total,Richness_OTU,321.33995,275.434243,34.38314258,30.08524976,3,3
+SB179,Forest,Pasture,Active,7,Total,Richness_OTU,442.92804,275.434243,58.02155311,30.08524976,3,3
+SB179,Forest,Pasture,Active,7,Total,Richness_OTU,384.615385,275.434243,25.78735694,30.08524976,3,3
+SB179,Forest,Pasture,Active,7,Total,Richness_OTU,364.764268,275.434243,45.12787464,30.08524976,3,3
+SB064,Forest,Mining,Active,12,Total,Richness_OTU,369,301,36.9,30.1,4,4
+SB074,Forest,Monoculture plantation,Active,12,Total,Richness_OTU,337.911,310.325,18.39,77.104096,4,5
+SB074,Forest,Monoculture plantation,Active,12,Total,Richness_OTU,473.543,312.624,105.746,10.27920449,4,5
+SB156,Forest,Deforestation,Active,15,Total,Richness_OTU,300.928793,323.219814,59.44272446,96.59442724,4,4
+SB156,Forest,Deforestation,Active,12,Total,Richness_OTU,286.068111,323.219814,156.0371517,96.59442724,4,4
+SB152,Grassland,Agriculture,Passive,2,Total,Richness_OTU,336.254,331.513,30.94900992,46.132,15,16
+SB152,Grassland,Agriculture,Passive,10,Total,Richness_OTU,346.455,331.513,19.43850341,46.132,15,16
+SB152,Grassland,Agriculture,Passive,20,Total,Richness_OTU,369.492,331.513,31.19688085,46.132,15,16
+SB075,Grassland,Pasture,Passive,9,Total,Richness_OTU,443.2,351,46.06300034,109.2472425,5,6
+SB075,Grassland,Pasture,Active,9,Total,Richness_OTU,437.6,351,32.13229684,109.2472425,5,6
+SB092,Forest,Agriculture,Active,15,Total,Richness_OTU,457.819,373.224,99.53235052,51.12988461,18,19
+SB092,Forest,Agriculture,Active,15,Total,Richness_OTU,432.684,373.224,91.79377391,51.12988461,18,19
+SB080,Forest,Monoculture plantation,Active,13,Total,Richness_OTU,410,376,41,37.6,4,5
+SB151,Grassland,Pasture,Passive,20,Total,Richness_OTU,449.577,419.27,61.37695242,45.77,3,4
+SB035,Forest,Agriculture,Passive,10,Total,Richness_OTU,521.534,444.306,197.663,98.831,15,15
+SB035,Forest,Agriculture,Passive,20,Total,Richness_OTU,650.742,444.306,238.78,98.831,15,15
+SB035,Forest,Agriculture,Passive,30,Total,Richness_OTU,576.856,444.306,213.82,98.831,15,15
+SB148,Grassland,Pasture,Passive,5,Total,Richness_OTU,724,460.2,72.4,46.02,1,2
+SB148,Grassland,Pasture,Passive,13,Total,Richness_OTU,526.6,460.2,52.66,46.02,1,2
+SB148,Grassland,Pasture,Passive,22,Total,Richness_OTU,558.8,460.2,55.88,46.02,1,2
+SB148,Grassland,Pasture,Passive,39,Total,Richness_OTU,542.2,460.2,54.22,46.02,1,2
+SB174,Forest,Deforestation,Active,50,Total,Richness_OTU,331,468,191,224,4,4
+SB174,Forest,Deforestation,Active,35,Total,Richness_OTU,210,468,125,224,4,4
+SB133,Grassland,Pasture,Active,31,Total,Richness_OTU,504,476,64.50157207,214.08,3,4
+SB133,Grassland,Pasture,Active,48,Total,Richness_OTU,599,476,111.7345976,214.08,3,4
+SB050,Grassland,Pasture,Passive,5,Total,Richness_OTU,468.99,526.721,11.30336357,43.83,3,4
+SB050,Grassland,Pasture,Passive,10,Total,Richness_OTU,593.57,526.721,40.94568109,43.83,3,4
+SB050,Grassland,Pasture,Passive,15,Total,Richness_OTU,511.34,526.721,9.941971635,43.83,3,4
+SB140,Grassland,Pasture,Passive,33,Total,Richness_OTU,659.1,533.2,53.07125,39.80344,9,9
+SB142,Forest,Monoculture plantation,Active,5,Total,Richness_OTU,697.67,549,47.6,131.53,3,3
+SB142,Forest,Monoculture plantation,Active,10,Total,Richness_OTU,687,549,150.12,131.53,3,3
+SB024,Forest,Agriculture,Passive,17,Total,Richness_OTU,737,557,25,18,3,3
+SB024,Forest,Agriculture,Passive,17,Total,Richness_OTU,659,557,23,18,3,3
+SB024,Grassland,Agriculture,Passive,78,Total,Richness_OTU,835,557,12,18,3,3
+SB073,Forest,Mining,Active,5,Total,Richness_OTU,683.836,608.474,171.4196543,82.69703076,18,19
+SB069,Forest,Agriculture,Active,17,Total,Richness_OTU,492.768,632.231,75.15022044,68.18,3,4
+SB069,Forest,Agriculture,Active,28,Total,Richness_OTU,734.504,632.231,48.31036112,68.18,3,4
+SB069,Forest,Agriculture,Active,34,Total,Richness_OTU,787.19,632.231,26.83812726,68.18,3,4
+SB069,Forest,Agriculture,Passive,45,Total,Richness_OTU,833.677,632.231,85.88547134,68.18,3,4
+SB063,Grassland,Pasture,Passive,8,Total,Richness_OTU,790.811966,666.880342,177.330101,127.156716,9,9
+SB082,Forest,Deforestation,Active,10,Total,Richness_OTU,484.115,716.484,74.22180438,42.66521234,5,6
+SB082,Forest,Deforestation,Active,16,Total,Richness_OTU,240.283,716.484,55.83908953,42.66521234,5,6
+SB082,Forest,Deforestation,Active,22,Total,Richness_OTU,487.227,716.484,102.6265759,42.66521234,5,6
+SB082,Forest,Deforestation,Active,47,Total,Richness_OTU,464.465,716.484,41.65347428,42.66521234,5,6
+SB104,Forest,Agriculture,Active,7,Total,Richness_OTU,363,751,36.3,75.1,3,4
+SB034,Forest,Agriculture,Passive,9,Total,Richness_OTU,1056.08,752.13,333.58,191.23,8,7
+SB034,Forest,Agriculture,Passive,16.2,Total,Richness_OTU,1317.1,752.13,257.48,191.23,5,7
+SB034,Forest,Agriculture,Passive,52.4,Total,Richness_OTU,884.86,752.13,280.27,191.23,9,7
+SB090,Forest,Agriculture,Passive,110,Total,Richness_OTU,902,755,98,122.9837388,4,5
+SB090,Forest,Agriculture,Passive,30,Total,Richness_OTU,768,755,110,122.9837388,4,5
+SB090,Forest,Agriculture,Passive,15,Total,Richness_OTU,847,755,44,122.9837388,4,5
+SB090,Forest,Agriculture,Passive,50,Total,Richness_OTU,860,755,48,122.9837388,4,5
+SB071,Forest,Agriculture,Passive,5,Total,Richness_OTU,729.6,790,72.96,79,5,5
+SB071,Forest,Agriculture,Passive,17.5,Total,Richness_OTU,764.2,790,76.42,79,5,5
+SB071,Forest,Agriculture,Passive,35,Total,Richness_OTU,882.4,790,88.24,79,5,5
+SB111,Grassland,Mining,Active,15,Total,Richness_OTU,1334,825,133.4,82.5,10,10
+SB111,Grassland,Mining,Active,15,Total,Richness_OTU,1208,825,120.8,82.5,10,10
+SB150,Grassland,Pasture,Active,5,Total,Richness_OTU,850,837,33.94819583,28.8,3,4
+SB150,Grassland,Pasture,Active,14,Total,Richness_OTU,679,837,16.45448267,28.8,3,4
+SB150,Grassland,Pasture,Active,16,Total,Richness_OTU,672,837,37.93191269,28.8,3,4
+SB150,Grassland,Pasture,Active,19,Total,Richness_OTU,673,837,16.45448267,28.8,3,4
+SB025,Grassland,Agriculture,Passive,5,Total,Richness_OTU,770,838,55.42562584,48.49742261,3,3
+SB025,Grassland,Agriculture,Passive,10,Total,Richness_OTU,780,838,36.37306696,48.49742261,3,3
+SB025,Grassland,Agriculture,Passive,15,Total,Richness_OTU,816,838,58.88972746,48.49742261,3,3
+SB025,Grassland,Agriculture,Passive,20,Total,Richness_OTU,828,838,29.44,48.49742261,3,3
+SB025,Grassland,Agriculture,Passive,30,Total,Richness_OTU,836,838,39.83716857,48.49742261,3,3
+SB102,Forest,Monoculture plantation,Passive,30,Total,Richness_OTU,627.715,865.913,61.32672294,122.316,3,4
+SB102,Forest,Monoculture plantation,Passive,40,Total,Richness_OTU,927.136,865.913,144.9553321,122.316,3,4
+SB102,Forest,Monoculture plantation,Passive,55,Total,Richness_OTU,672.78,865.913,122.6551779,122.316,3,4
+SB030,Forest,Deforestation,Active,26,Total,Richness_OTU,612.977,929.0076,77.72517739,219.852,8,9
+SB006,Grassland,Pasture,Passive,20,Total,Richness_OTU,856,937,85.6,93.7,3,3
+SB006,Grassland,Pasture,Active,20,Total,Richness_OTU,1044,937,104.4,93.7,3,3
+SB006,Grassland,Pasture,Active,20,Total,Richness_OTU,1084,937,108.4,93.7,3,3
+SB006,Grassland,Pasture,Active,20,Total,Richness_OTU,1003,937,100.3,93.7,3,3
+SB053,Forest,Agriculture,Passive,30,Total,Richness_OTU,2870,972,1188,55.90169944,4,5
+SB053,Forest,Agriculture,Passive,120,Total,Richness_OTU,2913,972,564,55.90169944,4,5
+SB077,Forest,Monoculture plantation,Active,11,Total,Richness_OTU,874.246,992.469,186.0707542,276.606,3,4
+SB077,Forest,Monoculture plantation,Active,11,Total,Richness_OTU,842.243,992.469,265.1769786,276.606,3,4
+SB114,Forest,Deforestation,Passive,30,Total,Richness_OTU,781,1055,273.8199122,515.3890383,3,3
+SB114,Forest,Deforestation,Passive,30,Total,Richness_OTU,1015,1055,96.45790947,515.3890383,3,3
+SB114,Forest,Deforestation,Passive,30,Total,Richness_OTU,1105,1055,230.4320394,515.3890383,3,3
+SB130,Forest,Monoculture plantation,Active,7,Total,Richness_OTU,1436.496,1156.204,212.3961944,262.772,3,4
+SB130,Forest,Monoculture plantation,Active,13,Total,Richness_OTU,1655.474,1156.204,273.0820585,262.772,3,4
+SB130,Forest,Monoculture plantation,Active,23,Total,Richness_OTU,1795.62,1156.204,136.5410293,262.772,3,4
+SB180,Grassland,Pasture,Active,4,Total,Richness_OTU,1196,1160,119.6,116,3,3
+SB027,Grassland,Pasture,Passive,10,Total,Richness_OTU,1070.7,1244,176.1495671,48.4,3,4
+SB027,Grassland,Pasture,Passive,25,Total,Richness_OTU,1367.3,1244,71.53369835,48.4,3,4
+SB027,Grassland,Pasture,Passive,35,Total,Richness_OTU,855.7,1244,127.4789394,48.4,3,4
+SB153,Grassland,Pasture,Passive,22,Total,Richness_OTU,1219.25,1302,198.9606763,156.42,3,4
+SB154,Forest,Agriculture,Active,24,Total,Richness_OTU,1510,1351,151,135.1,3,4
+SB154,Forest,Agriculture,Active,24,Total,Richness_OTU,396,1351,39.6,135.1,3,4
+SB154,Forest,Agriculture,Active,24,Total,Richness_OTU,840,1351,84,135.1,3,4
+SB154,Forest,Agriculture,Active,24,Total,Richness_OTU,958,1351,95.8,135.1,3,4
+SB154,Forest,Agriculture,Active,24,Total,Richness_OTU,1000,1351,100,135.1,3,4
+SB154,Forest,Agriculture,Active,24,Total,Richness_OTU,430,1351,43,135.1,3,4
+SB079,Grassland,Pasture,Passive,5,Total,Richness_OTU,1532,1456,153.2,145.6,3,4
+SB079,Grassland,Pasture,Passive,10,Total,Richness_OTU,1609,1456,160.9,145.6,3,4
+SB079,Grassland,Pasture,Passive,15,Total,Richness_OTU,1645,1456,164.5,145.6,3,4
+SB079,Grassland,Pasture,Passive,25,Total,Richness_OTU,1678,1456,167.8,145.6,3,4
+SB079,Grassland,Pasture,Passive,30,Total,Richness_OTU,1723,1456,172.3,145.6,3,4
+SB118,Grassland,Agriculture,Active,2.5,Total,Richness_OTU,1749,1689,259.3838854,252.2974435,5,6
+SB118,Grassland,Agriculture,Active,11,Total,Richness_OTU,1644,1689,245.9674775,252.2974435,5,6
+SB118,Grassland,Agriculture,Active,16,Total,Richness_OTU,1735,1689,313.0495168,252.2974435,5,6
+SB186,Grassland,Pasture,Passive,20,Total,Richness_OTU,2032,1804.8,203.2,180.48,4,5
+SB186,Grassland,Pasture,Passive,40,Total,Richness_OTU,2158.5,1804.8,215.85,180.48,4,5
+SB173,Forest,Pasture,Passive,23,Total,Richness_OTU,6776.859504,5759.297521,1241.116929,659.379529,4,4
+SB173,Forest,Pasture,Passive,47,Total,Richness_OTU,5149.793388,5759.297521,1536.25125,659.379529,4,4
+SB173,Forest,Pasture,Passive,68,Total,Richness_OTU,3879.132231,5759.297521,1130.839998,659.379529,4,4
+SB101,Grassland,Agriculture,Passive,24,Total,Richness_OTU,8956,8752,369,493.315315,9,10
+SB101,Grassland,Agriculture,Active,24,Total,Richness_OTU,8814,8752,474,493.315315,9,10
+SB101,Grassland,Agriculture,Active,24,Total,Richness_OTU,8746,8752,480,493.315315,9,10
+SB101,Grassland,Agriculture,Active,24,Total,Richness_OTU,8503,8752,435,493.315315,9,10
+SB101,Grassland,Agriculture,Passive,24,Total,Richness_OTU,8823,8752,507,493.315315,9,10
+SB127,Grassland,Pasture,Active,4,Total,Richness_OTU,45443,36633,4544.3,3663.3,3,3

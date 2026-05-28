@@ -1,0 +1,67 @@
+﻿ID,Ecosystem,Prior_land_use,Restoration_strategy,Restoration_time,Fungal group,Metrics,Restored_Mean,Degraded_Mean,Restored_SD,Degraded_SD,Restored_SS,Degraded_SS
+SB090,Forest,Agriculture,Passive,110,Total,Simpson index,0.045,0.0284,0.0306,0.010062306,4,5
+SB090,Forest,Agriculture,Passive,30,Total,Simpson index,0.0327,0.0284,0.0218,0.010062306,4,5
+SB090,Forest,Agriculture,Passive,15,Total,Simpson index,0.068,0.0284,0.055,0.010062306,4,5
+SB090,Forest,Agriculture,Passive,50,Total,Simpson index,0.0183,0.0284,0.0026,0.010062306,4,5
+SB166,Forest,Deforestation,Passive,40,Total,Simpson index,0.08844581,0.03463701,0.09543783,0.01247872,5,5
+SB166,Forest,Deforestation,Active,40,Total,Simpson index,0.05099693,0.03463701,0.01119341,0.01247872,5,5
+SB006,Grassland,Pasture,Passive,20,Total,Simpson index,0.1493,0.1031,0.01493,0.01031,3,3
+SB006,Grassland,Pasture,Active,20,Total,Simpson index,0.0563,0.1031,0.00563,0.01031,3,3
+SB006,Grassland,Pasture,Active,20,Total,Simpson index,0.0743,0.1031,0.00743,0.01031,3,3
+SB006,Grassland,Pasture,Active,20,Total,Simpson index,0.0528,0.1031,0.00528,0.01031,3,3
+SB171,Grassland,Mining,Active,2,Total,Simpson index,0.04,0.11,0.02,0.1,7,7
+SB171,Grassland,Mining,Active,6,Total,Simpson index,0.06,0.11,0.03,0.1,7,7
+SB021,Forest,Erosion,Active,12,Total,Simpson index,0.086,0.186,0.020124612,0.035777088,5,5
+SB021,Forest,Erosion,Active,29,Total,Simpson index,0.229,0.186,0.038013156,0.035777088,5,5
+SB021,Forest,Erosion,Active,53,Total,Simpson index,0.163,0.186,0.035777088,0.035777088,5,5
+SB047,Forest,Mining,Active,3,Total,Simpson index,0.78,0.35,0.089442719,0.274954542,20,21
+SB047,Forest,Mining,Active,4,Total,Simpson index,0.61,0.47,0.268328157,0.229128785,20,21
+SB142,Forest,Monoculture plantation,Active,5,Total,Simpson index,0.94,0.57,0.05,0.33,3,3
+SB142,Forest,Monoculture plantation,Active,10,Total,Simpson index,0.87,0.57,0.13,0.33,3,3
+SB163,Forest,Monoculture plantation,Active,11,Total,Simpson index,0.8031136,0.6204212,0.08266015,0.11033733,9,9
+SB093,Forest,Mining,Active,10,Total,Simpson index,0.886,0.817,0.0886,0.0817,7,8
+SB093,Forest,Mining,Active,10,Total,Simpson index,0.906,0.817,0.0906,0.0817,7,8
+SB093,Forest,Mining,Active,10,Total,Simpson index,0.82,0.817,0.082,0.0817,7,8
+SB093,Forest,Mining,Active,10,Total,Simpson index,0.801,0.817,0.0801,0.0817,7,8
+SB093,Forest,Mining,Active,10,Total,Simpson index,0.876,0.817,0.0876,0.0817,7,8
+SB072,Forest,Monoculture plantation,Active,2,Total,Simpson index,0.83,0.84,0.09797959,0.105830052,6,7
+SB072,Forest,Monoculture plantation,Active,2,Total,Simpson index,0.88,0.84,0.073484692,0.105830052,6,7
+SB146,Forest,Erosion,Active,25,Total,Simpson index,0.89,0.84,0.081406388,0.086,3,4
+SB146,Forest,Erosion,Active,25,Total,Simpson index,0.94,0.84,0.017320508,0.086,3,4
+SB111,Grassland,Mining,Active,15,Total,Simpson index,0.87,0.85,0.087,0.085,10,10
+SB111,Grassland,Mining,Active,15,Total,Simpson index,0.85,0.85,0.085,0.085,10,10
+SB101,Grassland,Agriculture,Passive,24,Total,Simpson index,0.95,0.87,0.18,0.18973666,9,10
+SB101,Grassland,Agriculture,Active,24,Total,Simpson index,0.92,0.87,0.15,0.18973666,9,10
+SB101,Grassland,Agriculture,Active,24,Total,Simpson index,0.89,0.87,0.27,0.18973666,9,10
+SB101,Grassland,Agriculture,Active,24,Total,Simpson index,0.84,0.87,0.15,0.18973666,9,10
+SB101,Grassland,Agriculture,Passive,24,Total,Simpson index,0.94,0.87,0,0.18973666,9,10
+SB095,Forest,Monoculture plantation,Active,12,Total,Simpson index,0.937,0.8732,0.0937,0.08732,3,4
+SB103,Grassland,Pasture,Passive,3,Total,Simpson index,0.65,0.88,0.53693575,0.06,3,4
+SB079,Grassland,Pasture,Passive,5,Total,Simpson index,0.949,0.897,0.121243557,0.1,3,4
+SB079,Grassland,Pasture,Passive,10,Total,Simpson index,0.959,0.897,0.103923048,0.1,3,4
+SB079,Grassland,Pasture,Passive,15,Total,Simpson index,0.971,0.897,0.069282032,0.1,3,4
+SB079,Grassland,Pasture,Passive,25,Total,Simpson index,0.982,0.897,0.051961524,0.1,3,4
+SB079,Grassland,Pasture,Passive,30,Total,Simpson index,0.989,0.897,0.069282032,0.1,3,4
+SB114,Forest,Deforestation,Passive,30,Total,Simpson index,0.77,0.9,0.225166605,0.051961524,3,3
+SB114,Forest,Deforestation,Passive,30,Total,Simpson index,0.89,0.9,0.034641016,0.051961524,3,3
+SB114,Forest,Deforestation,Passive,30,Total,Simpson index,0.94,0.9,0,0.051961524,3,3
+SB024,Forest,Agriculture,Active,17,Total,Simpson index,0.98,0.92,0.01,0.03,3,3
+SB024,Forest,Agriculture,Active,17,Total,Simpson index,0.95,0.92,0.01,0.03,3,3
+SB024,Grassland,Agriculture,Passive,78,Total,Simpson index,0.97,0.92,0.02,0.03,3,3
+SB049,Forest,Mining,Active,6,Total,Simpson index,0.96,0.95,0.096,0.095,4,5
+SB049,Forest,Mining,Active,6,Total,Simpson index,0.83,0.95,0.083,0.095,4,5
+SB049,Forest,Mining,Active,6,Total,Simpson index,0.95,0.95,0.095,0.095,4,5
+SB186,Grassland,Pasture,Passive,20,Total,Simpson index,0.97,0.96,0.097,0.096,4,5
+SB186,Grassland,Pasture,Passive,40,Total,Simpson index,0.95,0.96,0.095,0.096,4,5
+SB115,Forest,Agriculture,Passive,8,Total,Simpson index,0.92,0.97,0.092,0.097,2,3
+SB115,Forest,Agriculture,Passive,33,Total,Simpson index,0.93,0.97,0.093,0.097,2,3
+SB115,Forest,Agriculture,Passive,40,Total,Simpson index,0.93,0.97,0.093,0.097,2,3
+SB153,Grassland,Pasture,Passive,22,Total,Simpson index,0.94,0.98,0.034641016,0.02,3,4
+SB118,Grassland,Agriculture,Active,2.5,Total,Simpson index,0.989,0.989,0.002236068,0.004898979,5,6
+SB118,Grassland,Agriculture,Active,11,Total,Simpson index,0.989,0.989,0.004472136,0.004898979,5,6
+SB118,Grassland,Agriculture,Active,16,Total,Simpson index,0.991,0.989,0.002236068,0.004898979,5,6
+SB122,Forest,Mining,Active,5,Total,Simpson index,1.067,1.026,0.214305856,0.149906638,7,8
+SB122,Forest,Mining,Active,5,Total,Simpson index,1.077,1.026,0.28309539,0.149906638,7,8
+SB122,Forest,Mining,Active,5,Total,Simpson index,1.001,1.026,0.166682333,0.149906638,7,8
+SB122,Forest,Mining,Active,5,Total,Simpson index,1.006,1.026,0.092601296,0.149906638,7,8
+SB030,Forest,Deforestation,Active,26,Total,Simpson index,26.641,49.694,7.772517739,10.992,8,9

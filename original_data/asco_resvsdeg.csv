@@ -1,0 +1,226 @@
+﻿ID,Ecosystem,Prior_land_use,Restoration_strategy,Restoration_time,Fungal group,Metrics,Restored_Mean,Degraded_Mean,Restored_SD,Degraded_SD,Restored_SS,Degraded_SS
+SB130,Forest,Monoculture plantation,Active,7,Ascomycota,Relative abundance,0.42,0.3,0.155884573,0.16,3,4
+SB130,Forest,Monoculture plantation,Active,13,Ascomycota,Relative abundance,0.42,0.3,0.034641016,0.16,3,4
+SB130,Forest,Monoculture plantation,Active,23,Ascomycota,Relative abundance,0.44,0.3,0.08660254,0.16,3,4
+SB140,Grassland,Pasture,Passive,33,Ascomycota,Relative abundance,0.21,0.3,0.021,0.03,9,9
+SB030,Forest,Deforestation,Active,26,Ascomycota,Relative abundance,0.255,0.333,0.033941125,0.072,8,9
+SB186,Grassland,Pasture,Passive,20,Ascomycota,Relative abundance,0.31,0.354,0.048,0.067082039,4,5
+SB186,Grassland,Pasture,Passive,40,Ascomycota,Relative abundance,0.253,0.354,0.0426,0.067082039,4,5
+SB078,Forest,Erosion,Active,1,Ascomycota,Relative abundance,0.323,0.362,0.223434554,0.47,3,4
+SB078,Forest,Erosion,Active,6,Ascomycota,Relative abundance,0.21,0.362,0.081406388,0.47,3,4
+SB078,Forest,Erosion,Active,11,Ascomycota,Relative abundance,0.496,0.362,0.410496041,0.47,3,4
+SB078,Forest,Erosion,Active,16,Ascomycota,Relative abundance,0.203,0.362,0.08660254,0.47,3,4
+SB127,Grassland,Pasture,Active,4,Ascomycota,Relative abundance,0.638,0.686,0.237290961,0.332,3,4
+SB006,Grassland,Pasture,Passive,20,Ascomycota,Relative abundance,5,8,0.5,0.8,3,3
+SB006,Grassland,Pasture,Active,20,Ascomycota,Relative abundance,20,8,2,0.8,3,3
+SB006,Grassland,Pasture,Active,20,Ascomycota,Relative abundance,10,8,1,0.8,3,3
+SB006,Grassland,Pasture,Active,20,Ascomycota,Relative abundance,10,8,1,0.8,3,3
+SB183,Forest,Deforestation,Active,10,Ascomycota,Relative abundance,8,22,0.8,2.2,15,15
+SB183,Forest,Deforestation,Active,30,Ascomycota,Relative abundance,10,22,1,2.2,15,15
+SB183,Forest,Deforestation,Active,50,Ascomycota,Relative abundance,16,22,1.6,2.2,15,15
+SB058,Grassland,Mining,Active,5,Ascomycota,Relative abundance,42,25,4.2,2.5,3,4
+SB058,Grassland,Mining,Active,5,Ascomycota,Relative abundance,73,25,7.3,2.5,3,4
+SB058,Grassland,Mining,Active,5,Ascomycota,Relative abundance,57,25,5.7,2.5,3,4
+SB058,Grassland,Mining,Active,5,Ascomycota,Relative abundance,58,25,5.8,2.5,3,4
+SB058,Grassland,Mining,Active,5,Ascomycota,Relative abundance,62,25,6.2,2.5,3,4
+SB058,Grassland,Mining,Active,5,Ascomycota,Relative abundance,65,25,6.5,2.5,3,4
+SB115,Forest,Agriculture,Passive,8,Ascomycota,Relative abundance,62,26,6.2,2.6,2,3
+SB115,Forest,Agriculture,Passive,33,Ascomycota,Relative abundance,35,26,3.5,2.6,2,3
+SB115,Forest,Agriculture,Passive,40,Ascomycota,Relative abundance,29,26,2.9,2.6,2,3
+SB174,Forest,Deforestation,Active,50,Ascomycota,Relative abundance,55,27,5.5,2.7,4,4
+SB174,Forest,Deforestation,Active,35,Ascomycota,Relative abundance,50,27,5,2.7,4,4
+SB184,Grassland,Pasture,Active,5,Ascomycota,Relative abundance,30,30,3,3,9,8
+SB184,Grassland,Pasture,Active,10,Ascomycota,Relative abundance,37.5,30,3.75,3,6,8
+SB141,Forest,Deforestation,Active,59,Ascomycota,Relative abundance,30,32.5,3,3.25,15,15
+SB141,Forest,Deforestation,Active,59,Ascomycota,Relative abundance,2.5,32.5,0.25,3.25,15,15
+SB141,Forest,Deforestation,Active,59,Ascomycota,Relative abundance,15,32.5,1.5,3.25,15,15
+SB024,Forest,Agriculture,Passive,17,Ascomycota,Relative abundance,48,34,4.8,3.4,3,3
+SB024,Forest,Agriculture,Active,17,Ascomycota,Relative abundance,47,34,4.7,3.4,3,3
+SB024,Grassland,Agriculture,Passive,78,Ascomycota,Relative abundance,42.5,34,4.25,3.4,3,3
+SB104,Forest,Agriculture,Active,7,Ascomycota,Relative abundance,5,35,0.5,3.5,3,4
+SB093,Forest,Mining,Active,10,Ascomycota,Relative abundance,47.031,36.167,4.7031,3.6167,7,8
+SB093,Forest,Mining,Active,10,Ascomycota,Relative abundance,75.792,36.167,7.5792,3.6167,7,8
+SB093,Forest,Mining,Active,10,Ascomycota,Relative abundance,40.432,36.167,4.0432,3.6167,7,8
+SB093,Forest,Mining,Active,10,Ascomycota,Relative abundance,46.599,36.167,4.6599,3.6167,7,8
+SB093,Forest,Mining,Active,10,Ascomycota,Relative abundance,64.466,36.167,6.4466,3.6167,7,8
+SB122,Forest,Mining,Active,5,Ascomycota,Relative abundance,48,36.69,4.8,3.669,7,8
+SB122,Forest,Mining,Active,5,Ascomycota,Relative abundance,65.41,36.69,6.541,3.669,7,8
+SB122,Forest,Mining,Active,5,Ascomycota,Relative abundance,61.11,36.69,6.111,3.669,7,8
+SB122,Forest,Mining,Active,5,Ascomycota,Relative abundance,62.11,36.69,6.211,3.669,7,8
+SB185,Grassland,Agriculture,Active,17.5,Ascomycota,Relative abundance,25,37.5,2.5,3.75,3,3
+SB185,Grassland,Agriculture,Active,17.5,Ascomycota,Relative abundance,18.25,37.5,1.825,3.75,3,3
+SB185,Grassland,Agriculture,Active,17.5,Ascomycota,Relative abundance,20,37.5,2,3.75,3,3
+SB125,Forest,Monoculture plantation,Active,3,Ascomycota,Relative abundance,29.88,39.98,2.988,3.998,4,5
+SB125,Forest,Monoculture plantation,Active,3,Ascomycota,Relative abundance,22.03,39.98,2.203,3.998,4,5
+SB160,Grassland,Agriculture,Passive,2,Ascomycota,Relative abundance,40,40,4,4,3,3
+SB160,Grassland,Agriculture,Passive,8,Ascomycota,Relative abundance,54,40,5.4,4,3,3
+SB075,Grassland,Pasture,Passive,9,Ascomycota,Relative abundance,37,43,3.7,4.3,5,6
+SB075,Grassland,Pasture,Active,9,Ascomycota,Relative abundance,40,43,4,4.3,5,6
+SB102,Forest,Monoculture plantation,Passive,30,Ascomycota,Relative abundance,20,43,2,4.3,3,4
+SB102,Forest,Monoculture plantation,Passive,40,Ascomycota,Relative abundance,50,43,5,4.3,3,4
+SB102,Forest,Monoculture plantation,Passive,55,Ascomycota,Relative abundance,24,43,2.4,4.3,3,4
+SB123,Forest,Monoculture plantation,Active,40,Ascomycota,Relative abundance,18,45,1.8,4.5,3,4
+SB123,Forest,Monoculture plantation,Active,40,Ascomycota,Relative abundance,15,45,1.5,4.5,3,4
+SB143,Grassland,Agriculture,Passive,5,Ascomycota,Relative abundance,50,45,5,4.5,3,3
+SB143,Grassland,Agriculture,Passive,10,Ascomycota,Relative abundance,52,45,5.2,4.5,3,3
+SB143,Grassland,Agriculture,Passive,15,Ascomycota,Relative abundance,53,45,5.3,4.5,3,3
+SB143,Grassland,Agriculture,Passive,25,Ascomycota,Relative abundance,55,45,5.5,4.5,3,3
+SB143,Grassland,Agriculture,Passive,30,Ascomycota,Relative abundance,56,45,5.6,4.5,3,3
+SB097,Forest,Pasture,Active,6,Ascomycota,Relative abundance,37,47,3.7,4.7,9,10
+SB150,Grassland,Pasture,Active,5,Ascomycota,Relative abundance,40,47,4,4.7,3,4
+SB150,Grassland,Pasture,Active,14,Ascomycota,Relative abundance,35,47,3.5,4.7,3,4
+SB150,Grassland,Pasture,Active,16,Ascomycota,Relative abundance,41,47,4.1,4.7,3,4
+SB150,Grassland,Pasture,Active,19,Ascomycota,Relative abundance,41,47,4.1,4.7,3,4
+SB123,Forest,Monoculture plantation,Active,20,Ascomycota,Relative abundance,18,48,1.8,4.8,3,4
+SB123,Forest,Monoculture plantation,Active,20,Ascomycota,Relative abundance,15,48,1.5,4.8,3,4
+SB057,Forest,Agriculture,Active,13,Ascomycota,Relative abundance,52.74,49.7,10.34034332,10.62,3,4
+SB057,Forest,Agriculture,Active,29,Ascomycota,Relative abundance,47.6,49.7,4.867062769,10.62,3,4
+SB057,Forest,Agriculture,Active,44,Ascomycota,Relative abundance,45.92,49.7,4.382088543,10.62,3,4
+SB101,Grassland,Agriculture,Passive,24,Ascomycota,Relative abundance,42,50,4.2,5,9,10
+SB101,Grassland,Agriculture,Active,24,Ascomycota,Relative abundance,42,50,4.2,5,9,10
+SB101,Grassland,Agriculture,Active,24,Ascomycota,Relative abundance,40,50,4,5,9,10
+SB101,Grassland,Agriculture,Active,24,Ascomycota,Relative abundance,35,50,3.5,5,9,10
+SB101,Grassland,Agriculture,Passive,24,Ascomycota,Relative abundance,39,50,3.9,5,9,10
+SB177,Forest,Erosion,Active,37,Ascomycota,Relative abundance,44,50,4.4,5,3,3
+SB034,Forest,Agriculture,Passive,9,Ascomycota,Relative abundance,35.85,52.55,7.665037508,7.778508855,8,7
+SB034,Forest,Agriculture,Passive,16.2,Ascomycota,Relative abundance,34.11,52.55,7.311942286,7.778508855,5,7
+SB034,Forest,Agriculture,Passive,52.4,Ascomycota,Relative abundance,22.9,52.55,12.69,7.778508855,9,7
+SB074,Forest,Monoculture plantation,Active,12,Ascomycota,Relative abundance,47.09,54.11,4.62,5.210038388,4,5
+SB028,Forest,Agriculture,Active,15,Ascomycota,Relative abundance,60.03,54.86,5.300075471,20.24,3,4
+SB028,Forest,Agriculture,Active,30,Ascomycota,Relative abundance,29.46,54.86,12.50540683,20.24,3,4
+SB028,Forest,Agriculture,Active,45,Ascomycota,Relative abundance,40.27,54.86,10.84263806,20.24,3,4
+SB007,Forest,Others,Active,2,Ascomycota,Relative abundance,81,55,8.1,5.5,3,4
+SB007,Forest,Others,Active,1,Ascomycota,Relative abundance,60,55,6,5.5,3,4
+SB007,Forest,Others,Active,25,Ascomycota,Relative abundance,78,55,7.8,5.5,3,4
+SB079,Grassland,Pasture,Passive,5,Ascomycota,Relative abundance,50,55,5,5.5,3,4
+SB079,Grassland,Pasture,Passive,10,Ascomycota,Relative abundance,45,55,4.5,5.5,3,4
+SB079,Grassland,Pasture,Passive,15,Ascomycota,Relative abundance,58,55,5.8,5.5,3,4
+SB079,Grassland,Pasture,Passive,25,Ascomycota,Relative abundance,60,55,6,5.5,3,4
+SB079,Grassland,Pasture,Passive,30,Ascomycota,Relative abundance,65,55,6.5,5.5,3,4
+SB074,Forest,Monoculture plantation,Active,12,Ascomycota,Relative abundance,46.1,55.96,2.34,4.270889837,4,5
+SB166,Forest,Deforestation,Passive,40,Ascomycota,Relative abundance,37.11,56.05,15.18290157,5.9703015,5,5
+SB166,Forest,Deforestation,Active,40,Ascomycota,Relative abundance,55.57,56.05,8.608861713,5.9703015,5,5
+SB071,Forest,Agriculture,Passive,5,Ascomycota,Relative abundance,60.656,57.688,6.0656,5.7688,5,5
+SB071,Forest,Agriculture,Passive,17.5,Ascomycota,Relative abundance,61.248,57.688,6.1248,5.7688,5,5
+SB071,Forest,Agriculture,Passive,35,Ascomycota,Relative abundance,64.927,57.688,6.4927,5.7688,5,5
+SB096,Forest,Erosion,Active,2.5,Ascomycota,Relative abundance,76,58,7.6,5.8,3,4
+SB037,Forest,Agriculture,Passive,11,Ascomycota,Relative abundance,60.529,58.333,5.71465957,5.8333,6,7
+SB037,Forest,Agriculture,Passive,35,Ascomycota,Relative abundance,52.568,58.333,5.71465957,5.8333,6,7
+SB037,Forest,Agriculture,Passive,60,Ascomycota,Relative abundance,54.764,58.333,5.71465957,5.8333,6,7
+SB037,Forest,Agriculture,Passive,100,Ascomycota,Relative abundance,42.823,58.333,5.71465957,5.8333,6,7
+SB037,Forest,Agriculture,Passive,150,Ascomycota,Relative abundance,40.352,58.333,5.71465957,5.8333,6,7
+SB156,Forest,Deforestation,Active,15,Ascomycota,Relative abundance,52.5,60,5.25,6,4,4
+SB156,Forest,Deforestation,Active,12,Ascomycota,Relative abundance,54,60,5.4,6,4,4
+SB082,Forest,Deforestation,Active,10,Ascomycota,Relative abundance,37,62,3.7,6.2,5,6
+SB082,Forest,Deforestation,Active,16,Ascomycota,Relative abundance,55,62,5.5,6.2,5,6
+SB082,Forest,Deforestation,Active,22,Ascomycota,Relative abundance,35,62,3.5,6.2,5,6
+SB082,Forest,Deforestation,Active,47,Ascomycota,Relative abundance,35,62,3.5,6.2,5,6
+SB092,Forest,Agriculture,Active,15,Ascomycota,Relative abundance,30,62,3,6.2,18,19
+SB092,Forest,Agriculture,Passive,15,Ascomycota,Relative abundance,35,62,3.5,6.2,18,19
+SB132,Forest,Erosion,Active,57,Ascomycota,Relative abundance,8,62,0.8,6.2,4,5
+SB132,Forest,Erosion,Active,57,Ascomycota,Relative abundance,28,62,2.8,6.2,4,5
+SB132,Forest,Erosion,Active,57,Ascomycota,Relative abundance,64,62,6.4,6.2,4,5
+SB151,Grassland,Pasture,Passive,20,Ascomycota,Relative abundance,66.694,62,5.40399852,4.144,3,4
+SB049,Forest,Mining,Active,6,Ascomycota,Relative abundance,62.5,62.5,6.25,6.25,4,5
+SB049,Forest,Mining,Active,6,Ascomycota,Relative abundance,60,62.5,6,6.25,4,5
+SB049,Forest,Mining,Active,6,Ascomycota,Relative abundance,81.5,62.5,8.15,6.25,4,5
+SB133,Grassland,Pasture,Active,31,Ascomycota,Relative abundance,35,62.86,5.109549882,21.32,3,4
+SB133,Grassland,Pasture,Active,48,Ascomycota,Relative abundance,56.71,62.86,7.551741521,21.32,3,4
+SB162,Grassland,Agriculture,Passive,5,Ascomycota,Relative abundance,55.013123,62.992126,0.7273704,8.728445,3,3
+SB162,Grassland,Agriculture,Passive,15,Ascomycota,Relative abundance,60.892388,62.992126,4.3642225,8.728445,3,3
+SB162,Grassland,Agriculture,Passive,20,Ascomycota,Relative abundance,51.023622,62.992126,2.1821113,8.728445,3,3
+SB162,Grassland,Agriculture,Passive,40,Ascomycota,Relative abundance,41.154856,62.992126,4.7279077,8.728445,3,3
+SB146,Forest,Erosion,Active,25,Ascomycota,Relative abundance,66,63,6.6,6.3,3,4
+SB146,Forest,Erosion,Active,25,Ascomycota,Relative abundance,78,63,7.8,6.3,3,4
+SB182,Grassland,Agriculture,Active,7,Ascomycota,Relative abundance,87.5,63,8.75,6.3,5,5
+SB182,Grassland,Agriculture,Active,7,Ascomycota,Relative abundance,92,63,9.2,6.3,5,5
+SB077,Forest,Monoculture plantation,Active,11,Ascomycota,Relative abundance,58.54,64.28,32.94360636,22.1,3,4
+SB077,Forest,Monoculture plantation,Active,11,Ascomycota,Relative abundance,16.14,64.28,9.682164014,22.1,3,4
+SB092,Forest,Agriculture,Active,15,Ascomycota,Relative abundance,37,65,3.7,6.5,18,19
+SB092,Forest,Agriculture,Passive,15,Ascomycota,Relative abundance,37,65,3.7,6.5,18,19
+SB100,Forest,Agriculture,Active,1.5,Ascomycota,Relative abundance,66,65,6.6,6.5,5,6
+SB100,Forest,Agriculture,Active,15,Ascomycota,Relative abundance,30,65,3,6.5,5,6
+SB100,Forest,Agriculture,Active,1.5,Ascomycota,Relative abundance,68,65,6.8,6.5,5,6
+SB100,Forest,Agriculture,Active,15,Ascomycota,Relative abundance,70,65,7,6.5,5,6
+SB154,Forest,Agriculture,Active,24,Ascomycota,Relative abundance,35,65,3.5,6.5,3,4
+SB154,Forest,Agriculture,Active,24,Ascomycota,Relative abundance,20,65,2,6.5,3,4
+SB154,Forest,Agriculture,Active,24,Ascomycota,Relative abundance,33,65,3.3,6.5,3,4
+SB154,Forest,Agriculture,Active,24,Ascomycota,Relative abundance,55,65,5.5,6.5,3,4
+SB154,Forest,Agriculture,Active,24,Ascomycota,Relative abundance,45,65,4.5,6.5,3,4
+SB154,Forest,Agriculture,Active,24,Ascomycota,Relative abundance,10,65,1,6.5,3,4
+SB118,Grassland,Agriculture,Active,2.5,Ascomycota,Relative abundance,60,67,6,6.7,5,6
+SB118,Grassland,Agriculture,Active,11,Ascomycota,Relative abundance,70,67,7,6.7,5,6
+SB118,Grassland,Agriculture,Active,16,Ascomycota,Relative abundance,68,67,6.8,6.7,5,6
+SB069,Forest,Agriculture,Active,17,Ascomycota,Relative abundance,48.952,67.428,4.617647453,8.38,3,4
+SB069,Forest,Agriculture,Active,28,Ascomycota,Relative abundance,45.142,67.428,1.318090665,8.38,3,4
+SB069,Forest,Agriculture,Active,34,Ascomycota,Relative abundance,55.238,67.428,4.948469157,8.38,3,4
+SB069,Forest,Agriculture,Active,45,Ascomycota,Relative abundance,40.571,67.428,5.608380515,8.38,3,4
+SB172,Grassland,Pasture,Active,3,Ascomycota,Relative abundance,78,68.5,7.8,6.85,8,8
+SB029,Forest,Agriculture,Active,5,Ascomycota,Relative abundance,57.457,69.661,12.91590287,8.812,3,4
+SB029,Forest,Agriculture,Active,15,Ascomycota,Relative abundance,33.559,69.661,2.934094068,8.812,3,4
+SB029,Forest,Agriculture,Active,25,Ascomycota,Relative abundance,38.644,69.661,5.5772036,8.812,3,4
+SB029,Forest,Agriculture,Active,35,Ascomycota,Relative abundance,47.118,69.661,19.96188556,8.812,3,4
+SB136,Forest,Agriculture,Passive,7,Ascomycota,Relative abundance,46,70,4.6,7,3,4
+SB136,Forest,Agriculture,Passive,21,Ascomycota,Relative abundance,59,70,5.9,7,3,4
+SB136,Forest,Agriculture,Active,7,Ascomycota,Relative abundance,52,70,5.2,7,3,4
+SB136,Forest,Agriculture,Active,7,Ascomycota,Relative abundance,55,70,5.5,7,3,4
+SB142,Forest,Monoculture plantation,Active,5,Ascomycota,Relative abundance,71,70,7.1,7,3,3
+SB142,Forest,Monoculture plantation,Active,10,Ascomycota,Relative abundance,58,70,5.8,7,3,3
+SB090,Forest,Agriculture,Passive,110,Ascomycota,Relative abundance,50.11,70.75,11.04,8.184008798,4,5
+SB090,Forest,Agriculture,Passive,30,Ascomycota,Relative abundance,59.7,70.75,6.2,8.184008798,4,5
+SB090,Forest,Agriculture,Passive,15,Ascomycota,Relative abundance,66.69,70.75,12.56,8.184008798,4,5
+SB090,Forest,Agriculture,Passive,50,Ascomycota,Relative abundance,65.28,70.75,6.7,8.184008798,4,5
+SB114,Forest,Deforestation,Passive,30,Ascomycota,Relative abundance,58,72,5.8,7.2,3,3
+SB114,Forest,Deforestation,Passive,30,Ascomycota,Relative abundance,45,72,4.5,7.2,3,3
+SB114,Forest,Deforestation,Passive,30,Ascomycota,Relative abundance,61,72,6.1,7.2,3,3
+SB056,Forest,Deforestation,Active,43,Ascomycota,Relative abundance,86.21,73.68,5.031152949,19.20399958,5,6
+SB054,Forest,Agriculture,Passive,10,Ascomycota,Relative abundance,60,75,6,7.5,3,4
+SB054,Forest,Agriculture,Passive,20,Ascomycota,Relative abundance,62,75,6.2,7.5,3,4
+SB054,Forest,Agriculture,Passive,30,Ascomycota,Relative abundance,71,75,7.1,7.5,3,4
+SB054,Forest,Agriculture,Passive,40,Ascomycota,Relative abundance,70,75,7,7.5,3,4
+SB054,Forest,Agriculture,Passive,50,Ascomycota,Relative abundance,80,75,8,7.5,3,4
+SB059,Forest,Agriculture,Passive,30,Ascomycota,Relative abundance,32,77,3.2,7.7,3,4
+SB059,Forest,Agriculture,Passive,60,Ascomycota,Relative abundance,38,77,3.8,7.7,3,4
+SB059,Forest,Agriculture,Passive,110,Ascomycota,Relative abundance,35,77,3.5,7.7,3,4
+SB089,Forest,Agriculture,Active,29,Ascomycota,Relative abundance,62,77,6.2,7.7,9,9
+SB159,Forest,Agriculture,Active,18,Ascomycota,Relative abundance,69,77,6.9,7.7,3,3
+SB121,Grassland,Pasture,Active,14,Ascomycota,Relative abundance,89,78,8.9,7.8,4,5
+SB121,Grassland,Pasture,Active,14,Ascomycota,Relative abundance,72.5,78,7.25,7.8,4,5
+SB121,Grassland,Pasture,Active,14,Ascomycota,Relative abundance,72.75,78,7.275,7.8,4,5
+SB137,Forest,Agriculture,Active,17.5,Ascomycota,Relative abundance,50.41,78.41,11.46617635,10.04,3,4
+SB041,Grassland,Agriculture,Active,17,Ascomycota,Relative abundance,63.5,78.8,9.127907756,3,3,4
+SB041,Grassland,Agriculture,Active,27,Ascomycota,Relative abundance,58.6,78.8,5.906293254,3,3,4
+SB041,Grassland,Agriculture,Active,42,Ascomycota,Relative abundance,52.4,78.8,6.772318658,3,3,4
+SB131,Grassland,Pasture,Passive,9,Ascomycota,Relative abundance,71,79,7.1,7.9,3,4
+SB064,Forest,Mining,Active,12,Ascomycota,Relative abundance,77,80,7.7,8,4,4
+SB131,Grassland,Pasture,Passive,9,Ascomycota,Relative abundance,84,80,8.4,8,3,4
+SB021,Forest,Erosion,Active,12,Ascomycota,Relative abundance,80.725,80.907,16.62963755,1.21642098,5,5
+SB021,Forest,Erosion,Active,29,Ascomycota,Relative abundance,36.825,80.907,14.60152389,1.21642098,5,5
+SB021,Forest,Erosion,Active,53,Ascomycota,Relative abundance,44.988,80.907,24.74209217,1.21642098,5,5
+SB050,Grassland,Pasture,Passive,5,Ascomycota,Relative abundance,58.54,81.907,4.785656381,11.054,3,4
+SB050,Grassland,Pasture,Passive,10,Ascomycota,Relative abundance,80.399,81.907,1.740711062,11.054,3,4
+SB050,Grassland,Pasture,Passive,15,Ascomycota,Relative abundance,78.641,81.907,9.573044813,11.054,3,4
+SB080,Forest,Monoculture plantation,Active,13,Ascomycota,Relative abundance,95.732,82.755,4.468,4.73151984,4,5
+SB076,Forest,Agriculture,Passive,3,Ascomycota,Relative abundance,56.72,83.21,5.672,8.321,3,3
+SB076,Forest,Agriculture,Passive,6,Ascomycota,Relative abundance,59.79,83.21,5.979,8.321,3,3
+SB076,Forest,Agriculture,Passive,20,Ascomycota,Relative abundance,47.33,83.21,4.733,8.321,3,3
+SB076,Forest,Agriculture,Passive,40,Ascomycota,Relative abundance,55.61,83.21,5.561,8.321,3,3
+SB158,Grassland,Agriculture,Passive,10,Ascomycota,Relative abundance,74.2,83.96,7.42,8.396,3,3
+SB158,Grassland,Agriculture,Passive,20,Ascomycota,Relative abundance,56.28,83.96,5.628,8.396,3,3
+SB158,Grassland,Agriculture,Passive,30,Ascomycota,Relative abundance,65.16,83.96,6.516,8.396,3,3
+SB158,Grassland,Agriculture,Passive,40,Ascomycota,Relative abundance,56.47,83.96,5.647,8.396,3,3
+SB158,Grassland,Agriculture,Passive,50,Ascomycota,Relative abundance,57.71,83.96,5.771,8.396,3,3
+SB096,Forest,Erosion,Active,2.5,Ascomycota,Relative abundance,50,84,5,8.4,3,4
+SB155,Forest,Erosion,Active,43,Ascomycota,Relative abundance,37.5,85.5,3.75,8.55,4,4
+SB155,Forest,Erosion,Active,43,Ascomycota,Relative abundance,57.5,85.5,5.75,8.55,4,4
+SB155,Forest,Erosion,Active,43,Ascomycota,Relative abundance,55.5,85.5,5.55,8.55,4,4
+SB171,Grassland,Mining,Active,2,Ascomycota,Relative abundance,72.5,87,7.25,8.7,7,7
+SB171,Grassland,Mining,Active,6,Ascomycota,Relative abundance,54,87,5.4,8.7,7,7
+SB103,Grassland,Pasture,Passive,3,Ascomycota,Relative abundance,35,90,3.5,9,3,4
+SB047,Forest,Mining,Active,3,Ascomycota,Relative abundance,90,92,9,9.2,20,21
+SB131,Grassland,Pasture,Passive,9,Ascomycota,Relative abundance,80,94,8,9.4,3,4
+SB072,Forest,Monoculture plantation,Active,2,Ascomycota,Relative abundance,95,95,9.5,9.5,3,3
+SB072,Forest,Monoculture plantation,Active,2,Ascomycota,Relative abundance,97,95,9.7,9.5,3,3
+SB099,Forest,Mining,Active,2,Ascomycota,Relative abundance,86.019,97.708,26.37,34.84911943,4,5
+SB099,Forest,Mining,Active,2,Ascomycota,Relative abundance,100.406,97.708,8.392,34.84911943,4,5
+SB099,Forest,Mining,Active,2,Ascomycota,Relative abundance,82.122,97.708,43.76,34.84911943,4,5
