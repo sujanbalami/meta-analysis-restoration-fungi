@@ -39,7 +39,15 @@ Xishuangbanna Tropical Botanical Garden, Chinese Academy of Sciences
 Xishuangbanna, Yunnan 666303, China  
 
 Email: songliang@xtbg.ac.cn  
-Phone: +86-13529155140
+
+---
+
+## Contact for Reproducibility and Code
+
+**Sujan Balami** Ph.D.  
+
+Email: balamisujan@gmail.com
+
 
 ---
 
