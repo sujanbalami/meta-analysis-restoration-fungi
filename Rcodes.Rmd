@@ -1,0 +1,2658 @@
+# Persistent recovery gap in soil fungal communities after vegetation restoration: a meta-analysis
+
+# Chapter I: Literature search
+
+::: {style="background-color:#f0f0f0;"}
+The literature search was carried out in the Web of Science Core Collection (<https://www.webofscience.com/>). Using the **Advanced Search** option, the following Boolean keyword combinations were applied to identify relevant studies. The retrieved literature was then manually sorted based on inclusion/exclusion criteria provided in Methods ("Literature search").
+
+**First search**
+
+TS=((Fungi) AND (restor\* OR "eco-restor\*" OR ecorestor\* OR revegetat\* OR "re-vegetat" OR plantation\* OR replant\* OR "re-plant\*" OR afforest\* OR reforest\* OR "re-forest" OR reclam\* OR "re-calm\*" OR rewild\* OR "re-wild\*" OR rehabilitat\* OR "re-habilitat\*" OR remediate\* OR recover\* OR reintroduc\* OR "re-introduc" OR abandon\* OR succession\*) AND (soil\* OR root\*) AND (diversity\* OR richness\* OR evenness\* OR relative abundan\* OR abundan\* OR composition\* OR community\* OR network\* OR biomass\* OR PLFA\* OR glomalin\* OR spore density\* OR colonization\* OR propagule\* OR hypha\* OR colony\* OR abundance\* OR phylogen\* OR gene copy\*) AND (ecolog\* OR environment\* OR ecosystem\*))
+
+**Second search**
+
+TS=((Fungi OR "soil fungi" OR microbe\* OR microorganism\* OR microbiome OR mycobiome OR mycobiota OR "fungal communit\*" OR "soil microfungi" OR "soil mycota") AND (restor\* OR "eco-restor" OR ecorestor OR revegetat\* OR "re-vegetat" OR plantation\* OR replant\* OR "re-plant" OR afforest OR reforest\* OR "re-forest" OR reclam\* OR "re-calm" OR rewild OR "re-wild" OR rehabilitat OR "re-habilitat" OR remediate OR recover\* OR reintroduc\* OR "re-introduc" OR abandon\* OR succession) AND (soil) AND (diversity OR richness\* OR evenness\* OR "relative abundan\*" OR abundan\* OR biomass\* OR PLFA) AND (NGS\* OR "high-throughput" OR metagenom\* OR amplicon\* OR "next-generation sequencing" OR Illumina OR MiSeq OR IonTorrent OR PacBio OR Nanopore OR 454 OR "ITS" OR "18S") AND (ecolog OR environment\* OR ecosystem\*))
+:::
+
+## PRISMA flowchart (Figure S1, Table S1)
+
+```{r}
+if (!requireNamespace("DiagrammeR", quietly = TRUE)) {
+  install.packages("DiagrammeR")
+}
+
+library(DiagrammeR)
+# Create PRISMA flowchart
+Figure_S1 <- grViz("
+digraph flowchart {
+
+  graph [
+    layout = dot,
+    rankdir = TB,
+    labelloc = t,
+    label = 'Identification of studies via Web of Science core collection',
+    fontname = Helvetica,
+    fontsize = 12
+  ]
+
+  node [
+    shape = box,
+    style = filled,
+    fillcolor = white,
+    fontname = Helvetica,
+    fontsize = 12
+  ]
+
+  edge [
+    color = gray50,
+    arrowsize = 1
+  ]
+
+  A1 [label = 'April 2024\\nRecords identified:\\n14,069']
+  A2 [label = 'Records screened:\\n9,089']
+  A3 [label = 'Records selected:\\n126']
+
+  B1 [label = 'June 2025\\nRecords identified:\\n7,530']
+  B2 [label = 'Records screened:\\n1,882']
+  B3 [label = 'Records selected:\\n40']
+
+  C [label = 'Records included:\\n166']
+
+  A1 -> A2 -> A3
+  B1 -> B2 -> B3
+
+  A3 -> C
+  B3 -> C
+}
+")
+Figure_S1
+
+```
+
+# CHAPTER II: Data extraction
+
+## Data extraction from tables
+
+If reported, the relevant table was located, and the data were extracted.
+
+### Data extraction from figures (boxplot, barplot etc.) (Table S2)
+
+Before the extraction procedure, the figures available in the selected publication needed to be downloaded and saved. Here, an example figure was saved in the `Data_folder/example_shinyDigitise`.
+
+#### Installation of shinyDigitise
+
+The installation steps are available at this link <https://github.com/EIvimeyCook/ShinyDigitise> .
+
+#### Load required package
+
+```{r eval=FALSE}
+library(shinyDigitise)
+```
+
+#### Run shinyDigitise
+
+```{r eval = FALSE}
+shinyDigitise("./Data_folder/example_shinyDigitise") #Use absolute path if this do not open floating window correctly
+```
+
+A floating window will be opened, and the subsequent steps should be followed.
+
+For example, here is the example of figure.png loaded after clicking `GET EXTRACTING`.
+
+The following steps have to be followed: **Orientate Figure → Calibrate Axes → Extract Data**. Upon completion, a message will be displayed in the R console.
+
+## Data extraction from ordination plots (Table S3)
+
+#### Open figure in Datathief
+
+This step was performed outside the R environment. The **Datathief.jar** file was opened, which launched a window as shown below:
+
+#### Manual extraction of coordinates
+
+The ordination plot saved in the folder was opened. The axes were then calibrated by moving the "brown," "blue," and "green" points and entering the corresponding x-axis and y-axis coordinates for all three points. To obtain the coordinates of each individual point in the plot, each moving point was adjusted to the respective location, and the coordinates were recorded manually. These coordinates are provided in Supplementary Table S3 under the **Axis1** and **Axis2** columns.
+
+#### Calculation of euclidean distance
+
+##### Data preparation
+
+The data should consist of three columns: **Plot**, **Axis1**, and **Axis2**, containing the coordinates of each point. For example, as provided in `Data_folder/example_DataThief/ordination_point.csv`, the `df` dataset should appear as follows:
+
+Smilarly plot category data `Data_folder/example_DataThief/ordination_point_category.csv` should look like:
+
+##### Calculation step
+
+```{r eval=FALSE}
+# Import df data
+df<- read.csv(file = "Data_folder/example_DataThief/ordination_point.csv", header = TRUE, row.names = 1)
+
+# Calculate Euclidean distance matrix
+dist_mat<- vegdist(df, method = "euclidean")
+dist_matrix<- as.matrix(dist_mat)
+
+# Copy plot category table from excel sheet
+# Read group plot category from clipboard
+comparison<- read.csv(file = "Data_folder/example_DataThief/ordination_point_category.csv", header = TRUE, row.names = 1)
+
+# Get unique comparison types
+comparison_types <- unique(unlist(comparison))
+
+# Calculate WITHIN-group distances
+within_distances <- list()
+for (type in comparison_types) {
+  samples<- rownames(comparison)[comparison[, 1] == type]
+  if (length(samples) > 1) {
+    sub_dist <- dist_matrix[samples, samples]
+    within_distances[[type]] <- sub_dist[upper.tri(sub_dist)]  # Get upper triangle (no duplicates)
+  }
+}
+
+# Calculate mean and SD for within-group distances
+mean_within <- sapply(within_distances, mean)
+sd_within   <- sapply(within_distances, sd)
+
+# Calculate BETWEEN-group distances
+type_pairs <- combn(comparison_types, 2, simplify = FALSE)  # All possible pairs
+between_distances <- list()
+for (pair in type_pairs) {
+  type1   <- pair[1]
+  type2   <- pair[2]
+  samples1 <- rownames(comparison)[comparison[, 1] == type1]
+  samples2 <- rownames(comparison)[comparison[, 1] == type2]
+  between_distances[[paste(type1, type2, sep = "_vs_")]] <-
+    as.vector(dist_matrix[samples1, samples2])  # All distances between groups
+}
+
+# Calculate mean and SD for between-group distances
+mean_between <- sapply(between_distances, mean)
+sd_between   <- sapply(between_distances, sd) 
+
+# Compile results
+result <- list(
+  mean_within_groups = mean_within,
+  sd_within_groups   = sd_within,
+  mean_between_groups = mean_between,
+  sd_between_groups   = sd_between
+)
+result
+```
+
+From the results displayed in the R console, the relevant data were copied. These data are presented in Supplementary Table S3.
+
+# CHAPTER III: Data overview
+
+## Install and load required packages
+
+```{r message = FALSE, warning = FALSE}
+packages <- c("metafor","numDeriv","metadat","Matrix","gridExtra",  "dplyr","forcats","sf","maps","ggplot2",  "gtable","crayon","tidyselect","Rcpp","dichromat",  "systemfonts","scales","textshaping","lattice","R6",  "labeling","generics","classInt","tibble","units",  "DBI","pillar","RColorBrewer","rlang","utf8",  "mathjaxr","S7","cli","withr","magrittr","class",  "digest","nlme","lifecycle","vctrs","KernSmooth",  "proxy","glue","farver","ragg","e1071","pkgconfig",  "vegan","ggpubr","patchwork","cowplot", "grid")
+
+# cache installed packages
+installed <- rownames(installed.packages())
+to_install <- setdiff(packages, installed)
+
+if (length(to_install) > 0) {
+  install.packages(to_install, dependencies = TRUE)
+}
+
+# load packages safely
+invisible(lapply(packages, function(pkg) {
+  if (!require(pkg, character.only = TRUE)) {
+    stop(paste("Failed to load package:", pkg))
+  }
+}))
+```
+
+## Study distribution map
+
+```{r}
+distribution <- read.csv("data/data_overview/distribution.csv", header = TRUE)
+
+# LOAD WORLD MAP
+world_map <- map_data("world")
+
+# BASE MAP
+base_world_with_grid <- ggplot() + geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "lightblue", color = "transparent") + coord_quickmap(xlim = c(-160, 175), ylim = c(-55, 80)) + theme_bw() + theme(panel.grid = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(), panel.border = element_blank()) + labs(x = NULL, y = NULL)
+
+# FACTOR ORDERING
+distribution$Ecosystem <- factor(distribution$Ecosystem, levels = c("Forest", "Grassland"))
+
+distribution$Prior_land_use <- factor(distribution$Prior_land_use, levels = c("Agriculture", "Pasture", "Mining", "Deforestation", "Erosion", "Monoculture plantation", "Others"))
+```
+
+## Figure 1
+
+```{r}
+# FINAL MAP
+figure_1 <- base_world_with_grid + geom_point(data = distribution, aes(x = Longitude, y = Latitude, fill = Prior_land_use, shape = Ecosystem), size = 1, alpha = 0.5, color = "black", stroke = 0.3) + scale_fill_manual(values = c("Agriculture" = "red", "Pasture" = "blue", "Mining" = "darkgreen", "Deforestation" = "orange", "Erosion" = "brown", "Monoculture plantation" = "cyan", "Others" = "yellow")) + scale_shape_manual(values = c("Grassland" = 21, "Forest" = 22)) + labs(fill = "Prior land use", shape = "Ecosystem") + theme(legend.title = element_text(size = 10), legend.text = element_text(size = 8), legend.position = "right", strip.background = element_blank()) + facet_wrap(~Restoration_strategy, nrow = 2) + guides(shape = guide_legend(order = 1, override.aes = list(fill = "black", color = "black", size = 2.5), keyheight = unit(0.3, "cm"), keywidth = unit(0.8, "cm")), fill = guide_legend(order = 2, override.aes = list(shape = 21, color = "black", size = 2.5), keyheight = unit(0.3, "cm"), keywidth = unit(0.8, "cm")))
+figure_1
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_1.tiff", plot = figure_1, dpi = 600, height = 7, width = 7)
+```
+
+## Data overview
+
+```{r}
+data_overview <- read.csv("data/data_overview/data_overview.csv", header =TRUE)
+# ECOSYSTEM TYPE
+df_ecosystem <- data_overview[1:2,]
+df_restoration <- data_overview[3:4,]
+df_prior_land_use <- data_overview[5:11,]
+
+ecosystem_overview_plot <- ggplot(df_ecosystem, aes(x = Types, y = n, fill = Types)) + geom_col(width = 0.6, alpha = 0.6) + geom_text(aes(label = n), hjust = -0.2, size = 3) + scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + scale_y_continuous(expand = expansion(mult = c(0, 0.25))) + coord_flip(clip = "off") + labs(title = "Ecosystem", x = NULL, y = "Number of studies") + theme_classic(base_size = 10) + theme(legend.position = "none", plot.title = element_text(hjust = 0.5, size = 10, face = "bold"), axis.line = element_line(color = "black"))
+ecosystem_overview_plot
+
+df_prior_land_use$Types <- factor(df_prior_land_use$Types, levels = df_prior_land_use$Types[order(df_prior_land_use$n, decreasing = TRUE)])
+disturbance_overview_plot <- ggplot(df_prior_land_use, aes(x = Types, y = n)) + geom_col(width = 0.6, alpha = 0.6, fill = "grey50") + geom_text(aes(label = n), hjust = -0.2, size = 3) + scale_y_continuous(expand = expansion(mult = c(0, 0.25))) + coord_flip(clip = "off") + labs(title = "Prior land use", x = NULL, y = "Number of studies") + theme_classic(base_size = 10) + theme(legend.position = "none", plot.title = element_text(hjust = 0.5, size = 10, face = "bold"), axis.line = element_line(color = "black"))
+disturbance_overview_plot
+
+strategy_overview_plot <- ggplot(df_restoration, aes(x = Types, y = n, fill = Types)) + geom_col(width = 0.6, alpha = 0.6) + geom_text(aes(label = n), hjust = -0.2, size = 3) + scale_fill_manual(values = c("Active restoration" = "maroon", "Natural regeneration" = "darkgreen")) + scale_y_continuous(expand = expansion(mult = c(0, 0.25))) + coord_flip(clip = "off") + labs(title = "Restoration strategy", x = NULL, y = "Number of studies") + theme_classic(base_size = 10) + theme(legend.position = "none", plot.title = element_text(hjust = 0.5, size = 10, face = "bold"), axis.line = element_line(color = "black"))
+strategy_overview_plot
+
+# RESTORATION TIME
+restoration_time <- read.csv("data/data_overview/restoration_time.csv", header = TRUE)
+restoration_time <- restoration_time %>% mutate(Restoration_strategy = recode(Restoration_strategy, "Active" = "Active restoration", "Passive" = "Natural regeneration"))
+median(restoration_time$Restoration_time)
+
+restoration_time %>%group_by(Restoration_strategy) %>%  summarise(mean_restoration_time = median(Restoration_time, na.rm = TRUE))
+restoration_time_all <- restoration_time %>%  bind_rows(restoration_time %>% mutate(Restoration_strategy = "Overall")) %>%  mutate(Restoration_strategy = factor(Restoration_strategy, levels = c("Overall", "Active restoration","Natural regeneration")))
+
+time_boxplot <- restoration_time_all %>% ggplot(aes(x = Restoration_strategy, y = Restoration_time, fill = Restoration_strategy)) + geom_boxplot(outlier.shape = NA, alpha = 0.6) + geom_jitter(aes(color = Restoration_strategy), width = 0.1, size = 1.5, alpha = 0.6, shape = 16, stroke = 0.3) + scale_fill_manual(values = c("Active restoration" = "maroon", "Natural regeneration" = "darkgreen", "Overall" = "gray40")) + scale_color_manual(values = c("Active restoration" = "maroon", "Natural regeneration" = "darkgreen", "Overall" = "gray40")) + scale_y_continuous(breaks = seq(0, max(restoration_time$Restoration_time, na.rm = TRUE), by = 20)) + labs(x = NULL, y = "Restoration time (years)", title = "Restoration time") + coord_flip() + theme_classic(base_size = 10) + theme(legend.position = "none", plot.title = element_text(hjust = 0.5, size = 10, face = "bold"))
+time_boxplot
+```
+
+## Figure 2
+
+```{r}
+# COMBINE PLOTS
+figure_2 <- plot_grid(ecosystem_overview_plot, disturbance_overview_plot, strategy_overview_plot, time_boxplot, ncol = 2, nrow = 2, labels = c("(a)", "(b)", "(c)", "(d)"), label_size = 11, label_x = 0.98, label_y = 0.98, hjust = 1, vjust = 1, align = "hv", axis = "tblr", rel_widths = c(1, 1.2))
+figure_2
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_2.tiff", plot = figure_2, dpi = 600, height = 5, width = 6)
+```
+
+## Data overview by metrics
+
+```{r warning=FALSE}
+# ECOSYSTEM TYPE
+ecosystem_summary <- read.csv("data/data_overview/ecosystem_summary.csv", header = TRUE)
+
+# ECOSYSTEM TYPE
+data_segmented_ecosystem <- ecosystem_summary %>% mutate( Metrics = factor(Metrics, levels = c("OTU richness","Chao1 richness", "Shannon index", "Simpson index", "Ascomycota","Basidiomycota", "Beta diversity", "Structure", "PLFA content")),Ecosystem = factor(Ecosystem, levels = c("Forest","Grassland")))
+
+break_threshold <- 50
+data_segmented_ecosystem <- data_segmented_ecosystem %>%  mutate(needs_break = Comparison > break_threshold, segment_end = ifelse(needs_break, break_threshold * 0.9, Comparison))
+spacing_multiplier <- 3
+data_segmented_ecosystem <- data_segmented_ecosystem %>% mutate(x_position = (as.numeric(Metrics) - 1) * spacing_multiplier + 1)
+
+min_x <- min(data_segmented_ecosystem$x_position) - 1
+max_x <- max(data_segmented_ecosystem$x_position) + 1
+center_x <- (min_x + max_x) / 2 
+
+overview_ecosystem <- ggplot(data_segmented_ecosystem, aes(x = center_x, y = 0)) + geom_segment(aes(xend = x_position, yend = segment_end, color = Metrics), linewidth = 1, lineend = "round") + geom_segment(data = subset(data_segmented_ecosystem, needs_break == TRUE), aes(x = x_position, xend = x_position, y = break_threshold * 1.1, yend = break_threshold * 1.1 + (Comparison - break_threshold) * 0.3, color = Metrics), linewidth = 1, lineend = "round") + geom_hline(yintercept = 0, color = "black", size = 0.2) + geom_point(data = subset(data_segmented_ecosystem, needs_break == TRUE), aes(x = x_position, y = break_threshold), shape = 21, fill = "white", color = "transparent", size = 2) + geom_text(data = subset(data_segmented_ecosystem, needs_break == TRUE), aes(x = x_position, y = break_threshold * 1.1 + (Comparison - break_threshold) * 0.3, label = Comparison), vjust = -0.8, size = 2.5) + geom_text(data = subset(data_segmented_ecosystem, !needs_break), aes(x = x_position, y = Comparison, label = Comparison), vjust = -0.8, size = 2.5) + facet_wrap(~Ecosystem, nrow = 1, strip.position = "bottom") + labs(x = NULL, y = NULL, title = "Ecosystem") + scale_color_manual(values = c("OTU richness" = "darkgreen", "Chao1 richness" = "limegreen", "Shannon index" = "springgreen", "Simpson index" = "cyan3", "Ascomycota" = "orange", "Basidiomycota" = "brown", "Beta diversity" = "blue", "Structure" = "steelblue", "PLFA content" = "grey60")) + theme_bw() + theme(legend.position = "none", axis.text = element_blank(), axis.ticks = element_blank(), axis.line = element_blank(), plot.title = element_text(size = 10, hjust = 0.5, face = "bold"), panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), strip.background = element_blank(), strip.text = element_text(color = "black", face = "plain"), panel.spacing.x = unit(0.5, "cm")) + coord_cartesian(xlim = c(min_x, max_x), ylim = c(0, max(data_segmented_ecosystem$Comparison) * 0.5), clip = "off")
+```
+
+```{r}
+# RESTORATION STRATEGY
+restoration_strategy_summary <- read.csv("data/data_overview/restoration_strategy_summary.csv", header = TRUE)
+
+# RESTORATION STRATEGY
+restoration_metrics_summary <- restoration_strategy_summary %>% mutate(Restoration_strategy = recode(Restoration_strategy, "Active" = "Active restoration", "Passive" = "Natural regeneration"))
+
+data_segmented_restoration <- restoration_metrics_summary %>% rename(Restoration_activity = Restoration_strategy) %>%  mutate(Metrics = factor(Metrics, levels = c("OTU richness","Chao1 richness", "Shannon index", "Simpson index",  "Ascomycota","Basidiomycota", "Beta diversity", "Structure", "PLFA content")),  Restoration_activity = factor(Restoration_activity, levels = c("Active restoration", "Natural regeneration")))
+break_threshold <- 50
+
+data_segmented_restoration <- data_segmented_restoration %>%  mutate( needs_break = Comparison > break_threshold, segment_end = ifelse(needs_break, break_threshold * 0.9, Comparison))
+
+spacing_multiplier <- 3
+data_segmented_restoration <- data_segmented_restoration %>% mutate(x_position = (as.numeric(Metrics) - 1) * spacing_multiplier + 1)
+
+min_x <- min(data_segmented_restoration$x_position) - 1
+max_x <- max(data_segmented_restoration$x_position) + 1
+center_x <- (min_x + max_x) / 2 
+
+overview_restoration <- ggplot(data_segmented_restoration, aes(x = center_x, y = 0)) + geom_segment(aes(xend = x_position, yend = segment_end, color = Metrics), linewidth = 1, lineend = "round") + geom_segment(data = subset(data_segmented_restoration, needs_break == TRUE), aes(x = x_position, xend = x_position, y = break_threshold * 1.1, yend = break_threshold * 1.1 + (Comparison - break_threshold) * 0.3, color = Metrics), linewidth = 1, lineend = "round") + geom_hline(yintercept = 0, color = "black", size = 0.2) + geom_point(data = subset(data_segmented_restoration, needs_break == TRUE), aes(x = x_position, y = break_threshold), shape = 21, fill = "white", color = "transparent", size = 2) + geom_text(data = subset(data_segmented_restoration, needs_break == TRUE), aes(x = x_position, y = break_threshold * 1.1 + (Comparison - break_threshold) * 0.3, label = Comparison), vjust = -0.8, size = 2.5) + geom_text(data = subset(data_segmented_restoration, !needs_break), aes(x = x_position, y = Comparison, label = Comparison), vjust = -0.8, size = 2.5) + facet_wrap(~Restoration_activity, nrow = 1, strip.position = "bottom") + labs(x = NULL, y = NULL, title = "Restoration strategy") + scale_color_manual(values = c("OTU richness" = "darkgreen", "Chao1 richness" = "limegreen", "Shannon index" = "springgreen", "Simpson index" = "cyan3", "Ascomycota" = "orange", "Basidiomycota" = "brown", "Beta diversity" = "blue", "Structure" = "steelblue", "PLFA content" = "grey60")) + theme_bw() + theme(legend.position = "none", axis.text = element_blank(), axis.ticks = element_blank(), axis.line = element_blank(), plot.title = element_text(size = 10, hjust = 0.5, face = "bold"), panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), strip.background = element_blank(), strip.text = element_text(color = "black", face = "plain"), panel.spacing.x = unit(0.5, "cm")) + coord_cartesian(xlim = c(min_x, max_x), ylim = c(0, max(data_segmented_restoration$Comparison) * 0.5), clip = "off")
+```
+
+```{r}
+# PRIOR LAND USE
+prior_land_use_summary <- read.csv("data/data_overview/prior_land_use_summary.csv", header = TRUE)
+
+# PRIOR LAND USE
+prior_land_use_summary$Metrics <- factor(prior_land_use_summary$Metrics, levels = c("OTU richness", "Chao1 richness","Shannon index", "Simpson index", "Ascomycota", "Basidiomycota","Beta diversity", "Structure", "PLFA content"))
+
+prior_land_use_summary$Prior_land_use <- factor(prior_land_use_summary$Prior_land_use, levels = c("Agriculture", "Deforestation", "Erosion", "Mining", "Monoculture plantation", "Pasture","Others"))
+
+break_threshold <- 50
+data_segmented_Prior_land_use <- prior_land_use_summary %>% mutate(needs_break = Comparison > break_threshold, segment_end = ifelse(needs_break, break_threshold * 0.9, Comparison))
+
+max_metrics <- max(as.numeric(factor(data_segmented_Prior_land_use$Metrics)))
+spacing_multiplier <- 3
+
+data_segmented_Prior_land_use <- data_segmented_Prior_land_use %>% mutate(x_position = (as.numeric(factor(Metrics)) - 1) * spacing_multiplier + 1)
+
+min_x <- min(data_segmented_Prior_land_use$x_position) - 1
+max_x <- max(data_segmented_Prior_land_use$x_position) + 1
+center_x <- (min_x + max_x) / 2 
+
+# PLOT
+overview_Prior_land_use <- ggplot(data_segmented_Prior_land_use, aes(x = center_x, y = 0)) + geom_segment(aes(xend = x_position, yend = segment_end, color = Metrics), size = 1, lineend = "round") + geom_segment(data = subset(data_segmented_Prior_land_use, needs_break == TRUE), aes(x = x_position, xend = x_position, y = break_threshold * 1.1, yend = break_threshold * 1.1 + (Comparison - break_threshold) * 0.3, color = Metrics), size = 1, lineend = "round") + geom_hline(yintercept = 0, color = "black", size = 0.2) + geom_point(data = subset(data_segmented_Prior_land_use, needs_break == TRUE), aes(x = x_position, y = break_threshold), shape = 21, fill = "white", color = "transparent", size = 2) + geom_text(data = subset(data_segmented_Prior_land_use, needs_break == TRUE), aes(x = x_position, y = break_threshold * 1.1 + (Comparison - break_threshold) * 0.3, label = Comparison), vjust = -0.8, size = 2.5) + geom_text(data = subset(data_segmented_Prior_land_use, !needs_break), aes(x = x_position, y = Comparison, label = Comparison), vjust = -0.8, size = 2.5) + facet_wrap(~Prior_land_use, nrow = 1, strip.position = "bottom") + labs(x = NULL, y = NULL, color = NULL, title = "Prior land use") + scale_color_manual(values = c("OTU richness" = "darkgreen", "Chao1 richness" = "limegreen", "Shannon index" = "springgreen", "Simpson index" = "cyan3", "Ascomycota" = "orange", "Basidiomycota" = "brown", "Beta diversity" = "blue", "Structure" = "steelblue", "PLFA content" = "grey60")) + theme_bw() + theme(legend.position = "bottom", legend.text = element_text(size = 8), axis.text = element_blank(), axis.ticks = element_blank(), axis.line = element_blank(), plot.title = element_text(size = 10, hjust = 0.5, face = "bold"), panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), strip.background = element_blank(), strip.text = element_text(color = "black"), panel.spacing.x = unit(0.2, "cm"), panel.spacing.y = unit(-0.5, "cm"), plot.margin = margin(0, 0, 0, 0, "pt")) + coord_cartesian(xlim = c(min_x, max_x), ylim = c(0, max(data_segmented_Prior_land_use$Comparison) * 0.7), clip = "off")
+```
+
+## Figure S2
+
+```{r}
+top_row <- plot_grid( overview_ecosystem, overview_restoration, ncol = 2, labels = c("(a)", "(b)"), label_size = 12, label_x = 0.98, label_y = 0.98,  hjust = 1, align = 'h',  axis = 'bt' )
+Figure_S2 <- plot_grid(top_row, overview_Prior_land_use,  ncol = 1, labels = c("", "(c)"), label_size = 12,label_x = 0.98, label_y = 0.98, hjust = 1, rel_heights = c(1, 1.8), align = 'v', axis = 'lr')
+Figure_S2
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_S2.tiff", plot = Figure_S2, dpi = 600, height = 7, width = 7)
+```
+
+# Chapter VI: Publication bias
+
+## Restored vs Degraded
+
+### Load data
+
+```{r}
+# FUNCTION TO LOAD DATA (RESTORED VS DEGRADED)
+load_data_deg <- function(file_path) {read.csv(file_path, header = TRUE) %>%mutate(across(c(ID, Restoration_strategy, Ecosystem, Prior_land_use), as.factor), Restoration_time = as.numeric(Restoration_time), ControlID = paste(ID, Degraded_Mean, Degraded_SD, Degraded_SS, sep = "_")) %>%   mutate(ControlID = as.character(ControlID))}
+
+# RESTORED VS DEGRADED DATA
+## ALPHA DIVERSITY
+otu_resvsdeg_df      <- load_data_deg("data/original_data/otu_resvsdeg.csv")
+chao1_resvsdeg_df    <- load_data_deg("data/original_data/chao1_resvsdeg.csv")
+shannon_resvsdeg_df  <- load_data_deg("data/original_data/shannon_resvsdeg.csv")
+simpson_resvsdeg_df  <- load_data_deg("data/original_data/simpson_resvsdeg.csv")
+
+## RELATIVE ABUNDANCE
+asco_resvsdeg_df     <- load_data_deg("data/original_data/asco_resvsdeg.csv")
+basidio_resvsdeg_df  <- load_data_deg("data/original_data/basidio_resvsdeg.csv")
+
+## COMPOSITION
+beta_resvsdeg_df     <- load_data_deg("data/original_data/beta_resvsdeg.csv")
+comp_resvsdeg_df     <- load_data_deg("data/original_data/comp_resvsdeg.csv")
+
+## BIOMASS
+plfa_resvsdeg_df     <- load_data_deg("data/original_data/PLFA_resvsdeg.csv")
+```
+
+### Response ratio
+
+```{r}
+# FUNCTION TO CALCULATE RESPONSE RATIO
+compute_rr_deg <- function(df) {metafor::escalc(measure = "ROM", n1i = Restored_SS,  n2i = Degraded_SS, m1i = Restored_Mean,  m2i = Degraded_Mean, sd1i = Restored_SD,  sd2i = Degraded_SD, data = df )}
+
+# RESPONSE RATIO (RESTORED VS DEGRADED)
+## ALPHA DIVERSITY
+otu_resvsdeg_df     <- compute_rr_deg(otu_resvsdeg_df)
+chao1_resvsdeg_df   <- compute_rr_deg(chao1_resvsdeg_df)
+shannon_resvsdeg_df <- compute_rr_deg(shannon_resvsdeg_df)
+simpson_resvsdeg_df <- compute_rr_deg(simpson_resvsdeg_df)
+
+## RELATIVE ABUNDANCE
+asco_resvsdeg_df <- compute_rr_deg(asco_resvsdeg_df)
+basidio_resvsdeg_df <- compute_rr_deg(basidio_resvsdeg_df)
+
+## COMPOSITION
+beta_resvsdeg_df <- compute_rr_deg(beta_resvsdeg_df)
+comp_resvsdeg_df <- comp_resvsdeg_df # DATA ALREADY CONTAIN ln(RR)
+
+## BIOMASS
+plfa_resvsdeg_df <- compute_rr_deg(plfa_resvsdeg_df)
+```
+
+### Figure S3.1
+
+```{r}
+#| fig-width: 6
+#| fig-height: 8
+#| dpi: 600
+
+par(mfrow = c(3, 3), mar = c(4, 4, 3, 1), mgp = c(3, 1, 0))
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = otu_resvsdeg_df),
+       main = "OTU richness", xlab = "lnRR", ylab = "SE")
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = chao1_resvsdeg_df),
+       main = "Chao1 richness", xlab = "lnRR", ylab = NA)
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = shannon_resvsdeg_df),
+       main = "Shannon index", xlab = "lnRR", ylab = NA)
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = simpson_resvsdeg_df),
+       main = "Simpson index", xlab = "lnRR", ylab = NA)
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = asco_resvsdeg_df),
+       main = "Ascomycota", xlab = "lnRR", ylab = "SE")
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = basidio_resvsdeg_df),
+       main = "Basidiomycota", xlab = "lnRR", ylab = NA)
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = beta_resvsdeg_df),
+       main = "Beta diversity", xlab = "lnRR", ylab = "SE")
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = comp_resvsdeg_df),
+       main = "Structure", xlab = "lnRR", ylab = "SE")
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = plfa_resvsdeg_df),
+       main = "PLFA content", xlab = "lnRR", ylab = NA)
+```
+
+### Egger's test (Table S4.1)
+
+```{r}
+egger <- function(df) { model <- metafor::rma(yi = yi, vi = vi, data = df, method = "REML"); test <- metafor::regtest(model); p <- test$pval; sig <- ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ifelse(p < 0.1, ".", "")))); data.frame(Z = round(test$zval, 3), p = format(round(p, 3), nsmall = 3), Sig = sig) }
+
+egger_results_deg <- rbind(data.frame(Metrics = "OTU (restored vs degraded)",egger(otu_resvsdeg_df)),  data.frame(Metrics = "Chao1 (restored vs degraded)",egger(chao1_resvsdeg_df)),  data.frame(Metrics = "Shannon (restored vs degraded)",egger(shannon_resvsdeg_df)),  data.frame(Metrics = "Simpson (restored vs degraded)",egger(simpson_resvsdeg_df)),  data.frame(Metrics = "Asco (restored vs degraded)", egger(asco_resvsdeg_df)),  data.frame(Metrics = "Basidio (restored vs degraded)",egger(basidio_resvsdeg_df)),  data.frame(Metrics = "Beta (restored vs degraded)", egger(beta_resvsdeg_df)),  data.frame(Metrics = "Structure (restored vs degraded)", egger(comp_resvsdeg_df)),  data.frame(Metrics = "PLFA (restored vs degraded)",egger(plfa_resvsdeg_df)))
+print(egger_results_deg)
+
+```
+
+## Restored vs Reference
+
+### Load data
+
+```{r}
+# FUNCTION TO LOAD DATA (RESTORED VS REFERENCE)
+load_data_ref <- function(file_path) {read.csv(file_path, header = TRUE) %>%    mutate(across(c(ID, Restoration_strategy, Ecosystem, Prior_land_use), as.factor), Restoration_time = as.numeric(Restoration_time),
+      ControlID = paste(ID, Reference_Mean, Reference_SD, Reference_SS, sep = "_")) %>% mutate(ControlID = as.character(ControlID))}
+
+# RESTORED VS REFERENCE DATA
+## ALPHA DIVERSITY
+otu_resvsref_df     <- load_data_ref("data/original_data/otu_resvsref.csv")
+chao1_resvsref_df   <- load_data_ref("data/original_data/chao1_resvsref.csv")
+shannon_resvsref_df <- load_data_ref("data/original_data/shannon_resvsref.csv")
+simpson_resvsref_df <- load_data_ref("data/original_data/simpson_resvsref.csv")
+
+## RELATIVE ABUNDANCE
+asco_resvsref_df    <- load_data_ref("data/original_data/asco_resvsref.csv")
+basidio_resvsref_df <- load_data_ref("data/original_data/basidio_resvsref.csv")
+
+## COMPOSITION
+beta_resvsref_df    <- load_data_ref("data/original_data/beta_resvsref.csv")
+comp_resvsref_df    <- load_data_ref("data/original_data/comp_resvsref.csv")
+
+## BIOMASS
+plfa_resvsref_df    <- load_data_ref("data/original_data/plfa_resvsref.csv")
+
+```
+
+### Response ratio
+
+```{r}
+#FUNCTION TO CALCULATE RESPONSE RATIO (RESTORED VS REFERENCE)
+compute_rr_ref <- function(df) {metafor::escalc(measure = "ROM",  n1i = Restored_SS,    n2i = Reference_SS, m1i = Restored_Mean,  m2i = Reference_Mean, sd1i = Restored_SD,   sd2i = Reference_SD,  data = df )}
+
+#RESPONSE RATIO (RESTORED VS REFERENCE)
+##ALPHA DIVERSITY
+otu_resvsref_df     <- compute_rr_ref(otu_resvsref_df)
+chao1_resvsref_df   <- compute_rr_ref(chao1_resvsref_df)
+shannon_resvsref_df <- compute_rr_ref(shannon_resvsref_df)
+simpson_resvsref_df <- compute_rr_ref(simpson_resvsref_df)
+
+##RELATIVE ABUNDANCE
+asco_resvsref_df    <- compute_rr_ref(asco_resvsref_df)
+basidio_resvsref_df <- compute_rr_ref(basidio_resvsref_df)
+
+##COMPOSITION
+beta_resvsref_df    <- compute_rr_ref(beta_resvsref_df)
+comp_resvsref_df <- comp_resvsref_df # DATA ALREADY CONTAIN ln(RR)
+
+## BIOMASS
+plfa_resvsref_df    <- compute_rr_ref(plfa_resvsref_df)
+```
+
+### Figure S3.2
+
+```{r}
+#| fig-width: 6
+#| fig-height: 8
+#| dpi: 600
+
+par(mfrow = c(3, 3), mar = c(4, 4, 3, 1), mgp = c(3, 1, 0))
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = otu_resvsref_df),
+       main = "OTU richness", xlab = "lnRR", ylab = "SE")
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = chao1_resvsref_df),
+       main = "Chao1 richness", xlab = "lnRR", ylab = NA)
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = shannon_resvsref_df),
+       main = "Shannon index", xlab = "lnRR", ylab = NA)
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = simpson_resvsref_df),
+       main = "Simpson index", xlab = "lnRR", ylab = NA)
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = asco_resvsref_df),
+       main = "Ascomycota", xlab = "lnRR", ylab = "SE")
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = basidio_resvsref_df),
+       main = "Basidiomycota", xlab = "lnRR", ylab = NA)
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = beta_resvsref_df),
+       main = "Beta diversity", xlab = "lnRR", ylab = "SE")
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = comp_resvsref_df),
+       main = "Structure", xlab = "lnRR", ylab = "SE")
+
+funnel(rma.mv(yi, vi, random = ~ 1 | ID, data = plfa_resvsref_df),
+       main = "PLFA content", xlab = "lnRR", ylab = NA)
+```
+
+### Egger's test (Table S4.2)
+
+```{r}
+egger_results_ref <- rbind( data.frame(Metrics = "OTU (restored vs reference)",egger(otu_resvsref_df)),  data.frame(Metrics = "Chao1 (restored vs reference)",egger(chao1_resvsref_df)),  data.frame(Metrics ="Shannon (restored vs reference)",egger(shannon_resvsref_df)),  data.frame(Metrics ="Simpson (restored vs reference)",egger(simpson_resvsref_df)),  data.frame(Metrics = "Asco (restored vs reference)", egger(asco_resvsref_df)),  data.frame(Metrics ="Basidio (restored vs reference)",egger(basidio_resvsref_df)),  data.frame(Metrics = "Beta (restored vs reference)", egger(beta_resvsref_df)),  data.frame(Metrics ="Structure (restored vs reference)", egger(comp_resvsref_df)),  data.frame(Metrics ="PLFA (restored vs reference)",egger(plfa_resvsref_df)))
+print(egger_results_ref)
+```
+
+# Chapter VII: Overall restoration effect
+
+```{r}
+# CONSTRUCTING VARIANCE-COVARIANCE MATRIX
+build_cov_matrix <- function(df, rho) { V <- matrix(0, nrow(df), nrow(df)); for (g in split(seq_len(nrow(df)), df$ControlID)) { sub <- df[g, ]; k <- length(g); if (k == 1) { V[g, g] <- sub$vi } else { Vb <- rho * sqrt(outer(sub$vi, sub$vi)); diag(Vb) <- sub$vi; V[g, g] <- Vb } }; diag(V) <- diag(V) + 1e-8; V }
+
+
+# SENSITIVITY ANALYSIS FOR CORRELATION AMONG MULTIPLE EFFECT SIZES
+run_sensitivity <- function(df, rho_vals = c(0.2, 0.5, 0.8)) { models <- lapply(rho_vals, function(rho) { rma.mv(yi = df$yi, V = build_cov_matrix(df, rho = rho), random = ~ 1 | ID, method = "REML", data = df) }); extract_results <- function(mod, rho) { s <- summary(mod); data.frame(rho = rho, estimate = s$beta[1], ci.lb = s$ci.lb[1], ci.ub = s$ci.ub[1], pval = s$pval[1]) }; do.call(rbind, Map(extract_results, models, rho_vals)) }
+
+run_sensitivity_2 <- function(df, rho_vals = c(0.2, 0.5, 0.8)) { models <- lapply(rho_vals, function(rho) { rma.mv(yi = df$yi, V = build_cov_matrix(df, rho = rho), random = ~ 1 | ID, method = "REML", control = list(optimizer = "optim", maxit = 10000), data = df) }); extract_results <- function(mod, rho) { s <- summary(mod); data.frame(rho = rho, estimate = s$beta[1], ci.lb = s$ci.lb[1], ci.ub = s$ci.ub[1], pval = s$pval[1]) }; do.call(rbind, Map(extract_results, models, rho_vals)) }
+
+# EXTRACT TEST OF HETEROGENEITY
+get_heterogeneity <- function(mod) { s <- summary(mod); data.frame(QE = s$QE, QE_df = s$QEdf, QE_p = s$QEp, tau2 = s$sigma2, tau = sqrt(s$sigma2)) }
+
+
+# FIND OUTLIERS AND REMOVE IF ANY
+get_outliers <- function(model, data, z_thresh = 3) { res_stud <- rstudent(model); cd_vals <- cooks.distance(model); outlier_idx <- intersect(which(abs(res_stud$z) > z_thresh), which(cd_vals > (4 / nrow(data)))); outlier_idx }
+
+remove_outliers <- function(df, outlier_idx) { if (length(outlier_idx) > 0) { message("Removing influential outliers for ", paste(outlier_idx, collapse = ", ")); return(df[-outlier_idx, ]) } else { return(df) } }
+
+get_results <- function(mod, data, label) { s <- summary(mod); int_pos <- which(rownames(s$beta) == "intrcpt"); strategy_k <- sum(data$Restoration_strategy == label, na.rm = TRUE); data.frame(Restoration_strategy = label, K = strategy_k, Estimate = round(s$beta[int_pos, ], 3), ci.lb = round(s$ci.lb[int_pos], 3), ci.ub = round(s$ci.ub[int_pos], 3), pval = s$pval[int_pos], Percentage = round((exp(s$beta[int_pos, ]) - 1) * 100, 1), Perc_lb = round((exp(s$ci.lb[int_pos]) - 1) * 100, 1), Perc_ub = round((exp(s$ci.ub[int_pos]) - 1) * 100, 1), Significance = ifelse(s$pval[int_pos] < 0.05, "*", "")) }
+
+
+get_results_prior_land_use <- function(mod, data, label) { s <- summary(mod); int_pos <- which(rownames(s$beta) == "intrcpt"); land_k <- sum(tolower(trimws(as.character(data$Prior_land_use))) == tolower(trimws(label)), na.rm = TRUE); data.frame(Prior_land_use = label, K = paste0("(", land_k, ")"), Estimate = round(s$beta[int_pos, ], 3), ci.lb = round(s$ci.lb[int_pos], 3), ci.ub = round(s$ci.ub[int_pos], 3), pval = s$pval[int_pos], Percentage = paste0(round((exp(s$beta[int_pos, ]) - 1) * 100, 1), "%"), Perc_lb = paste0(round((exp(s$ci.lb[int_pos]) - 1) * 100, 1), "%"), Perc_ub = paste0(round((exp(s$ci.ub[int_pos]) - 1) * 100, 1), "%"), Significance = ifelse(s$pval[int_pos] < 0.05, "*", "")) }
+
+# EXTRACT SUMMARY STATISTICS
+extract_meta_result <- function(res, metric, ecosystem) { data.frame(Metric = metric, Ecosystem = ecosystem, k = res$k, lnRR = round(as.numeric(res$beta), 3), SE = round(res$se, 3), ci.lb = round(res$ci.lb, 3), ci.ub = round(res$ci.ub, 3), pval = round(res$pval, 4), Percent_Change = round((exp(as.numeric(res$beta)) - 1) * 100, 1)) }
+
+report_table <- function(res_list, metric_name) { do.call(rbind, lapply(names(res_list), function(ecos) { extract_meta_result(res = res_list[[ecos]], metric = metric_name, ecosystem = ecos) })) }
+
+get_coefficient <- function(model) { coefs <- coef(summary(model)); beta_forest <- coefs["log_time", "estimate"]; beta_grass <- beta_forest + coefs["log_time:EcosystemGrassland", "estimate"]; p_forest <- coefs["log_time", "pval"]; p_grass <- coefs["log_time:EcosystemGrassland", "pval"]; stars <- function(p) { if (p < 0.001) "***" else if (p < 0.01) "**" else if (p < 0.05) "*" else "" }; list(forest = paste0("Forest: \u03B2 = ", round(beta_forest, 3), stars(p_forest)), grass = paste0("Grassland: \u03B2 = ", round(beta_grass, 3), stars(p_grass))) }
+
+
+# FUNCTIONS TO ADD LABELS
+add_labels1 <- function(df) { df %>% dplyr::mutate(sig = dplyr::case_when(pval < 0.001 ~ "***", pval < 0.01 ~ "**", pval < 0.05 ~ "*", TRUE ~ "ns"), pct_val = round((exp(lnRR) - 1) * 100, 1), lab_k = paste0("(", k, ")"), lab_percent = paste0("(", pct_val, "% ", sig, ")")) }
+
+add_labels2 <- function(df, metric_levels) { df %>% mutate(Metrics = factor(Metrics, levels = metric_levels), Restoration_strategy = factor(Restoration_strategy, levels = c("Passive", "Active")), sig = case_when(pval < 0.001 ~ "***", pval < 0.01 ~ "**", pval < 0.05 ~ "*", TRUE ~ "ns"), pct_val = round((exp(Estimate) - 1) * 100, 1), lab_k = paste0("(", K, ")"), lab_percent = paste0("(", Percentage, "% ", sig, ")")) }
+
+```
+
+## Restored vs Degraded
+
+### Alpha diversity
+
+```{r}
+# OTU RICHNESS
+## FIT MODEL
+res_overall_otu_deg <- rma.mv(yi = yi,V = build_cov_matrix(otu_resvsdeg_df, rho = 0.5),random = ~ 1 | ID, method = "REML",data = otu_resvsdeg_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(otu_resvsdeg_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_otu_deg))
+
+# REMOVE OUTLIERS IF ANY
+outlier_otu <- get_outliers(res_overall_otu_deg, otu_resvsdeg_df)
+otu_clean_df <- remove_outliers(otu_resvsdeg_df, outlier_otu)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_otu_deg <- split(otu_clean_df, otu_clean_df$Ecosystem)
+res_ecosystem_otu_deg <- lapply(ecosystems_otu_deg, function(sub) { V_sub <- build_cov_matrix(sub, rho = 0.5) ;  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_otu_deg <- report_table(res_ecosystem_otu_deg, "OTU richness")
+print(summary_otu_deg)
+```
+
+```{r}
+# CHAO1 RICHNESS
+## FIT MODEL
+res_overall_chao1_deg <- rma.mv(yi = yi,V = build_cov_matrix(chao1_resvsdeg_df, rho = 0.5),random = ~ 1 | ID, method = "REML",data = chao1_resvsdeg_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(chao1_resvsdeg_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_chao1_deg))
+
+# REMOVE OUTLIERS IF ANY
+outlier_chao1 <- get_outliers(res_overall_chao1_deg, chao1_resvsdeg_df)
+chao1_clean_df <- remove_outliers(chao1_resvsdeg_df, outlier_chao1)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_chao1_deg <- split(chao1_clean_df, chao1_clean_df$Ecosystem) 
+res_ecosystem_chao1_deg <- lapply(ecosystems_chao1_deg, function(sub) { V_sub <- build_cov_matrix(sub, rho = 0.5); rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_chao1_deg <- report_table(res_ecosystem_chao1_deg, "Chao1 richness")
+print(summary_chao1_deg)
+```
+
+```{r}
+# SHANNON INDEX
+## FIT MODEL
+res_overall_shannon_deg <- rma.mv(yi = yi, V = build_cov_matrix(shannon_resvsdeg_df,rho=0.5),random = ~ 1 | ID, method = "REML",data = shannon_resvsdeg_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(shannon_resvsdeg_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_shannon_deg))
+
+# REMOVE OUTLIERS IF ANY
+outlier_shannon <- get_outliers(res_overall_shannon_deg, shannon_resvsdeg_df)
+shannon_clean_df <- remove_outliers(shannon_resvsdeg_df, outlier_shannon)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_shannon_deg <- split(shannon_clean_df, shannon_clean_df$Ecosystem)
+res_ecosystem_shannon_deg <- lapply(ecosystems_shannon_deg, function(sub) {  V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_shannon_deg <- report_table( res_ecosystem_shannon_deg,
+                                                "Shannon index")
+print(summary_shannon_deg)
+```
+
+```{r}
+# SIMPSON INDEX
+## FIT MODEL
+res_overall_simpson_deg <- rma.mv(yi = yi, V = build_cov_matrix(simpson_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = simpson_resvsdeg_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(simpson_resvsdeg_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_simpson_deg))
+
+# REMOVE OUTLIERS IF ANY
+outlier_simpson <- get_outliers(res_overall_simpson_deg, simpson_resvsdeg_df)
+simpson_clean_df <- remove_outliers(simpson_resvsdeg_df, outlier_simpson)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_simpson_deg <- split(simpson_clean_df, simpson_clean_df$Ecosystem)
+res_ecosystem_simpson_deg <- lapply(ecosystems_simpson_deg, function(sub) {  V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_simpson_deg <- report_table(res_ecosystem_simpson_deg,
+                                         "Simpson index")
+print(summary_simpson_deg)
+```
+
+### Relative abundance
+
+```{r}
+# ASCOMYCOTA
+## FIT MODEL
+res_overall_asco_deg <- rma.mv(yi = yi, V = build_cov_matrix(asco_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = asco_resvsdeg_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(asco_resvsdeg_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_asco_deg))
+
+# REMOVE OUTLIERS IF ANY
+outlier_asco <- get_outliers(res_overall_asco_deg, asco_resvsdeg_df)
+asco_clean_df <- remove_outliers(asco_resvsdeg_df, outlier_asco)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_asco_deg <- split(asco_clean_df, asco_clean_df$Ecosystem)
+res_ecosystem_asco_deg <- lapply(ecosystems_asco_deg, function(sub) {  V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_asco_deg <- report_table(res_ecosystem_asco_deg,"Ascomycota")
+print(summary_asco_deg)
+```
+
+```{r}
+#### BASIDIOMYCOTA
+## FIT MODEL
+res_overall_basidio_deg <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = basidio_resvsdeg_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(basidio_resvsdeg_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_basidio_deg))
+
+# REMOVE OUTLIERS IF ANY
+outlier_basidio <- get_outliers(res_overall_basidio_deg, basidio_resvsdeg_df)
+basidio_clean_df <- remove_outliers(basidio_resvsdeg_df, outlier_basidio)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_basidio_deg <- split(basidio_clean_df, basidio_clean_df$Ecosystem)
+res_ecosystem_basidio_deg <- lapply(ecosystems_basidio_deg, function(sub) {  V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_basidio_deg <- report_table( res_ecosystem_basidio_deg, "Basidiomycota")
+print(summary_basidio_deg)
+```
+
+### Composition
+
+```{r}
+# BETA DIVERISTY
+## FIT MODEL
+res_overall_beta_deg <- rma.mv( yi = yi,  V = build_cov_matrix(beta_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = beta_resvsdeg_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(beta_resvsdeg_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_beta_deg))
+
+# REMOVE OUTLIERS IF ANY
+outlier_beta <- get_outliers(res_overall_beta_deg, beta_resvsdeg_df)
+beta_clean_df <- remove_outliers(beta_resvsdeg_df, outlier_beta)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_beta_deg <- split(beta_clean_df, beta_clean_df$Ecosystem)
+res_ecosystem_beta_deg <- lapply(ecosystems_beta_deg, function(sub) {  V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_beta_deg <- report_table(res_ecosystem_beta_deg, "Beta diversity")
+print(summary_beta_deg)
+```
+
+```{r}
+# STRUCTURE
+## FIT MODEL
+res_overall_comp_deg <- rma.mv( yi = yi,  V = build_cov_matrix(comp_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = comp_resvsdeg_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(comp_resvsdeg_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_comp_deg))
+
+# REMOVE OUTLIERS IF ANY
+outlier_comp <- get_outliers(res_overall_comp_deg, comp_resvsdeg_df)
+comp_clean_df <- remove_outliers(comp_resvsdeg_df, outlier_comp)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_comp_deg <- split(comp_clean_df, comp_clean_df$Ecosystem)
+res_ecosystem_comp_deg <- lapply(ecosystems_comp_deg, function(sub) {  V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_comp_deg <- report_table(res_ecosystem_comp_deg,"Structure")
+print(summary_comp_deg)
+```
+
+### Biomass
+
+```{r}
+# PLFA content
+## FIT MODEL
+res_overall_plfa_deg <- rma.mv( yi = yi,  V = build_cov_matrix(plfa_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = plfa_resvsdeg_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity_2(plfa_resvsdeg_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_plfa_deg))
+
+# REMOVE OUTLIERS IF ANY
+outlier_plfa <- get_outliers(res_overall_plfa_deg, plfa_resvsdeg_df)
+plfa_clean_df <- remove_outliers(plfa_resvsdeg_df, outlier_plfa)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_plfa_deg <- split(plfa_clean_df, plfa_clean_df$Ecosystem) 
+res_ecosystem_plfa_deg <- lapply(ecosystems_plfa_deg, function(sub) {  V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_plfa_deg <- report_table(res_ecosystem_plfa_deg, "PLFA content")
+print(summary_plfa_deg)
+```
+
+```{r}
+metrics_resvsdeg_df <- rbind(summary_otu_deg, summary_chao1_deg,summary_shannon_deg, summary_simpson_deg,summary_asco_deg, summary_basidio_deg, summary_beta_deg, summary_comp_deg,summary_plfa_deg)
+print(metrics_resvsdeg_df)
+```
+
+```{r}
+write.csv(file = "data/figure_data/overall_resvsdeg_df.csv", metrics_resvsdeg_df, row.names = FALSE )
+
+```
+
+### Figure 3.1
+
+```{r warning=FALSE}
+# LOAD DATA
+metrics_resvsdeg_df <- read.csv("data/figure_data/overall_resvsdeg_df.csv", header = TRUE)
+
+# SEPARATE DATA
+alpha_diversity_deg <- metrics_resvsdeg_df[1:8,]
+relabun_deg         <- metrics_resvsdeg_df[9:12,]
+comm_deg            <- metrics_resvsdeg_df[13:16,]
+plfa_deg            <- metrics_resvsdeg_df[17:18,]
+
+alpha_diversity_deg <- add_labels1(alpha_diversity_deg)
+relabun_deg         <- add_labels1(relabun_deg)
+comm_deg            <- add_labels1(comm_deg)
+plfa_deg  <- add_labels1(plfa_deg)
+
+# ALPHA DIVERSITY
+label_alpha <- data.frame(label = c("Simpson index", "Shannon index", "Chao1 richness", "OTU richness"), y = c(1.45, 2.45, 3.45, 4.45),  x = -0.6 )
+
+alpha_diversity_deg$Metric <- factor(alpha_diversity_deg$Metric, levels = c("Simpson index", "Shannon index", "Chao1 richness", "OTU richness"))
+
+overall_alpha_diversity_deg_plot <- ggplot(alpha_diversity_deg, aes(x = lnRR, y = Metric, color = Ecosystem)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.5), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.5)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.5), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.5), hjust = -0.2, size = 3.2, show.legend = FALSE) + geom_text(data = label_alpha, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + labs(x = "lnRR (alpha diversity)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.5)))
+
+## RELATIVE ABUNDANCE PLOT
+label_rel <- data.frame(label = c("Basidiomycota", "Ascomycota"),y = c(1.45, 2.45),  x = -1)
+relabun_deg$Metric <- factor(relabun_deg$Metric, levels = c("Basidiomycota", "Ascomycota"))
+
+overall_relabun_deg_plot <- ggplot(relabun_deg, aes(x = lnRR, y = Metric, color = Ecosystem)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.5), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.5)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.5), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.5), hjust = -0.2, size = 3.2, show.legend = FALSE) + geom_text(data = label_rel, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + labs(x = "lnRR (relative abundance)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.5)))
+
+## COMPOSITION PLOT
+label_comm <- data.frame(label = c("Beta diversity", "Structure"),  y = c(1.45, 2.45),  x = -1.5)
+
+comm_deg$Metric <- factor(comm_deg$Metric,levels = c("Beta diversity", "Structure"))
+
+overall_comm_deg_plot <- ggplot(comm_deg, aes(x = lnRR, y = Metric, color = Ecosystem)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.5), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.5)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.5), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.5), hjust = -0.2, size = 3.2, show.legend = FALSE) + geom_text(data = label_comm, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + labs(x = "lnRR (composition)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.5)))
+
+
+## BIOMASS PLOT
+label_plfa <- data.frame(label = c("PLFA content"), y = c(1.45),  x = -1)
+overall_biomass_deg_plot <- ggplot(plfa_deg, aes(x = lnRR, y = Metric, color = Ecosystem)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.5), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.5)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.5), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.5), hjust = -0.2, size = 3.2, show.legend = FALSE) + geom_text(data = label_plfa, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + labs(x = "lnRR (biomass)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.5)))
+```
+
+```{r warning=FALSE, message=FALSE}
+legend <- get_legend(overall_biomass_deg_plot + theme(legend.position = "bottom",  legend.text = element_text(size = 12), legend.title = element_text(size = 12), legend.margin = margin(t = -20)) + labs(color = "Ecosystem"))
+Figure_3_deg1<-ggarrange(overall_alpha_diversity_deg_plot,  overall_biomass_deg_plot,  nrow = 2, heights = c(1, 0.4), legend = "none")
+Figure_3_deg2 <-ggarrange(overall_relabun_deg_plot, overall_comm_deg_plot,nrow = 2, legend = "none")
+Figure_3_deg_grid <- ggarrange(Figure_3_deg1, Figure_3_deg2, ncol = 2)
+final_combined <- plot_grid(Figure_3_deg_grid, legend, ncol = 1,  rel_heights = c(1, 0.08))
+Figure_3.1 <- annotate_figure(final_combined, top = text_grob("Restored vs Degraded", face = "bold", size = 12), fig.lab = "(a)", fig.lab.pos = "top.right", fig.lab.face = "bold", fig.lab.size = 16)
+Figure_3.1
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_3.1.tiff", plot = Figure_3.1, dpi = 600, height = 6, width = 5)
+```
+
+## Restored vs Reference
+
+### Alpha diversity
+
+```{r}
+# OTU RICHNESS
+## FIT MODEL
+res_overall_otu_ref <- rma.mv(  yi = yi,  V = build_cov_matrix(otu_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = otu_resvsref_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(otu_resvsref_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_otu_ref))
+
+# REMOVE OUTLIERS IF ANY
+outlier_otu_ref <- get_outliers(res_overall_otu_ref, otu_resvsref_df)
+otu_clean_ref_df <- remove_outliers(otu_resvsref_df, outlier_otu_ref)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_otu_ref <- split(otu_clean_ref_df, otu_clean_ref_df$Ecosystem)
+res_ecosystem_otu_ref <- lapply(ecosystems_otu_ref, function(sub) {  V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_otu_ref <- report_table(res_ecosystem_otu_ref,  "OTU richness")
+print(summary_otu_ref)
+```
+
+```{r}
+# CHAO1 RICHNESS
+## FIT MODEL
+res_overall_chao1_ref <- rma.mv(  yi = yi,  V = build_cov_matrix(chao1_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = chao1_resvsref_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(chao1_resvsref_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_chao1_ref))
+
+# REMOVE OUTLIERS IF ANY
+outlier_chao1_ref <- get_outliers(res_overall_chao1_ref, chao1_resvsref_df)
+chao1_clean_ref_df <- remove_outliers(chao1_resvsref_df, outlier_chao1_ref)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_chao1_ref <- split(chao1_clean_ref_df, chao1_clean_ref_df$Ecosystem)
+res_ecosystem_chao1_ref <- lapply(ecosystems_chao1_ref, function(sub) {V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_chao1_ref <- report_table(res_ecosystem_chao1_ref, "Chao1 richness")
+print(summary_chao1_ref)
+```
+
+```{r}
+# SHANNON INDEX
+## FIT MODEL
+res_overall_shannon_ref <- rma.mv(  yi = yi,  V = build_cov_matrix(shannon_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = shannon_resvsref_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(shannon_resvsref_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_shannon_ref))
+
+# REMOVE OUTLIERS IF ANY
+outlier_shannon_ref <- get_outliers(res_overall_shannon_ref, shannon_resvsref_df)
+shannon_clean_ref_df <- remove_outliers(shannon_resvsref_df, outlier_shannon_ref)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_shannon_ref <-split(shannon_clean_ref_df, shannon_clean_ref_df$Ecosystem)
+res_ecosystem_shannon_ref <- lapply(ecosystems_shannon_ref, function(sub) {V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_shannon_ref <- report_table(res_ecosystem_shannon_ref,"Shannon index")
+print(summary_shannon_ref)
+```
+
+```{r}
+# SIMPSON INDEX
+## FIT MODEL
+res_overall_simpson_ref <- rma.mv(  yi = yi,  V = build_cov_matrix(simpson_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = simpson_resvsref_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(simpson_resvsref_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_simpson_ref))
+
+# REMOVE OUTLIERS IF ANY
+outlier_simpson_ref <- get_outliers(res_overall_simpson_ref, simpson_resvsref_df)
+simpson_clean_ref_df <- remove_outliers(simpson_resvsref_df, outlier_simpson_ref)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_simpson_ref <-split(simpson_clean_ref_df, simpson_clean_ref_df$Ecosystem)
+res_ecosystem_simpson_ref <- lapply(ecosystems_simpson_ref, function(sub) {V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_simpson_ref <- report_table(res_ecosystem_simpson_ref, "Simpson index")
+print(summary_simpson_ref)
+```
+
+### Relative abundance
+
+```{r}
+# ASCOMYCOTA
+## FIT MODEL
+res_overall_asco_ref <- rma.mv(yi = yi,  V = build_cov_matrix(asco_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = asco_resvsref_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(asco_resvsref_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_asco_ref))
+
+# REMOVE OUTLIERS IF ANY
+outlier_asco_ref <- get_outliers(res_overall_asco_ref, asco_resvsref_df)
+asco_clean_ref_df <- remove_outliers(asco_resvsref_df, outlier_asco_ref)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_asco_ref <- split(asco_clean_ref_df, asco_clean_ref_df$Ecosystem)
+res_ecosystem_asco_ref <- lapply(ecosystems_asco_ref, function(sub) {V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_asco_ref <- report_table(res_ecosystem_asco_ref,  "Ascomycota")
+print(summary_asco_ref)
+```
+
+```{r}
+# BASIDIOMYCOTA
+## FIT MODEL
+res_overall_basidio_ref <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = basidio_resvsref_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(basidio_resvsref_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_basidio_ref))
+
+# REMOVE OUTLIERS IF ANY
+outlier_basidio_ref <- get_outliers(res_overall_basidio_ref, basidio_resvsref_df)
+basidio_clean_ref_df <- remove_outliers(basidio_resvsref_df, outlier_basidio_ref)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_basidio_ref <-split(basidio_clean_ref_df, basidio_clean_ref_df$Ecosystem)
+res_ecosystem_basidio_ref <- lapply(ecosystems_basidio_ref, function(sub) {V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_basidio_ref <- report_table(res_ecosystem_basidio_ref,"Basidiomycota")
+print(summary_basidio_ref)
+```
+
+### Composition
+
+```{r}
+# BETA DIVERSITY
+## FIT MODEL
+res_overall_beta_ref <- rma.mv(  yi = yi,  V = build_cov_matrix(beta_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = beta_resvsref_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(beta_resvsref_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_beta_ref))
+
+# REMOVE OUTLIERS IF ANY
+outlier_beta_ref <- get_outliers(res_overall_beta_ref, beta_resvsref_df)
+beta_clean_ref_df <- remove_outliers(beta_resvsref_df, outlier_beta_ref)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_beta_ref <- split(beta_clean_ref_df, beta_clean_ref_df$Ecosystem)
+res_ecosystem_beta_ref <- lapply(ecosystems_beta_ref, function(sub) {V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_beta_ref <- report_table(res_ecosystem_beta_ref,"Beta diversity")
+print(summary_beta_ref)
+```
+
+```{r}
+# STRUCTURE
+## FIT MODEL
+res_overall_comp_ref <- rma.mv(  yi = yi,  V = build_cov_matrix(comp_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = comp_resvsref_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(comp_resvsref_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_comp_ref))
+
+# REMOVE OUTLIERS IF ANY
+outlier_comp_ref <- get_outliers(res_overall_comp_ref, comp_resvsref_df)
+comp_clean_ref_df <- remove_outliers(comp_resvsref_df, outlier_comp_ref)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_comp_ref <- split(comp_clean_ref_df, comp_clean_ref_df$Ecosystem) 
+res_ecosystem_comp_ref <- lapply(ecosystems_comp_ref, function(sub) {V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_comp_ref <- report_table(res_ecosystem_comp_ref,  "Structure")
+print(summary_comp_ref)
+```
+
+### Biomass
+
+```{r}
+# PLFA CONTENT
+## FIT MODEL
+res_overall_plfa_ref <- rma.mv(yi = yi,  V = build_cov_matrix(plfa_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = plfa_resvsref_df)
+
+# SENSITIVITY ANALYSIS
+print(run_sensitivity(plfa_resvsref_df))
+
+# GET TEST OF HETEROGENEITY
+print(get_heterogeneity(res_overall_plfa_ref))
+
+# REMOVE OUTLIERS IF ANY
+outlier_plfa_ref <- get_outliers(res_overall_plfa_ref, plfa_resvsref_df)
+plfa_clean_ref_df <- remove_outliers(plfa_resvsref_df, outlier_plfa_ref)
+
+## ECOSYSTEM-LEVEL MODELS
+ecosystems_plfa_ref <- split(plfa_clean_ref_df, plfa_clean_ref_df$Ecosystem)
+res_ecosystem_plfa_ref <- lapply(ecosystems_plfa_ref, function(sub) {V_sub <- build_cov_matrix(sub, rho = 0.5);  rma.mv(yi = yi, V = V_sub, random = ~ 1 | ID, method = "REML", data = sub)})
+
+## REPORTING TABLE
+summary_plfa_ref <- report_table(res_ecosystem_plfa_ref,  "PLFA content")
+print(summary_plfa_ref)
+```
+
+```{r}
+metrics_resvsref_df <- rbind( summary_otu_ref,  summary_chao1_ref, summary_shannon_ref,  summary_simpson_ref, summary_asco_ref,  summary_basidio_ref, summary_beta_ref,  summary_comp_ref, summary_plfa_ref)
+print(metrics_resvsref_df)
+```
+
+```{r eval=FALSE}
+write.csv(file = "data/figure_data/overall_resvsref_df.csv", metrics_resvsref_df, row.names = FALSE )
+```
+
+### Figure 3.2
+
+```{r}
+metrics_resvsref_df <- read.csv("data/figure_data/overall_resvsref_df.csv",  header = TRUE)
+
+alpha_diversity_ref <- metrics_resvsref_df[1:8,]
+relabun_ref         <- metrics_resvsref_df[9:12,]
+comm_ref            <- metrics_resvsref_df[13:16,]
+plfa_ref            <- metrics_resvsref_df[17:18,]
+
+alpha_diversity_ref <- add_labels1(alpha_diversity_ref)
+relabun_ref         <- add_labels1(relabun_ref)
+comm_ref            <- add_labels1(comm_ref)
+plfa_ref            <- add_labels1(plfa_ref)
+
+
+# ALPHA DIVERSITY
+label_alpha <- data.frame(label = c("Simpson index", "Shannon index", "Chao1 richness", "OTU richness"), y = c(1.45, 2.45, 3.45, 4.45),  x = -0.6 )
+
+alpha_diversity_ref$Metric <- factor(alpha_diversity_ref$Metric, levels = c("Simpson index", "Shannon index", "Chao1 richness", "OTU richness"))
+overall_alpha_diversity_ref_plot <- ggplot(alpha_diversity_ref, aes(x = lnRR, y = Metric, color = Ecosystem)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.5), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.5)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.5), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.5), hjust = -0.2, size = 3.2, show.legend = FALSE) + geom_text(data = label_alpha, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + labs(x = "lnRR (alpha diversity)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.05, 0.5)))
+
+## RELATIVE ABUNDANCE
+label_rel <- data.frame(label = c("Basidiomycota", "Ascomycota"), y = c(1.45, 2.45),  x = -1)
+relabun_ref$Metric <- factor(relabun_ref$Metric, levels = c("Basidiomycota", "Ascomycota"))
+
+overall_relabun_ref_plot <- ggplot(relabun_ref, aes(x = lnRR, y = Metric, color = Ecosystem)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.5), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.5)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.5), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.5), hjust = -0.2, size = 3.2, show.legend = FALSE) + geom_text(data = label_rel, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + labs(x = "lnRR (relative abundance)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.5)))
+
+## COMPOSITION
+label_comm <- data.frame(label = c("Structure", "Beta diversity"), y = c(1.45, 2.45),    x = -1.5)
+comm_ref$Metric <- factor(comm_ref$Metric, levels = c("Structure", "Beta diversity"))
+
+overall_comm_ref_plot <- ggplot(comm_ref, aes(x = lnRR, y = Metric, color = Ecosystem)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.5), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.5)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.5), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.5), hjust = -0.2, size = 3.2, show.legend = FALSE) + geom_text(data = label_comm, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + labs(x = "lnRR (composition)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.6)))
+
+## PLFA CONTENT
+label_plfa <- data.frame(label = c("PLFA content"), y = c(1.45),  x = -1)
+
+overall_biomass_ref_plot <- ggplot(plfa_ref, aes(x = lnRR, y = Metric, color = Ecosystem)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.5), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.5)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.5), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.5), hjust = -0.2, size = 3.2, show.legend = FALSE) + geom_text(data = label_plfa, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + labs(x = "lnRR (biomass)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.5)))
+```
+
+```{r}
+master_legend_ref <- get_legend(overall_biomass_ref_plot + theme(legend.position = "bottom", legend.text = element_text(size = 12), legend.title = element_text(size = 12, face = "plain"), legend.margin = margin(t = -20, r = 0, b = 0, l = 0)) + labs(color = "Ecosystem"))
+Figure_3_ref1 <- ggarrange( overall_alpha_diversity_ref_plot, overall_biomass_ref_plot, nrow = 2, heights = c(1, 0.4),legend = "none")
+Figure_3_ref2 <- ggarrange( overall_relabun_ref_plot, overall_comm_ref_plot,  nrow = 2, heights = c(1, 1),legend = "none")
+Figure_3_ref_grid <- ggarrange( Figure_3_ref1, Figure_3_ref2,  ncol = 2, widths = c(1, 1))
+final_combined_ref <- plot_grid(Figure_3_ref_grid, master_legend_ref, ncol = 1, rel_heights = c(1, 0.08))
+Figure_3.2 <- annotate_figure( final_combined_ref,  top = text_grob("Restored vs Reference", face = "bold", size = 12),  fig.lab = "(b)",  fig.lab.pos = "top.right",fig.lab.face = "bold",  fig.lab.size = 16)
+Figure_3.2
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_3.2.tiff", plot = Figure_3.2, dpi = 600, height = 6, width = 5)
+```
+
+# Chapter VIII: Effect of restoration strategies
+
+### Restored vs Degraded
+
+#### Alpha diversity
+
+```{r}
+# OTU RICHNESS
+## FIT MODEL
+res_otu_init <- rma.mv(yi = yi, V = build_cov_matrix(otu_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = otu_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_otu_deg <- get_outliers(res_otu_init, otu_resvsdeg_df)
+otu_filtered <- remove_outliers(otu_resvsdeg_df, outlier_otu_deg)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+otu_filtered$Restoration_strategy <- relevel(factor(otu_filtered$Restoration_strategy), ref = "Active")
+res_active_otu <- rma.mv(yi = yi, V = build_cov_matrix(otu_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem +  Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = otu_filtered)
+
+### Passive as reference (Intercept = Passive)
+otu_filtered$Restoration_strategy <- relevel(factor(otu_filtered$Restoration_strategy), ref = "Passive")
+res_passive_otu <- rma.mv(yi = yi, V = build_cov_matrix(otu_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem +  Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = otu_filtered)
+summary(res_passive_otu)
+
+## REPORTING TABLE
+estimates_df_otu <- rbind(get_results(res_active_otu, otu_filtered, "Passive"),  get_results(res_passive_otu, otu_filtered, "Active")) %>%  mutate(Metrics = "OTU richness")
+print(estimates_df_otu)
+```
+
+```{r}
+# CHAO1 RICHNESS
+## FIT MODEL
+res_chao1_init <- rma.mv(yi = yi, V = build_cov_matrix(chao1_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = chao1_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_chao1_deg <- get_outliers(res_chao1_init, chao1_resvsdeg_df)
+chao1_filtered <- remove_outliers(chao1_resvsdeg_df, outlier_chao1_deg)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+chao1_filtered$Restoration_strategy <- relevel(factor(chao1_filtered$Restoration_strategy), ref = "Active")
+res_active_chao1 <- rma.mv(yi = yi, V = build_cov_matrix(chao1_filtered, rho = 0.5),mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = chao1_filtered)
+
+### Passive as reference (Intercept = Passive)
+chao1_filtered$Restoration_strategy <- relevel(factor(chao1_filtered$Restoration_strategy), ref = "Passive")
+res_passive_chao1 <- rma.mv(yi = yi, V = build_cov_matrix(chao1_filtered, rho = 0.5),mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML",  data = chao1_filtered)
+summary(res_passive_chao1)
+
+## REPORTING TABLE
+estimates_df_chao1 <- rbind(get_results(res_passive_chao1, chao1_filtered, "Passive"),  get_results(res_active_chao1, chao1_filtered, "Active")) %>%  mutate(Metrics = "Chao1 richness")
+print(estimates_df_chao1)
+```
+
+```{r}
+# SHANNON INDEX
+## FIT MODEL
+res_shannon_init <- rma.mv(yi = yi, V = build_cov_matrix(shannon_resvsdeg_df, rho = 0.5),mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = shannon_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_shannon_deg <- get_outliers(res_shannon_init, shannon_resvsdeg_df)
+shannon_filtered <- remove_outliers(shannon_resvsdeg_df, outlier_shannon_deg)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+shannon_filtered$Restoration_strategy <- relevel(factor(shannon_filtered$Restoration_strategy), ref = "Active")
+res_active_shannon <- rma.mv(yi = yi, V = build_cov_matrix(shannon_filtered, rho = 0.5),mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = shannon_filtered)
+
+### Passive as reference (Intercept = Passive)
+shannon_filtered$Restoration_strategy <- relevel(factor(shannon_filtered$Restoration_strategy), ref = "Passive")
+res_passive_shannon <- rma.mv(yi = yi, V = build_cov_matrix(shannon_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = shannon_filtered) 
+summary(res_passive_shannon)
+
+## REPORTING TABLE
+estimates_df_shannon <- rbind(get_results(res_passive_shannon, shannon_filtered, "Passive"),  get_results(res_active_shannon, shannon_filtered, "Active")) %>%  mutate(Metrics = "Shannon index")
+print(estimates_df_shannon)
+```
+
+```{r}
+# SIMPSON INDEX
+## FIT MODEL
+res_simpson_init <- rma.mv(yi = yi, V = build_cov_matrix(simpson_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = simpson_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_simpson_deg <- get_outliers(res_simpson_init, simpson_resvsdeg_df)
+simpson_filtered <- remove_outliers(simpson_resvsdeg_df, outlier_simpson_deg)
+
+# FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+simpson_filtered$Restoration_strategy <- relevel(factor(simpson_filtered$Restoration_strategy), ref = "Active")
+res_active_simpson <- rma.mv(yi = yi, V = build_cov_matrix(simpson_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML",  data = simpson_filtered)
+summary(res_active_simpson)
+
+### Passive as reference (Intercept = Passive)
+simpson_filtered$Restoration_strategy <- relevel(factor(simpson_filtered$Restoration_strategy), ref = "Passive")
+res_passive_simpson <- rma.mv(yi = yi, V = build_cov_matrix(simpson_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = simpson_filtered)
+
+## REPORTING TABLE
+estimates_df_simpson <- rbind(get_results(res_passive_simpson, simpson_filtered, "Passive"), get_results(res_active_simpson, simpson_filtered, "Active")) %>%  mutate(Metrics = "Simpson index")
+print(estimates_df_simpson)
+```
+
+#### Relative abundance
+
+```{r}
+# ASCOMYCOTA
+## FIT MODEL
+res_asco_init <- rma.mv(yi = yi, V =  build_cov_matrix(asco_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = asco_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_asco_deg <- get_outliers(res_asco_init, asco_resvsdeg_df)
+asco_filtered <- remove_outliers(asco_resvsdeg_df, outlier_asco_deg)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+asco_filtered$Restoration_strategy <- relevel(factor(asco_filtered$Restoration_strategy), ref = "Active")
+res_active_asco <- rma.mv(yi = yi, V = build_cov_matrix(asco_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML",  data = asco_filtered)
+
+### Passive as reference (Intercept = Passive)
+asco_filtered$Restoration_strategy <- relevel(factor(asco_filtered$Restoration_strategy), ref = "Passive")
+res_passive_asco <- rma.mv(yi = yi, V = build_cov_matrix(asco_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = asco_filtered)
+
+## REPORTING TABLE 
+estimates_df_asco <- rbind( get_results(res_passive_asco, asco_filtered, "Passive"), get_results(res_active_asco, asco_filtered, "Active")) %>% mutate(Metrics = "Ascomycota")
+print(estimates_df_asco)
+```
+
+```{r}
+# BASIDIOMYCOTA
+## FIT MODEL
+res_basidio_init <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = basidio_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_basidio_deg <- get_outliers(res_basidio_init, basidio_resvsdeg_df)
+basidio_filtered <- remove_outliers(basidio_resvsdeg_df, outlier_basidio_deg)
+
+# FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+basidio_filtered$Restoration_strategy <- relevel(factor(basidio_filtered$Restoration_strategy), ref = "Active")
+res_active_basidio <- rma.mv(yi = yi, V = build_cov_matrix(basidio_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem +  Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = basidio_filtered)
+
+### Passive as reference (Intercept = Passive)
+basidio_filtered$Restoration_strategy <- relevel(factor(basidio_filtered$Restoration_strategy), ref = "Passive")
+res_passive_basidio <- rma.mv(yi = yi, V = build_cov_matrix(basidio_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = basidio_filtered)
+summary(res_passive_basidio)
+
+## REPORTING TABLE
+estimates_df_basidio <- rbind(get_results(res_passive_basidio, basidio_filtered, "Passive"),  get_results(res_active_basidio, basidio_filtered, "Active")) %>%  mutate(Metrics = "Basidiomycota")
+print(estimates_df_basidio)
+```
+
+#### Composition
+
+```{r}
+# BETA DIVERSITY
+## FIT MODEL
+res_beta_init <- rma.mv(yi = yi, V = build_cov_matrix(beta_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = beta_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_beta_deg <- get_outliers(res_beta_init, beta_resvsdeg_df)
+beta_filtered <- remove_outliers(beta_resvsdeg_df, outlier_beta_deg)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+beta_filtered$Restoration_strategy <- relevel(factor(beta_filtered$Restoration_strategy), ref = "Active")
+res_active_beta <- rma.mv(yi = yi, V = build_cov_matrix(beta_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = beta_filtered)
+
+### Passive as reference (Intercept = Passive)
+beta_filtered$Restoration_strategy <- relevel(factor(beta_filtered$Restoration_strategy), ref = "Passive")
+res_passive_beta <- rma.mv(yi = yi, V = build_cov_matrix(beta_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem +  Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = beta_filtered)
+
+## REPORTING TABLE
+estimates_df_beta <- rbind(get_results(res_passive_beta, beta_filtered, "Passive"),  get_results(res_active_beta, beta_filtered, "Active")) %>%  mutate(Metrics = "Beta diversity")
+print(estimates_df_beta)
+```
+
+```{r}
+# STRUCTURE
+## FIT MODEL
+res_comp_init <- rma.mv(yi = yi, V = build_cov_matrix(comp_resvsdeg_df, rho = 0.5),mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,random = ~ 1 | ID, method = "REML", data = comp_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_comp_deg <- get_outliers(res_comp_init, comp_resvsdeg_df)
+comp_filtered <- remove_outliers(comp_resvsdeg_df, outlier_comp_deg)
+
+# FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+comp_filtered$Restoration_strategy <- relevel(factor(comp_filtered$Restoration_strategy), ref = "Active")
+res_active_comp <- rma.mv(yi = yi, V = build_cov_matrix(comp_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,random = ~ 1 | ID, method = "REML", data = comp_filtered)
+
+### Passive as reference (Intercept = Passive)
+comp_filtered$Restoration_strategy <- relevel(factor(comp_filtered$Restoration_strategy), ref = "Passive")
+res_passive_comp <- rma.mv(yi = yi, V = build_cov_matrix(comp_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID, method = "REML", data = comp_filtered)
+
+## REPORTING TABLE
+estimates_df_comp <- rbind(get_results(res_passive_comp, comp_filtered, "Passive"),  get_results(res_active_comp, comp_filtered, "Active")) %>%  mutate(Metrics = "Structure")
+print(estimates_df_comp)
+```
+
+#### Biomass
+
+```{r}
+# PLFA CONTENT
+## FIT MODEL
+res_plfa_init <- rma.mv(yi = yi, V = build_cov_matrix(plfa_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = plfa_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_plfa_deg <- get_outliers(res_plfa_init, plfa_resvsdeg_df)
+plfa_filtered <- remove_outliers(plfa_resvsdeg_df, outlier_plfa_deg)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+plfa_filtered$Restoration_strategy <- relevel(factor(plfa_filtered$Restoration_strategy), ref = "Active")
+res_active_plfa <- rma.mv(yi = yi, V = build_cov_matrix(plfa_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML",  data = plfa_filtered)
+
+### Passive as reference (Intercept = Passive)
+plfa_filtered$Restoration_strategy <- relevel(factor(plfa_filtered$Restoration_strategy), ref = "Passive")
+res_passive_plfa <- rma.mv(yi = yi, V = build_cov_matrix(plfa_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem +Prior_land_use + Restoration_time,random = ~ 1 | ID, method = "REML",  data = plfa_filtered)
+
+## REPORTING TABLE
+estimates_df_plfa <- rbind(get_results(res_passive_plfa, plfa_filtered, "Passive"),  get_results(res_active_plfa, plfa_filtered, "Active")) %>%  mutate(Metrics = "PLFA content")
+print(estimates_df_plfa)
+```
+
+```{r eval=FALSE}
+strategy_resvsdeg_df <- rbind(estimates_df_otu,  estimates_df_chao1, estimates_df_shannon,  estimates_df_simpson, estimates_df_asco,  estimates_df_basidio, estimates_df_beta, estimates_df_comp, estimates_df_plfa)
+print(strategy_resvsdeg_df)
+```
+
+```{r eval=FALSE}
+write.csv(file = "data/figure_data/strategy_resvsdeg_df.csv", strategy_resvsdeg_df, row.names = FALSE )
+```
+
+#### Figure 4.1
+
+```{r warning=FALSE}
+strategy_resvsdeg_df <- read.csv("data/figure_data/strategy_resvsdeg_df.csv", header = TRUE)
+
+alpha_restoration_deg          <- strategy_resvsdeg_df[1:8,]
+relabund_restoration_deg         <- strategy_resvsdeg_df[9:12,]
+comm_restoration_deg            <- strategy_resvsdeg_df[13:16,]
+plfa_restoration_deg            <- strategy_resvsdeg_df[17:18,]
+
+# FORMAT DATA
+alpha_restoration_deg <- add_labels2(alpha_restoration_deg, c("OTU richness", "Chao1 richness", "Shannon index", "Simpson index"))
+relabund_restoration_deg <- add_labels2( relabund_restoration_deg, c("Ascomycota", "Basidiomycota"))
+comm_restoration_deg <- add_labels2(comm_restoration_deg, c("Structure", "Beta diversity"))
+plfa_restoration_deg <- add_labels2(plfa_restoration_deg, c("PLFA content"))
+
+# ALPHA DIVERSITY PLOT
+alpha_restoration_deg$Metrics <- factor(alpha_restoration_deg$Metrics,levels = c("Simpson index", "Shannon index", "Chao1 richness", "OTU richness"))
+label_df <- data.frame(label = c("OTU richness", "Chao1 richness", "Shannon index", "Simpson index"),y = c(4.45, 3.45, 2.45, 1.45), x = -1 )
+
+alpha_diversity_deg_plot <- ggplot(alpha_restoration_deg, aes(x = Estimate, y = Metrics, color = Restoration_strategy)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.6), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), height = 0.2, position = position_dodge(width = 0.6)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.6), hjust = 1.2, size = 3.0, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.6), hjust = -0.15, size = 3.0, show.legend = FALSE) + geom_text(data = label_df, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Passive" = "darkgreen", "Active" = "maroon")) + labs(x = "lnRR (alpha diversity)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.5)))
+
+# RELATIVE ABUNDANCE PLOT
+relabund_restoration_deg$Metrics <- factor(relabund_restoration_deg$Metrics,levels = c("Basidiomycota", "Ascomycota"))
+label_df_rel <- data.frame( label = c("Ascomycota", "Basidiomycota"), y = c(2.45, 1.45),  x = -2 )
+
+relabun_deg_plot <- ggplot(relabund_restoration_deg, aes(x = Estimate, y = Metrics, color = Restoration_strategy)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.6), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), height = 0.2, position = position_dodge(width = 0.6)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.6), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.6), hjust = -0.15, size = 3.2, show.legend = FALSE) + geom_text(data = label_df_rel, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Passive" = "darkgreen", "Active" = "maroon")) + labs(x = "lnRR (relative abundance)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.5)))
+
+# COMPOSITION PLOT
+comm_restoration_deg$Metrics <- factor(comm_restoration_deg$Metrics,  levels = c("Beta diversity", "Structure"))
+label_df_comm <- data.frame(label = c("Structure", "Beta diversity"), y = c(2.45, 1.45),  x = -2)
+
+comm_deg_plot <- ggplot(comm_restoration_deg, aes(x = Estimate, y = Metrics, color = Restoration_strategy)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.6), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), height = 0.2, position = position_dodge(width = 0.6)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.6), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.6), hjust = -0.15, size = 3.2, show.legend = FALSE) + geom_text(data = label_df_comm, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Passive" = "darkgreen", "Active" = "maroon")) + labs(x = "lnRR (composition)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.5)))
+
+# BIOMASS PLOT
+label_df_plfa <- data.frame(label = c("PLFA content"),y = 1.45, x = -2)
+
+plfa_restoration_deg_plot <- ggplot(plfa_restoration_deg, aes(x = Estimate, y = Metrics, color = Restoration_strategy)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.6), size = 3) + geom_errorbarh(aes(xmin = ci.lb, xmax = ci.ub), height = 0.2, position = position_dodge(width = 0.6)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.6), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.6), hjust = -0.15, size = 3.2, show.legend = FALSE) + geom_text(data = label_df_plfa, aes(x = x, y = y, label = label), color = "black", size = 3.5, fontface = "plain", inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Passive" = "darkgreen", "Active" = "maroon")) + labs(x = "lnRR (biomass)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.55)))
+```
+
+```{r warning=FALSE, message=FALSE}
+# UNIFY LEGEND & THEME
+shared_plot_for_legend <- alpha_diversity_deg_plot + theme(legend.position = "bottom") + scale_color_manual(name = "Restoration strategy", values = c("Passive" = "darkgreen", "Active" = "maroon"), labels = c("Passive" = "Natural regeneration", "Active" = "Active restoration"))
+
+legend_bottom <- get_legend(shared_plot_for_legend)
+Figure_4_deg_left <- ggarrange(alpha_diversity_deg_plot + theme(legend.position = "none"), plfa_restoration_deg_plot + theme(legend.position = "none"), ncol = 1,  heights = c(1, 0.5), align = "v")
+Figure_4_deg_right <- ggarrange(relabun_deg_plot + theme(legend.position = "none"), comm_deg_plot + theme(legend.position = "none"), ncol = 1, heights = c(1, 1), align = "v")
+Figure_4.1 <- grid.arrange( Figure_4_deg_left, Figure_4_deg_right, ncol = 2, widths = c(1, 1), bottom = legend_bottom, top = textGrob("Restored vs Degraded", gp = gpar(fontsize = 12, fontface = "bold")))
+Figure_4.1 <- annotate_figure(Figure_4.1, fig.lab = "(a)", fig.lab.pos = "top.right",fig.lab.face = "bold", fig.lab.size = 16)
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_4.1.tiff", plot = Figure_4.1, dpi = 600, height = 6, width = 5)
+```
+
+## Restored vs Reference
+
+#### Alpha diversity
+
+```{r}
+# OTU RICHNESS
+## FIT MODEL
+res_otu_ref_init <- rma.mv(yi = yi,  V = build_cov_matrix(otu_resvsref_df, rho = 0.5), mods = ~ Restoration_strategy +  Ecosystem + Prior_land_use + Restoration_time,random = ~ 1 | ID, method = "REML", data = otu_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_otu_ref <- get_outliers(res_otu_init, otu_resvsref_df)
+otu_ref_filtered <- remove_outliers(otu_resvsref_df, outlier_otu_ref)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+otu_ref_filtered$Restoration_strategy <- relevel(factor(otu_ref_filtered$Restoration_strategy), ref = "Active")
+mod_ref_active <- rma.mv(yi = yi, V = build_cov_matrix(otu_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = otu_ref_filtered)
+
+### NATURAL REGENERAITON AS REFERENCE
+otu_ref_filtered$Restoration_strategy <- relevel(factor(otu_ref_filtered$Restoration_strategy), ref = "Passive")
+mod_ref_passive <- rma.mv(yi = yi, V = build_cov_matrix(otu_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = otu_ref_filtered)
+
+## REPORTING TABLE
+estimates_ref_otu <- rbind(get_results(mod_ref_passive, otu_ref_filtered, "Passive"),  get_results(mod_ref_active, otu_ref_filtered, "Active")) %>%  mutate(Metrics = "OTU richness")
+print(estimates_ref_otu)
+```
+
+```{r}
+# CHAO1 RICHNESS
+res_chao1_ref_init <- rma.mv(yi = yi, V = build_cov_matrix(chao1_resvsref_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = chao1_resvsref_df)
+
+# REMOVE OUTLIERS IF ANY
+outlier_chao1_ref <- get_outliers(res_chao1_init, chao1_resvsref_df)
+chao1_ref_filtered <- remove_outliers(chao1_resvsref_df, outlier_chao1_ref)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+chao1_ref_filtered$Restoration_strategy <- relevel(factor(chao1_ref_filtered$Restoration_strategy), ref = "Active")
+mod_chao1_ref_active <- rma.mv(yi = yi, V = build_cov_matrix(chao1_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = chao1_ref_filtered)
+
+### Passive as reference (Intercept = Passive)
+chao1_ref_filtered$Restoration_strategy <- relevel(factor(chao1_ref_filtered$Restoration_strategy), ref = "Passive")
+mod_chao1_ref_passive <- rma.mv(yi = yi,  V = build_cov_matrix(chao1_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = chao1_ref_filtered)
+
+## REPORTING TABLE
+estimates_ref_chao1 <- rbind(get_results(mod_chao1_ref_passive, chao1_ref_filtered, "Passive"), get_results(mod_chao1_ref_active, chao1_ref_filtered, "Active")) %>%  mutate(Metrics = "Chao1 richness")
+print(estimates_ref_chao1)
+```
+
+```{r}
+# SHANNON INDEX
+## FIT MODEL
+res_shannon_ref_init <- rma.mv(yi = yi,  V = build_cov_matrix(shannon_resvsref_df, rho = 0.5),mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = shannon_resvsref_df)
+
+# REMOVE OUTLIERS IF ANY
+outlier_shannon_ref <- get_outliers(res_shannon_init, shannon_resvsref_df)
+shannon_ref_filtered <- remove_outliers(shannon_resvsref_df, outlier_shannon_ref)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+shannon_ref_filtered$Restoration_strategy <- relevel(factor(shannon_ref_filtered$Restoration_strategy), ref = "Active")
+mod_shannon_ref_active <- rma.mv(yi = yi, V = build_cov_matrix(shannon_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = shannon_ref_filtered)
+
+### Passive as reference (Intercept = Passive)
+shannon_ref_filtered$Restoration_strategy <- relevel(factor(shannon_ref_filtered$Restoration_strategy), ref = "Passive")
+mod_shannon_ref_passive <- rma.mv(yi = yi, V = build_cov_matrix(shannon_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem +  Prior_land_use + Restoration_time, random = ~ 1 | ID, data = shannon_ref_filtered)
+
+## REPORTING TABLE
+estimates_ref_shannon <- rbind(get_results(mod_shannon_ref_passive, shannon_ref_filtered, "Passive"),  get_results(mod_shannon_ref_active, shannon_ref_filtered, "Active")) %>%  mutate(Metrics = "Shannon index")
+print(estimates_ref_shannon)
+```
+
+```{r}
+# SIMPSON INDEX
+res_simpson_ref_init <- rma.mv(yi = yi, V = build_cov_matrix(simpson_resvsref_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = simpson_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_simpson_ref <- get_outliers(res_simpson_init, simpson_resvsref_df)
+simpson_ref_filtered <- remove_outliers(simpson_resvsref_df, outlier_simpson_ref)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+simpson_ref_filtered$Restoration_strategy <- relevel(factor(simpson_ref_filtered$Restoration_strategy), ref = "Active")
+mod_simpson_ref_active <- rma.mv(yi = yi, V = build_cov_matrix(simpson_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem +Prior_land_use + Restoration_time, random = ~ 1 | ID, data = simpson_ref_filtered)
+
+### Passive as reference (Intercept = Passive)
+simpson_ref_filtered$Restoration_strategy <- relevel(factor(simpson_ref_filtered$Restoration_strategy), ref = "Passive")
+mod_simpson_ref_passive <- rma.mv(yi = yi,  V = build_cov_matrix(simpson_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = simpson_ref_filtered)
+
+## REPORTING TABLE
+estimates_ref_simpson <- rbind(
+  get_results(mod_simpson_ref_passive, simpson_ref_filtered, "Passive"),  get_results(mod_simpson_ref_active, simpson_ref_filtered, "Active")) %>%  mutate(Metrics = "Simpson index")
+print(estimates_ref_simpson)
+```
+
+#### Relative abundance
+
+```{r}
+# ASCOMYCOTA
+## FIT MODEL
+res_asco_ref_init <- rma.mv(yi = yi, V = build_cov_matrix(asco_resvsref_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = asco_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_asco_ref <- get_outliers(res_asco_init, asco_resvsref_df)
+asco_ref_filtered <- remove_outliers(asco_resvsref_df, outlier_asco_ref)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+asco_ref_filtered$Restoration_strategy <- relevel(factor(asco_ref_filtered$Restoration_strategy), ref = "Active")
+mod_asco_ref_active <- rma.mv(yi = yi, V = build_cov_matrix(asco_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = asco_ref_filtered)
+
+### Passive as reference (Intercept = Passive)
+asco_ref_filtered$Restoration_strategy <- relevel(factor(asco_ref_filtered$Restoration_strategy), ref = "Passive")
+mod_asco_ref_passive <- rma.mv(yi = yi, V = build_cov_matrix(asco_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = asco_ref_filtered)
+
+## REPORTING TABLE
+estimates_ref_asco <- rbind(get_results(mod_asco_ref_passive, asco_ref_filtered, "Passive"),  get_results(mod_asco_ref_active, asco_ref_filtered, "Active")) %>%  mutate(Metrics = "Ascomycota")
+print(estimates_ref_asco)
+```
+
+```{r}
+# BASIDIOMYCOTA
+## FIT MODEL
+res_basidio_ref_init <- rma.mv(yi = yi, V = build_cov_matrix(basidio_resvsref_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = basidio_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_basidio_ref <- get_outliers(res_basidio_init, basidio_resvsref_df)
+basidio_ref_filtered <- remove_outliers(basidio_resvsref_df, outlier_basidio_ref)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+basidio_ref_filtered$Restoration_strategy <- relevel(factor(basidio_ref_filtered$Restoration_strategy), ref = "Active")
+mod_basidio_ref_active <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = basidio_ref_filtered)
+
+### Passive as reference (Intercept = Passive)
+basidio_ref_filtered$Restoration_strategy <- relevel(factor(basidio_ref_filtered$Restoration_strategy), ref = "Passive")
+mod_basidio_ref_passive <- rma.mv(yi = yi, V = build_cov_matrix(basidio_ref_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID, data = basidio_ref_filtered)
+
+## REPORTING TABLE
+estimates_ref_basidio <- rbind(
+  get_results(mod_basidio_ref_passive, basidio_ref_filtered, "Passive"),  get_results(mod_basidio_ref_active, basidio_ref_filtered, "Active")) %>%  mutate(Metrics = "Basidiomycota")
+print(estimates_ref_basidio)
+```
+
+#### Community structure
+
+```{r}
+# BETA DIVERSITY
+## FIT MODEL
+res_beta_ref_init <- rma.mv(yi = yi, V = build_cov_matrix(beta_resvsref_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = beta_resvsref_df)
+
+# REMOVE OUTLIERS IF ANY
+outlier_beta_ref <- get_outliers(res_beta_init, beta_resvsref_df)
+beta_ref_filtered <- remove_outliers(beta_resvsref_df, outlier_beta_ref)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+beta_ref_filtered$Restoration_strategy <- relevel(factor(beta_ref_filtered$Restoration_strategy), ref = "Active")
+mod_beta_ref_active <- rma.mv(yi = yi, V = build_cov_matrix(beta_ref_filtered, rho = 0.5),mods = ~ Restoration_strategy + Ecosystem +Prior_land_use + Restoration_time, random = ~ 1 | ID, data = beta_ref_filtered)
+
+### Passive as reference (Intercept = Passive)
+beta_ref_filtered$Restoration_strategy <- relevel(factor(beta_ref_filtered$Restoration_strategy), ref = "Passive")
+mod_beta_ref_passive <- rma.mv(yi = yi, V = build_cov_matrix(beta_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = beta_ref_filtered)
+
+## REPORTING TABLE
+estimates_ref_beta <- rbind(get_results(mod_beta_ref_passive, beta_ref_filtered, "Passive"), get_results(mod_beta_ref_active, beta_ref_filtered, "Active")) %>%  mutate(Metrics = "Beta diversity")
+print(estimates_ref_beta)
+```
+
+```{r}
+# STRUCTURE 
+## FIT MODEL
+res_comp_ref_init <- rma.mv(yi = yi, V = build_cov_matrix(comp_resvsref_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = comp_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_comp_ref <- get_outliers(res_comp_init, comp_resvsref_df)
+comp_ref_filtered <- remove_outliers(comp_resvsref_df, outlier_comp_ref)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+comp_ref_filtered$Restoration_strategy <- relevel(factor(comp_ref_filtered$Restoration_strategy), ref = "Active")
+mod_comp_ref_active <- rma.mv(yi = yi, V = build_cov_matrix(comp_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = comp_ref_filtered)
+
+### Passive as reference (Intercept = Passive)
+comp_ref_filtered$Restoration_strategy <- relevel(factor(comp_ref_filtered$Restoration_strategy), ref = "Passive")
+mod_comp_ref_passive <- rma.mv(yi = yi, V = build_cov_matrix(comp_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = comp_ref_filtered)
+
+## REPORTING TABLE
+estimates_ref_comp <- rbind(
+  get_results(mod_comp_ref_passive, comp_ref_filtered, "Passive"), get_results(mod_comp_ref_active, comp_ref_filtered, "Active")) %>%  mutate(Metrics = "Structure")
+print(estimates_ref_comp)
+```
+
+#### Biomass
+
+```{r}
+# PLFA CONTENT
+## FIT MODEL
+res_plfa_ref_init <- rma.mv(yi = yi, V = build_cov_matrix(plfa_resvsref_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = plfa_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_plfa_ref <- get_outliers(res_plfa_init, plfa_resvsref_df)
+plfa_ref_filtered <- remove_outliers(plfa_resvsref_df, outlier_plfa_ref)
+
+## FINAL MODELS (Active vs Passive Strategy Effects)
+### Active as reference (Intercept = Active)
+plfa_ref_filtered$Restoration_strategy <- relevel(factor(plfa_ref_filtered$Restoration_strategy), ref = "Active")
+mod_plfa_ref_active <- rma.mv(yi = yi, V = build_cov_matrix(plfa_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = plfa_ref_filtered)
+
+### Passive as reference (Intercept = Passive)
+plfa_ref_filtered$Restoration_strategy <- relevel(factor(plfa_ref_filtered$Restoration_strategy), ref = "Passive")
+mod_plfa_ref_passive <- rma.mv(yi = yi, V = build_cov_matrix(plfa_ref_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, data = plfa_ref_filtered)
+
+## REPORTING TABLE
+estimates_ref_plfa <- rbind(get_results(mod_plfa_ref_passive, plfa_ref_filtered, "Passive"), get_results(mod_plfa_ref_active, plfa_ref_filtered, "Active")) %>%  mutate(Metrics = "PLFA Biomass")
+print(estimates_ref_plfa)
+```
+
+```{r eval=FALSE}
+strategy_resvsref_df <- rbind(estimates_ref_otu, estimates_ref_chao1, estimates_ref_shannon, estimates_ref_simpson, estimates_ref_asco, estimates_ref_basidio, estimates_ref_beta, estimates_ref_comp, estimates_ref_plfa)
+print(strategy_resvsref_df)
+```
+
+```{r eval=FALSE}
+write.csv(file = "data/figure_data/strategy_resvsref_df.csv", strategy_resvsref_df, row.names = FALSE )
+```
+
+#### Figure 4.2
+
+```{r}
+strategy_resvsref_df <- read.csv("data/figure_data/strategy_resvsref_df.csv", header = TRUE)
+alpha_ref <- strategy_resvsref_df[1:8,]
+relabun_ref         <- strategy_resvsref_df[9:12,]
+comm_ref            <- strategy_resvsref_df[13:16,]
+plfa_ref            <- strategy_resvsref_df[17:18,]
+
+# FORMAT LABELS
+# ADD LABELS
+alpha_restoration_ref <- add_labels2(alpha_ref, rev(c("OTU richness", "Chao1 richness", "Shannon index", "Simpson index")))
+relabund_restoration_ref <- add_labels2(relabun_ref, rev(c("Ascomycota", "Basidiomycota")))
+comm_restoration_ref <- add_labels2(comm_ref, c("Structure", "Beta diversity"))
+plfa_restoration_ref <- add_labels2(plfa_ref, c("PLFA content"))
+
+## ALPHA DIVERSITY
+label_df <- data.frame(label = c("OTU richness", "Chao1 richness", "Shannon index", "Simpson index"), y = c(4.45, 3.45, 2.45, 1.45),  x = -2 )
+alpha_restoration_ref$Metrics <- factor(alpha_restoration_ref$Metrics,  levels = c("OTU richness", "Chao1 richness", "Shannon index", "Simpson index"))
+
+alpha_diversity_ref_plot <- ggplot(alpha_restoration_ref, aes(x = Estimate, y = Metrics, color = Restoration_strategy)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.6), size = 3) + geom_errorbar(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.6)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.6), hjust = 1.2, size = 3.0, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.6), hjust = -0.15, size = 3.0, show.legend = FALSE) + geom_text(data = label_df, aes(x = x, y = y, label = label), color = "black", size = 3.5, inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Passive" = "darkgreen", "Active" = "maroon")) + labs(x = "lnRR (alpha diversity)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.4)))
+
+# RELATIVE ABUNDANCE
+label_df_rel <- data.frame(label = c("Ascomycota", "Basidiomycota"), y = c(2.45, 1.45), x = -2)
+relabund_restoration_ref$Metrics <- factor(relabund_restoration_ref$Metrics,  levels = c("Basidiomycota", "Ascomycota"))
+
+relabun_ref_plot <- ggplot(relabund_restoration_ref, aes(x = Estimate, y = Metrics, color = Restoration_strategy)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.6), size = 3) + geom_errorbar(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.6)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.6), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.6), hjust = -0.15, size = 3.2, show.legend = FALSE) + geom_text(data = label_df_rel, aes(x = x, y = y, label = label), color = "black", size = 3.5, inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Passive" = "darkgreen", "Active" = "maroon")) + labs(x = "lnRR (relative abundance)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.4)))
+
+# COMPOSITION
+label_df_comm <- data.frame(label = c("Structure", "Beta diversity"),  y = c(2.45, 1.45),  x = -2)
+comm_restoration_ref$Metrics <- factor(comm_restoration_ref$Metrics,  levels = c("Beta diversity", "Structure"))
+
+comm_ref_plot <- ggplot(comm_restoration_ref, aes(x = Estimate, y = Metrics, color = Restoration_strategy)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.6), size = 3) + geom_errorbar(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.6)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.6), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.6), hjust = -0.15, size = 3.2, show.legend = FALSE) + geom_text(data = label_df_comm, aes(x = x, y = y, label = label), color = "black", size = 3.5, inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Passive" = "darkgreen", "Active" = "maroon")) + labs(x = "lnRR (composition)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.4)))
+
+# BIOMASS
+label_df_plfa <- data.frame(label = c("PLFA content"),y = 1.45, x = -2)
+plfa_restoration_ref_plot <- ggplot(plfa_restoration_ref, aes(x = Estimate, y = Metrics, color = Restoration_strategy)) + geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 0.2) + geom_point(position = position_dodge(width = 0.6), size = 3) + geom_errorbar(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, position = position_dodge(width = 0.6)) + geom_text(aes(x = ci.lb, label = lab_k), position = position_dodge(width = 0.6), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = lab_percent), position = position_dodge(width = 0.6), hjust = -0.15, size = 3.2, show.legend = FALSE) + geom_text(data = label_df_plfa, aes(x = x, y = y, label = label), color = "black", size = 3.5, inherit.aes = FALSE, hjust = 0) + scale_color_manual(values = c("Passive" = "darkgreen", "Active" = "maroon")) + labs(x = "lnRR (biomass)", y = NULL) + theme_pubr(border = TRUE, legend = "none") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.text.x = element_text(size = 10)) + scale_x_continuous(expand = expansion(mult = c(0.04, 0.4)))
+```
+
+```{r}
+Figure_4_ref_left <- ggarrange(alpha_diversity_ref_plot + theme(legend.position = "none"), plfa_restoration_ref_plot + theme(legend.position = "none"), ncol = 1, heights = c(1, 0.5), align = "v")
+Figure_4_ref_right <- ggarrange(relabun_ref_plot + theme(legend.position = "none"), comm_ref_plot + theme(legend.position = "none"), ncol = 1, heights = c(1, 1), align = "v")
+Figure_4_ref_final <- grid.arrange(Figure_4_ref_left, Figure_4_ref_right, ncol = 2, widths = c(1, 1), bottom = legend_bottom, top = textGrob("Restored vs Reference", gp = gpar(fontsize = 12, fontface = "bold")))
+Figure_4.2 <- annotate_figure(Figure_4_ref_final, fig.lab = "(b)", fig.lab.pos = "top.right", fig.lab.face = "bold", fig.lab.size = 16)
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_4.2.tiff", plot = Figure_4.2, dpi = 600, height = 6, width = 5)
+```
+
+# Chapter IX: Effect of restoration time
+
+## Restored vs Degraded
+
+### Alpha diversity
+
+```{r}
+# OTU RICHNESS
+## LOG TRANSFORM RESTORATION TIME
+otu_resvsdeg_df$log_time <- log(otu_resvsdeg_df$Restoration_time)
+
+## FIT MODEL
+res_otu_mod <- rma.mv(yi ~ log_time * Ecosystem,V = build_cov_matrix(otu_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = otu_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_otu_deg <- get_outliers(res_otu_mod, otu_resvsdeg_df)
+otu_deg_filtered <- remove_outliers(otu_resvsdeg_df, outlier_otu_deg)
+
+## FINAL MODEL
+res_otu_filtered <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(otu_deg_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = otu_deg_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_otu_deg <- get_coefficient(res_otu_filtered)
+
+## PREDICTION GRID
+newdat_otu_deg <- expand.grid(log_time = seq(min(otu_deg_filtered$log_time, na.rm = TRUE), max(otu_deg_filtered$log_time, na.rm = TRUE),  length.out = 100), Ecosystem = levels(factor(otu_deg_filtered$Ecosystem)))
+
+X_otu_deg <- model.matrix(~ log_time * Ecosystem, data = newdat_otu_deg)
+pred_otu_deg <- predict(res_otu_filtered, newmods = X_otu_deg[, -1])
+
+## PREDICTION DATASET
+newdat_otu_deg <- cbind(newdat_otu_deg,  pred = pred_otu_deg$pred,  ci.lb = pred_otu_deg$ci.lb,  ci.ub = pred_otu_deg$ci.ub)
+
+## PLOT
+plot_otu_deg <- ggplot(newdat_otu_deg, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = otu_deg_filtered, aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "OTU richness") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_otu_deg$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_otu_deg$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_otu_deg)
+```
+
+```{r}
+## LOG TRANSFORM RESTORATION TIME
+chao1_resvsdeg_df$log_time <- log(chao1_resvsdeg_df$Restoration_time)
+
+## FIT MODEL
+res_chao1_mod <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(chao1_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = chao1_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_chao1_deg <- get_outliers(res_chao1_mod, chao1_resvsdeg_df)
+chao1_deg_filtered <- remove_outliers(chao1_resvsdeg_df, outlier_chao1_deg)
+
+## FINAL MODEL
+res_chao1_filtered <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(chao1_deg_filtered, rho = 0.5),random = ~ 1 | ID,  method = "REML",  data = chao1_deg_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_chao1_deg <- get_coefficient(res_chao1_filtered)
+
+## PREDICTION GRID
+newdat_chao1_deg <- expand.grid(log_time = seq(min(chao1_deg_filtered$log_time, na.rm = TRUE), max(chao1_deg_filtered$log_time, na.rm = TRUE), length.out = 100), Ecosystem = levels(factor(chao1_deg_filtered$Ecosystem)))
+X_chao1_deg <- model.matrix(~ log_time * Ecosystem, data = newdat_chao1_deg)
+pred_chao1_deg <- predict(res_chao1_filtered, newmods = X_chao1_deg[, -1])
+
+## PREDICTION DATASET
+newdat_chao1_deg <- cbind(newdat_chao1_deg,  pred = pred_chao1_deg$pred,  ci.lb = pred_chao1_deg$ci.lb,  ci.ub = pred_chao1_deg$ci.ub)
+
+## PLOT
+plot_chao1_deg <- ggplot(newdat_chao1_deg, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = chao1_deg_filtered, aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Chao1 richness") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_chao1_deg$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_chao1_deg$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_chao1_deg)
+```
+
+```{r}
+# SHANNON INDEX
+## LOG TRANSFORM RESTORATION TIME
+shannon_resvsdeg_df$log_time <- log(shannon_resvsdeg_df$Restoration_time)
+
+## FIT MODEL
+res_shannon_mod <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(shannon_resvsdeg_df, rho = 0.5), random = ~ 1 | ID, method = "REML", data = shannon_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_shannon_deg <- get_outliers(res_shannon_mod, shannon_resvsdeg_df)
+shannon_deg_filtered <- remove_outliers(shannon_resvsdeg_df, outlier_shannon_deg)
+
+## FINAL MODEL
+res_shannon_filtered <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(shannon_deg_filtered, rho = 0.5), random = ~ 1 | ID, method = "REML",data = shannon_deg_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_shannon_deg <- get_coefficient(res_shannon_filtered)
+
+## PREDCTION
+newdat_shannon_deg <- expand.grid(log_time = seq(min(shannon_deg_filtered$log_time, na.rm = TRUE),max(shannon_deg_filtered$log_time, na.rm = TRUE), length.out = 100),Ecosystem =levels(factor(shannon_deg_filtered$Ecosystem)))
+X_shannon <- model.matrix(~ log_time * Ecosystem, data = newdat_shannon_deg)
+pred_shannon_deg <- predict(res_shannon_filtered, newmods = X_shannon[, -1])
+
+## PREDICTION DATASET
+newdat_shannon_deg <- cbind(newdat_shannon_deg, pred = pred_shannon_deg$pred, ci.lb = pred_shannon_deg$ci.lb, ci.ub = pred_shannon_deg$ci.ub)
+
+## PLOT
+plot_shannon_deg <- ggplot(newdat_shannon_deg, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = shannon_deg_filtered, aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Shannon index") +  theme_pubr(border = TRUE, legend = "none") +   theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1)))+  annotate("text", x = -Inf, y = -Inf, label = coef_sig_shannon_deg$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +    annotate("text", x = -Inf, y = -Inf, label = coef_sig_shannon_deg$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_shannon_deg)
+```
+
+```{r}
+## LOG TRANSFORM RESTORATION TIME
+simpson_resvsdeg_df$log_time <- log(simpson_resvsdeg_df$Restoration_time)
+
+## FIT MODEL
+res_simpson_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(simpson_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = simpson_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_simpson_deg <- get_outliers(res_simpson_mod, simpson_resvsdeg_df)
+simpson_deg_filtered <- remove_outliers(simpson_resvsdeg_df, outlier_simpson_deg)
+
+## FINAL MODEL
+res_simpson_filtered <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(simpson_deg_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = simpson_deg_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_simpson_deg <- get_coefficient(res_simpson_filtered)
+
+## PREDICTION GRID
+newdat_simpson_deg <- expand.grid(log_time = seq(min(simpson_deg_filtered$log_time, na.rm = TRUE),max(simpson_deg_filtered$log_time, na.rm = TRUE),length.out = 100), Ecosystem = levels(factor(simpson_deg_filtered$Ecosystem)))
+
+X_simpson_deg <- model.matrix(~ log_time * Ecosystem, data = newdat_simpson_deg)
+pred_simpson_deg <- predict(res_simpson_filtered, newmods = X_simpson_deg[, -1])
+
+## PREDICTION DATASET
+newdat_simpson_deg <- cbind(newdat_simpson_deg,  pred = pred_simpson_deg$pred,  ci.lb = pred_simpson_deg$ci.lb,  ci.ub = pred_simpson_deg$ci.ub)
+
+## PLOT
+plot_simpson_deg <- ggplot(newdat_simpson_deg, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = simpson_deg_filtered,    aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2  ) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Simpson index") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_simpson_deg$forest,  hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_simpson_deg$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_simpson_deg)
+```
+
+### Relative abundance
+
+```{r}
+# ASCOMYCOTA
+## LOG TRANSFORM RESTORATION TIME
+asco_resvsdeg_df$log_time <- log(asco_resvsdeg_df$Restoration_time)
+
+## FIT MODEL
+res_asco_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(asco_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = asco_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_asco_deg <- get_outliers(res_asco_mod, asco_resvsdeg_df)
+asco_deg_filtered <- remove_outliers(asco_resvsdeg_df, outlier_asco_deg)
+
+## FINAL MODEL
+res_asco_filtered <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(asco_deg_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = asco_deg_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_asco_deg <- get_coefficient(res_asco_filtered)
+
+## PREDICTION GRID
+newdat_asco_deg <- expand.grid(log_time = seq(min(asco_deg_filtered$log_time, na.rm = TRUE),max(asco_deg_filtered$log_time, na.rm = TRUE),length.out = 100),Ecosystem = levels(factor(asco_deg_filtered$Ecosystem)))
+X_asco_deg <- model.matrix(~ log_time * Ecosystem, data = newdat_asco_deg)
+pred_asco_deg <- predict(res_asco_filtered, newmods = X_asco_deg[, -1])
+
+## PREDICTION DATASET
+newdat_asco_deg <- cbind(newdat_asco_deg,  pred = pred_asco_deg$pred,  ci.lb = pred_asco_deg$ci.lb,  ci.ub = pred_asco_deg$ci.ub)
+
+## PLOT
+plot_asco_deg <- ggplot(newdat_asco_deg, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = asco_deg_filtered,    aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2  ) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Ascomycota") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_asco_deg$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_asco_deg$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_asco_deg)
+```
+
+```{r}
+# BASIDIOMYCOTA
+## LOG TRANSFORM RESTORATION TIME
+basidio_resvsdeg_df$log_time <- log(basidio_resvsdeg_df$Restoration_time)
+
+## FIT MODEL
+res_basidio_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(basidio_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = basidio_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_basidio_deg <- get_outliers(res_basidio_mod, basidio_resvsdeg_df)
+basidio_deg_filtered <- remove_outliers(basidio_resvsdeg_df, outlier_basidio_deg)
+
+## FINAL MODEL
+res_basidio_filtered <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(basidio_deg_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = basidio_deg_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_basidio_deg <- get_coefficient(res_basidio_filtered)
+
+## PREDICTION GRID
+newdat_basidio_deg <- expand.grid(log_time = seq(min(basidio_deg_filtered$log_time, na.rm = TRUE),max(basidio_deg_filtered$log_time, na.rm = TRUE), length.out = 100),Ecosystem = levels(factor(basidio_deg_filtered$Ecosystem)))
+X_basidio_deg <- model.matrix(~ log_time * Ecosystem, data = newdat_basidio_deg)
+pred_basidio_deg <- predict(res_basidio_filtered, newmods = X_basidio_deg[, -1])
+
+## PREDICTION DATASET
+newdat_basidio_deg <- cbind(newdat_basidio_deg, pred = pred_basidio_deg$pred, ci.lb = pred_basidio_deg$ci.lb,  ci.ub = pred_basidio_deg$ci.ub)
+
+## PLOT
+plot_basidio_deg <- ggplot(newdat_basidio_deg, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = basidio_deg_filtered,    aes(x = log_time, y = yi, color = Ecosystem),    alpha = 0.4, size = 2 ) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Basidiomycota") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_basidio_deg$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_basidio_deg$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_basidio_deg)
+```
+
+### Composition
+
+```{r}
+# BETA DIVERSITY
+## LOG TRANSFORM RESTORATION TIME
+beta_resvsdeg_df$log_time <- log(beta_resvsdeg_df$Restoration_time)
+
+## FIT MODEL
+res_beta_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(beta_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = beta_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_beta_deg <- get_outliers(res_beta_mod, beta_resvsdeg_df)
+beta_deg_filtered <- remove_outliers(beta_resvsdeg_df, outlier_beta_deg)
+
+## FINAL MODEL
+res_beta_filtered <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(beta_deg_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = beta_deg_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_beta_deg <- get_coefficient(res_beta_filtered)
+
+## PREDICTION GRID
+newdat_beta_deg <- expand.grid(log_time = seq(min(beta_deg_filtered$log_time, na.rm = TRUE),  max(beta_deg_filtered$log_time, na.rm = TRUE),  length.out = 100),Ecosystem = levels(factor(beta_deg_filtered$Ecosystem)))
+
+X_beta_deg <- model.matrix(~ log_time * Ecosystem, data = newdat_beta_deg)
+pred_beta_deg <- predict(res_beta_filtered, newmods = X_beta_deg[, -1])
+
+## PREDICTION DATASET
+newdat_beta_deg <- cbind( newdat_beta_deg,  pred = pred_beta_deg$pred,  ci.lb = pred_beta_deg$ci.lb,  ci.ub = pred_beta_deg$ci.ub)
+
+## PLOT
+plot_beta_deg <- ggplot(newdat_beta_deg, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = beta_deg_filtered,  aes(x = log_time, y = yi, color = Ecosystem),  alpha = 0.4, size = 2 ) + geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Beta diversity") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) + scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_beta_deg$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_beta_deg$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_beta_deg)
+```
+
+```{r}
+# STRUCTURE
+## LOG TRANSFORM RESTORATION TIME
+comp_resvsdeg_df$log_time <- log(comp_resvsdeg_df$Restoration_time)
+
+## FIT MODEL
+res_comp_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(comp_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = comp_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_comp_deg <- get_outliers(res_comp_mod, comp_resvsdeg_df)
+comp_deg_filtered <- remove_outliers(comp_resvsdeg_df, outlier_comp_deg)
+
+## FINAL MODEL
+res_comp_filtered <- rma.mv(yi ~ log_time * Ecosystem,V = build_cov_matrix(comp_deg_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = comp_deg_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_comp_deg <- get_coefficient(res_comp_filtered)
+
+## PREDICTION GRID
+newdat_comp_deg <- expand.grid(log_time = seq(min(comp_deg_filtered$log_time, na.rm = TRUE), max(comp_deg_filtered$log_time, na.rm = TRUE),length.out = 100),Ecosystem = levels(factor(comp_deg_filtered$Ecosystem)))
+
+X_comp_deg <- model.matrix(~ log_time * Ecosystem, data = newdat_comp_deg)
+pred_comp_deg <- predict(res_comp_filtered, newmods = X_comp_deg[, -1])
+
+## PREDICTION DATASET
+newdat_comp_deg <- cbind(newdat_comp_deg,  pred = pred_comp_deg$pred,  ci.lb = pred_comp_deg$ci.lb,  ci.ub = pred_comp_deg$ci.ub)
+
+## PLOT
+plot_comp_deg <- ggplot(newdat_comp_deg, aes(x = log_time, y = pred, color = Ecosystem)) + geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) + geom_point(data = comp_deg_filtered, aes(x = log_time, y = yi, color = Ecosystem),alpha = 0.4, size = 2) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Structure") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_comp_deg$forest,  hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_comp_deg$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_comp_deg)
+```
+
+### Biomass
+
+```{r}
+# PLFA CONTENT
+## LOG TRANSFORM RESTORATION TIME
+plfa_resvsdeg_df$log_time <- log(plfa_resvsdeg_df$Restoration_time)
+
+## FIT MODEL
+res_plfa_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(plfa_resvsdeg_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = plfa_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_plfa_deg <- get_outliers(res_plfa_mod, plfa_resvsdeg_df)
+plfa_deg_filtered <- remove_outliers(plfa_resvsdeg_df, outlier_plfa_deg)
+
+## FINAL MODEL
+res_plfa_filtered <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(plfa_deg_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = plfa_deg_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_plfa_deg <- get_coefficient(res_plfa_filtered)
+
+## PREDICTION GRID
+newdat_plfa_deg <- expand.grid(log_time = seq(min(plfa_deg_filtered$log_time, na.rm = TRUE),max(plfa_deg_filtered$log_time, na.rm = TRUE),  length.out = 100),Ecosystem = levels(factor(plfa_deg_filtered$Ecosystem)))
+
+X_plfa_deg <- model.matrix(~ log_time * Ecosystem, data = newdat_plfa_deg)
+pred_plfa_deg <- predict(res_plfa_filtered, newmods = X_plfa_deg[, -1])
+
+## PREDICTION DATASET
+newdat_plfa_deg <- cbind(newdat_plfa_deg,  pred = pred_plfa_deg$pred,  ci.lb = pred_plfa_deg$ci.lb,  ci.ub = pred_plfa_deg$ci.ub)
+
+## PLOT
+plot_plfa_deg <- ggplot(newdat_plfa_deg, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point( data = plfa_deg_filtered, aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2 ) + geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "PLFA content") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_plfa_deg$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_plfa_deg$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_plfa_deg)
+```
+
+### Figure 5.1
+
+```{r}
+# Update just the first plot's theme
+plot_otu_deg <- plot_otu_deg + theme(legend.text = element_text(size = 14), legend.title = element_text(size = 15, face = "plain"))
+final_deg_grid <- ggarrange(plot_otu_deg, plot_chao1_deg, plot_shannon_deg, plot_simpson_deg, plot_asco_deg, plot_basidio_deg, plot_beta_deg, plot_comp_deg, plot_plfa_deg, ncol = 3, nrow = 3, labels = NULL, common.legend = TRUE, legend = "bottom", align = "hv")
+resvsdeg_restoration_time_plot <- annotate_figure(final_deg_grid, top = text_grob("Restored vs Degraded", face = "bold", size = 16, vjust = 0.5), left = text_grob("lnRR", color = "black", size = 16, rot = 90, vjust = 1.5), bottom = text_grob("log(restoration time)", color = "black", size = 16, vjust = -4), fig.lab = "(a)", fig.lab.pos = "top.right", fig.lab.face = "bold",fig.lab.size = 18)
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_5.1.jpg", plot = resvsdeg_restoration_time_plot, dpi = 800, height = 11, width = 9)
+```
+
+## Restored vs Reference
+
+### Alpha diversity
+
+```{r}
+# OTU RICHNESS
+## LOG TRANSFORM RESTORATION TIME
+otu_resvsref_df$log_time <- log(otu_resvsref_df$Restoration_time)
+
+## FIT MODEL
+res_otu_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(otu_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = otu_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_otu_ref <- get_outliers(res_otu_mod, otu_resvsref_df)
+otu_ref_filtered <- remove_outliers(otu_resvsref_df, outlier_otu_ref)
+
+## FINAL MODEL
+res_otu_filtered <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(otu_ref_filtered, rho = 0.5), random = ~ 1 | ID, method = "REML", data = otu_ref_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_otu_ref <- get_coefficient(res_otu_filtered)
+
+## PREDICTION GRID
+newdat_otu_ref <- expand.grid(log_time = seq(min(otu_ref_filtered$log_time, na.rm = TRUE), max(otu_ref_filtered$log_time, na.rm = TRUE), length.out = 100),Ecosystem = levels(factor(otu_ref_filtered$Ecosystem))
+)
+
+X_otu_ref <- model.matrix(~ log_time * Ecosystem, data = newdat_otu_ref)
+pred_otu_ref <- predict(res_otu_filtered, newmods = X_otu_ref[, -1])
+
+## PREDICTION DATASET
+newdat_otu_ref <- cbind(newdat_otu_ref,  pred = pred_otu_ref$pred,  ci.lb = pred_otu_ref$ci.lb,  ci.ub = pred_otu_ref$ci.ub)
+
+## PLOT
+plot_otu_ref <- ggplot(newdat_otu_ref, aes(x = log_time, y = pred, color = Ecosystem)) + geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = otu_ref_filtered, aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) + geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "OTU richness") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_otu_ref$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") + annotate("text", x = -Inf, y = -Inf, label = coef_sig_otu_ref$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_otu_ref)
+```
+
+```{r}
+# CHAO1 RICHNESS
+## LOG TRANSFORM RESTORATION TIME
+chao1_resvsref_df$log_time <- log(chao1_resvsref_df$Restoration_time)
+
+## FIT MODEL
+res_chao1_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(chao1_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = chao1_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_chao1_ref <- get_outliers(res_chao1_mod, chao1_resvsref_df)
+chao1_ref_filtered <- remove_outliers(chao1_resvsref_df, outlier_chao1_ref)
+
+## FINAL MODEL
+res_chao1_filtered <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(chao1_ref_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = chao1_ref_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_chao1_ref <- get_coefficient(res_chao1_filtered)
+
+## PREDICTION GRID
+newdat_chao1_ref <- expand.grid(log_time = seq(min(chao1_ref_filtered$log_time, na.rm = TRUE), max(chao1_ref_filtered$log_time, na.rm = TRUE), length.out = 100), Ecosystem = levels(factor(chao1_ref_filtered$Ecosystem)))
+X_chao1_ref <- model.matrix(~ log_time * Ecosystem, data = newdat_chao1_ref)
+pred_chao1_ref <- predict(res_chao1_filtered, newmods = X_chao1_ref[, -1])
+
+## PREDICTION DATASET
+newdat_chao1_ref <- cbind(newdat_chao1_ref,  pred = pred_chao1_ref$pred,  ci.lb = pred_chao1_ref$ci.lb,  ci.ub = pred_chao1_ref$ci.ub)
+
+## PLOT
+plot_chao1_ref <- ggplot(newdat_chao1_ref, aes(x = log_time, y = pred, color = Ecosystem)) +geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem),alpha = 0.2, color = NA) +  geom_point(data = chao1_ref_filtered,    aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) +geom_line(linewidth = 1.2) +scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Chao1 richness") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_chao1_ref$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_chao1_ref$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_chao1_ref)
+```
+
+```{r}
+# SHANNON INDEX
+## LOG TRANSFORM RESTORATION TIME
+shannon_resvsref_df$log_time <- log(shannon_resvsref_df$Restoration_time)
+
+## FIT MODEL
+res_shannon_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(shannon_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = shannon_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_shannon_ref <- get_outliers(res_shannon_mod, shannon_resvsref_df)
+shannon_ref_filtered <- remove_outliers(shannon_resvsref_df, outlier_shannon_ref)
+
+## FINAL MODEL
+res_shannon_filtered <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(shannon_ref_filtered, rho = 0.5),random = ~ 1 | ID,  method = "REML",  data = shannon_ref_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_shannon_ref <- get_coefficient(res_shannon_filtered)
+
+## PREDICTION GRID
+newdat_shannon_ref <- expand.grid(log_time = seq(min(shannon_ref_filtered$log_time, na.rm = TRUE),max(shannon_ref_filtered$log_time, na.rm = TRUE), length.out = 100), Ecosystem = levels(factor(shannon_ref_filtered$Ecosystem)))
+X_shannon_ref <- model.matrix(~ log_time * Ecosystem, data = newdat_shannon_ref)
+pred_shannon_ref <- predict(res_shannon_filtered, newmods = X_shannon_ref[, -1])
+
+## PREDICTION DATASET
+newdat_shannon_ref <- cbind(newdat_shannon_ref,  pred = pred_shannon_ref$pred,  ci.lb = pred_shannon_ref$ci.lb,  ci.ub = pred_shannon_ref$ci.ub)
+
+## PLOT
+plot_shannon_ref <- ggplot(newdat_shannon_ref, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem),alpha = 0.2, color = NA) +geom_point(data = shannon_ref_filtered, aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) +geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Shannon index") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_shannon_ref$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_shannon_ref$grass,   hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_shannon_ref)
+```
+
+```{r}
+# SIMPSON INDEX
+## LOG TRANSFORM RESTORATION TIME
+simpson_resvsref_df$log_time <- log(simpson_resvsref_df$Restoration_time)
+
+## FIT MODEL
+res_simpson_mod <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(simpson_resvsref_df, rho = 0.5), random = ~ 1 | ID, method = "REML", data = simpson_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_simpson_ref <- get_outliers(res_simpson_mod, simpson_resvsref_df)
+simpson_ref_filtered <- remove_outliers(simpson_resvsref_df, outlier_simpson_ref)
+
+## FINAL MODEL
+res_simpson_filtered <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(simpson_ref_filtered, rho = 0.5), random = ~ 1 | ID, method = "REML", data = simpson_ref_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_simpson_ref <- get_coefficient(res_simpson_filtered)
+
+## PREDICTION GRID
+newdat_simpson_ref <- expand.grid(log_time = seq(min(simpson_ref_filtered$log_time, na.rm = TRUE), max(simpson_ref_filtered$log_time, na.rm = TRUE), length.out = 100), Ecosystem = levels(factor(simpson_ref_filtered$Ecosystem)))
+X_simpson_ref <- model.matrix(~ log_time * Ecosystem, data = newdat_simpson_ref)
+pred_simpson_ref <- predict(res_simpson_filtered, newmods = X_simpson_ref[, -1])
+
+## PREDICTION DATASET
+newdat_simpson_ref <- cbind(  newdat_simpson_ref,  pred = pred_simpson_ref$pred,  ci.lb = pred_simpson_ref$ci.lb,  ci.ub = pred_simpson_ref$ci.ub)
+
+## PLOT
+plot_simpson_ref <- ggplot(newdat_simpson_ref, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = simpson_ref_filtered, aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Simpson index") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_simpson_ref$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") + annotate("text", x = -Inf, y = -Inf, label = coef_sig_simpson_ref$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_simpson_ref)
+```
+
+### Relative abundance
+
+```{r}
+# ASCOMYCOTA
+## LOG TRANSFORM RESTORATION TIME
+asco_resvsref_df$log_time <- log(asco_resvsref_df$Restoration_time)
+
+## FIT MODEL
+res_asco_mod <- rma.mv(  yi ~ log_time * Ecosystem,  V = build_cov_matrix(asco_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = asco_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_asco_ref <- get_outliers(res_asco_mod, asco_resvsref_df)
+asco_ref_filtered <- remove_outliers(asco_resvsref_df, outlier_asco_ref)
+
+## FINAL MODEL
+res_asco_filtered <- rma.mv(  yi ~ log_time * Ecosystem,  V = build_cov_matrix(asco_ref_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = asco_ref_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_asco_ref <- get_coefficient(res_asco_filtered)
+
+## PREDICTION GRID
+newdat_asco_ref <- expand.grid(log_time = seq(min(asco_ref_filtered$log_time, na.rm = TRUE), max(asco_ref_filtered$log_time, na.rm = TRUE), length.out = 100), Ecosystem = levels(factor(asco_ref_filtered$Ecosystem)))
+X_asco_ref <- model.matrix(~ log_time * Ecosystem, data = newdat_asco_ref)
+pred_asco_ref <- predict(res_asco_filtered, newmods = X_asco_ref[, -1])
+
+## PREDICTION DATASET
+newdat_asco_ref <- cbind(  newdat_asco_ref,  pred = pred_asco_ref$pred,  ci.lb = pred_asco_ref$ci.lb,  ci.ub = pred_asco_ref$ci.ub)
+
+## PLOT
+plot_asco_ref <- ggplot(newdat_asco_ref, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = asco_ref_filtered, aes(x = log_time, y = yi, color = Ecosystem),  alpha = 0.4, size = 2) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Ascomycota") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_asco_ref$forest,   hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_asco_ref$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_asco_ref)
+```
+
+```{r}
+# BASIDIOMYCOTA
+## LOG TRANSFORM RESTORATION TIME
+basidio_resvsref_df$log_time <- log(basidio_resvsref_df$Restoration_time)
+
+## FIT MODEL
+res_basidio_mod <- rma.mv(yi ~ log_time * Ecosystem,  V = build_cov_matrix(basidio_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = basidio_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_basidio_ref <- get_outliers(res_basidio_mod, basidio_resvsref_df)
+basidio_ref_filtered <- remove_outliers(basidio_resvsref_df, outlier_basidio_ref)
+
+## FINAL MODEL
+res_basidio_filtered <- rma.mv( yi ~ log_time * Ecosystem, V = build_cov_matrix(basidio_ref_filtered, rho = 0.5), random = ~ 1 | ID, method = "REML", data = basidio_ref_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_basidio_ref <- get_coefficient(res_basidio_filtered)
+
+## PREDICTION GRID
+newdat_basidio_ref <- expand.grid(log_time = seq(min(basidio_ref_filtered$log_time, na.rm = TRUE), max(basidio_ref_filtered$log_time, na.rm = TRUE), length.out = 100),  Ecosystem = levels(factor(basidio_ref_filtered$Ecosystem)))
+X_basidio_ref <- model.matrix(~ log_time * Ecosystem, data = newdat_basidio_ref)
+pred_basidio_ref <- predict(res_basidio_filtered, newmods = X_basidio_ref[, -1])
+
+## PREDICTION DATASET
+newdat_basidio_ref <- cbind(  newdat_basidio_ref,  pred = pred_basidio_ref$pred,  ci.lb = pred_basidio_ref$ci.lb,  ci.ub = pred_basidio_ref$ci.ub)
+
+## PLOT
+plot_basidio_ref <- ggplot(newdat_basidio_ref, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem),alpha = 0.2, color = NA) +geom_point(data = basidio_ref_filtered, aes(x = log_time, y = yi, color = Ecosystem),alpha = 0.4, size = 2) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Basidiomycota") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_basidio_ref$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_basidio_ref$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_basidio_ref)
+```
+
+### Composition
+
+```{r}
+# BETA DIVERSITY
+## LOG TRANSFORM RESTORATION TIME
+beta_resvsref_df$log_time <- log(beta_resvsref_df$Restoration_time)
+
+## FIT MODEL
+res_beta_mod <- rma.mv(  yi ~ log_time * Ecosystem,  V = build_cov_matrix(beta_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = beta_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_beta_ref <- get_outliers(res_beta_mod, beta_resvsref_df)
+beta_ref_filtered <- remove_outliers(beta_resvsref_df, outlier_beta_ref)
+
+## FINAL MODEL
+res_beta_filtered <- rma.mv(yi ~ log_time * Ecosystem, V = build_cov_matrix(beta_ref_filtered, rho = 0.5), random = ~ 1 | ID,  method = "REML",  data = beta_ref_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_beta_ref <- get_coefficient(res_beta_filtered)
+
+## PREDICTION GRID
+newdat_beta_ref <- expand.grid(log_time = seq(min(beta_ref_filtered$log_time, na.rm = TRUE), max(beta_ref_filtered$log_time, na.rm = TRUE), length.out = 100 ),  Ecosystem = levels(factor(beta_ref_filtered$Ecosystem)))
+X_beta_ref <- model.matrix(~ log_time * Ecosystem, data = newdat_beta_ref)
+pred_beta_ref <- predict(res_beta_filtered, newmods = X_beta_ref[, -1])
+
+## PREDICTION DATASET
+newdat_beta_ref <- cbind(  newdat_beta_ref,  pred = pred_beta_ref$pred,  ci.lb = pred_beta_ref$ci.lb,  ci.ub = pred_beta_ref$ci.ub)
+
+## PLOT
+plot_beta_ref <- ggplot(newdat_beta_ref, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = beta_ref_filtered,aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Beta diversity") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_beta_ref$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_beta_ref$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_beta_ref)
+```
+
+```{r}
+# STRUCTURE
+## LOG TRANSFORM RESTORATION TIME
+comp_resvsref_df$log_time <- log(comp_resvsref_df$Restoration_time)
+
+## FIT MODEL
+res_comp_mod <- rma.mv(  yi ~ log_time * Ecosystem,  V = build_cov_matrix(comp_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = comp_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_comp_ref <- get_outliers(res_comp_mod, comp_resvsref_df)
+comp_ref_filtered <- remove_outliers(comp_resvsref_df, outlier_comp_ref)
+
+## FINAL MODEL
+res_comp_filtered <- rma.mv(  yi ~ log_time * Ecosystem,  V = build_cov_matrix(comp_ref_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = comp_ref_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_comp_ref <- get_coefficient(res_comp_filtered)
+
+## PREDICTION GRID
+newdat_comp_ref <- expand.grid(log_time = seq(min(comp_ref_filtered$log_time, na.rm = TRUE), max(comp_ref_filtered$log_time, na.rm = TRUE), length.out = 100  ), Ecosystem = levels(factor(comp_ref_filtered$Ecosystem)))
+X_comp_ref <- model.matrix(~ log_time * Ecosystem, data = newdat_comp_ref)
+pred_comp_ref <- predict(res_comp_filtered, newmods = X_comp_ref[, -1])
+
+## PREDICTION DATASET
+newdat_comp_ref <- cbind(  newdat_comp_ref,  pred = pred_comp_ref$pred,  ci.lb = pred_comp_ref$ci.lb,  ci.ub = pred_comp_ref$ci.ub)
+
+## PLOT
+plot_comp_ref <- ggplot(newdat_comp_ref, aes(x = log_time, y = pred, color = Ecosystem)) +  geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) +  geom_point(data = comp_ref_filtered, aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) +  geom_line(linewidth = 1.2) +  scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) +  labs(x = "", y = "", title = "Structure") +  theme_pubr(border = TRUE, legend = "none") +  theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) +  scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_comp_ref$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") +  annotate("text", x = -Inf, y = -Inf, label = coef_sig_comp_ref$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_comp_ref)
+```
+
+### Biomass
+
+```{r}
+# PLFA CONTENT
+## LOG TRANSFORM RESTORATION TIME
+plfa_resvsref_df$log_time <- log(plfa_resvsref_df$Restoration_time)
+
+## FIT MODEL
+res_plfa_mod <- rma.mv(  yi ~ log_time * Ecosystem,  V = build_cov_matrix(plfa_resvsref_df, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = plfa_resvsref_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_plfa_ref <- get_outliers(res_plfa_mod, plfa_resvsref_df)
+plfa_ref_filtered <- remove_outliers(plfa_resvsref_df, outlier_plfa_ref)
+
+## FINAL MODEL
+res_plfa_filtered <- rma.mv(  yi ~ log_time * Ecosystem,  V = build_cov_matrix(plfa_ref_filtered, rho = 0.5),  random = ~ 1 | ID,  method = "REML",  data = plfa_ref_filtered)
+
+## GET COEFFICIENTS AND SIGNIFICANCE
+coef_sig_plfa_ref <- get_coefficient(res_plfa_filtered)
+
+## PREDICTION GRID
+newdat_plfa_ref <- expand.grid( log_time = seq( min(plfa_ref_filtered$log_time, na.rm = TRUE),max(plfa_ref_filtered$log_time, na.rm = TRUE),    length.out = 100  ),  Ecosystem = levels(factor(plfa_ref_filtered$Ecosystem)))
+X_plfa_ref <- model.matrix(~ log_time * Ecosystem, data = newdat_plfa_ref)
+pred_plfa_ref <- predict(res_plfa_filtered, newmods = X_plfa_ref[, -1])
+
+## PREDICTION DATASET
+newdat_plfa_ref <- cbind(  newdat_plfa_ref,  pred = pred_plfa_ref$pred,  ci.lb = pred_plfa_ref$ci.lb,  ci.ub = pred_plfa_ref$ci.ub)
+
+## PLOT
+plot_plfa_ref <- ggplot(newdat_plfa_ref, aes(x = log_time, y = pred, color = Ecosystem)) + geom_ribbon(aes(ymin = ci.lb, ymax = ci.ub, fill = Ecosystem), alpha = 0.2, color = NA) + geom_point(data = plfa_ref_filtered, aes(x = log_time, y = yi, color = Ecosystem), alpha = 0.4, size = 2) + geom_line(linewidth = 1.2) + scale_color_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + scale_fill_manual(values = c("Forest" = "black", "Grassland" = "chocolate")) + labs(x = "", y = "", title = "PLFA content") + theme_pubr(border = TRUE, legend = "none") + theme(plot.title = element_text(hjust = 0.5, vjust = -0.5)) + scale_y_continuous(expand = expansion(mult = c(0.3, 0.1))) + annotate("text", x = -Inf, y = -Inf, label = coef_sig_plfa_ref$forest, hjust = -0.05, vjust = -2.5, size = 3.5, color = "black") + annotate("text", x = -Inf, y = -Inf, label = coef_sig_plfa_ref$grass, hjust = -0.05, vjust = -1.0, size = 3.5, color = "chocolate")
+print(plot_plfa_ref)
+```
+
+### Figure 5.2
+
+```{r}
+plot_otu_ref <- plot_otu_ref +  theme(legend.text = element_text(size = 14), legend.title = element_text(size = 15, face = "plain"))
+final_ref_grid <- ggarrange(plot_otu_ref, plot_chao1_ref, plot_shannon_ref, plot_simpson_ref, plot_asco_ref, plot_basidio_ref,  plot_beta_ref, plot_comp_ref, plot_plfa_ref, ncol = 3, nrow = 3, labels = NULL, common.legend = TRUE,  legend = "bottom", align = "hv")
+resvsref_restoration_time_plot <- annotate_figure(final_ref_grid,  top = text_grob("Restored vs Reference",  face = "bold", size = 16, vjust = 0.5),  left = text_grob("lnRR",  color = "black", size = 16, rot = 90, vjust = 1.5), bottom = text_grob("log(restoration time)", color = "black", size = 16, vjust = -4),  fig.lab = "(b)",   fig.lab.pos = "top.right",  fig.lab.face = "bold",  fig.lab.size = 18)
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_5.2.jpg", plot = resvsref_restoration_time_plot, dpi = 800, height = 11, width = 9)
+```
+
+# Chapter X: Test of ordination method
+
+```{r}
+# Read and prepare data
+beta_resvsdeg_df <- read.csv("data/original_data/ord_test_resvsdeg.csv", header = TRUE) %>%  mutate(across(c(ID, Method, Restoration_strategy, Ecosystem, Prior_land_use), as.factor), Restoration_time = as.numeric(Restoration_time),         ControlID = paste(ID, Degraded_Mean, Degraded_SD, Degraded_SS, sep = "_")) %>%  mutate(ControlID = as.character(ControlID))
+
+# Compute effect sizes (log response ratio)
+beta_resvsdeg_df <- escalc(measure = "ROM",  n1i = Restored_SS, n2i = Degraded_SS, m1i = Restored_Mean, m2i = Degraded_Mean, sd1i = Restored_SD, sd2i = Degraded_SD, data = beta_resvsdeg_df)
+res_method_beta_deg <- rma.mv(yi = yi,  V = build_cov_matrix(beta_resvsdeg_df, rho = 0.5),  mods = ~ Method, random = ~ 1 | ID, method = "REML", data = beta_resvsdeg_df)
+summary(res_method_beta_deg)
+anova(res_method_beta_deg)
+
+sensitivity_df <- beta_resvsdeg_df %>%  filter(!Method %in% c("Non-metric", "Unimodal"))
+V_beta_sens <- build_cov_matrix(sensitivity_df, rho = 0.5)
+res_method_beta_sens <- rma.mv(yi = yi,  V = V_beta_sens, mods = ~ Method, random = ~ 1 | ID, method = "REML", data = sensitivity_df)
+summary(res_method_beta_sens)
+anova(res_method_beta_sens)
+```
+
+# Prior land use (Fig S4)
+
+```{r}
+table(otu_resvsdeg_df$Prior_land_use)
+res_otu_init <- rma.mv(yi = yi, V = build_cov_matrix(otu_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = otu_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_otu_deg <- get_outliers(res_otu_init, otu_resvsdeg_df)
+otu_filtered <- remove_outliers(otu_resvsdeg_df, outlier_otu_deg)
+
+otu_filtered$Prior_land_use <- relevel(factor(otu_filtered$Prior_land_use), ref = "Agriculture")
+res_agri <- rma.mv(yi = yi, V = build_cov_matrix(otu_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem +  Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = otu_filtered)
+
+otu_filtered$Prior_land_use <- relevel(factor(otu_filtered$Prior_land_use), ref = "Deforestation")
+res_defor <- rma.mv(yi = yi, V = build_cov_matrix(otu_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = otu_filtered)
+
+otu_filtered$Prior_land_use <- relevel(factor(otu_filtered$Prior_land_use), ref = "Mining")
+res_min <- rma.mv(yi = yi, V = build_cov_matrix(otu_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID, method = "REML", data = otu_filtered)
+
+otu_filtered$Prior_land_use <- relevel(factor(otu_filtered$Prior_land_use), ref = "Monoculture plantation")
+res_mon <- rma.mv(yi = yi, V = build_cov_matrix(otu_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML", data = otu_filtered)
+
+
+otu_filtered$Prior_land_use <- relevel(factor(otu_filtered$Prior_land_use), ref = "Pasture")
+res_pat <- rma.mv(yi = yi, V = build_cov_matrix(otu_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID, method = "REML",  data = otu_filtered)
+
+## REPORTING TABLE
+estimates_df_otu <- rbind(get_results_prior_land_use(res_agri, otu_filtered, "Agriculture"),  get_results_prior_land_use(res_defor, otu_filtered, "Deforestation"), get_results_prior_land_use(res_min, otu_filtered, "Mining"), get_results_prior_land_use(res_mon, otu_filtered, "Monoculture plantation"), get_results_prior_land_use(res_pat, otu_filtered, "Pasture")) %>%  mutate(Metrics = "OTU richness")
+print(estimates_df_otu)
+```
+
+```{r}
+table(chao1_resvsdeg_df$Prior_land_use)
+res_chao1_init <- rma.mv( yi = yi,  V = build_cov_matrix(chao1_resvsdeg_df, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML", data = chao1_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_chao1_deg <- get_outliers(res_chao1_init, chao1_resvsdeg_df)
+chao1_filtered <- remove_outliers(chao1_resvsdeg_df, outlier_chao1_deg)
+
+chao1_filtered$Prior_land_use <- relevel(factor(chao1_filtered$Prior_land_use), ref = "Agriculture")
+res_agri <- rma.mv(yi = yi, V = build_cov_matrix(chao1_filtered, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = chao1_filtered)
+
+chao1_filtered$Prior_land_use <- relevel(factor(chao1_filtered$Prior_land_use), ref = "Deforestation")
+res_defor <- rma.mv(yi = yi,  V = build_cov_matrix(chao1_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = chao1_filtered)
+
+chao1_filtered$Prior_land_use <- relevel(factor(chao1_filtered$Prior_land_use), ref = "Mining")
+res_min <- rma.mv(yi = yi,  V = build_cov_matrix(chao1_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = chao1_filtered)
+
+chao1_filtered$Prior_land_use <- relevel(factor(chao1_filtered$Prior_land_use), ref = "Monoculture plantation")
+res_mon <- rma.mv(yi = yi,  V = build_cov_matrix(chao1_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = chao1_filtered)
+
+chao1_filtered$Prior_land_use <- relevel(factor(chao1_filtered$Prior_land_use), ref = "Pasture")
+res_pat <- rma.mv(yi = yi,  V = build_cov_matrix(chao1_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = chao1_filtered)
+
+chao1_filtered$Prior_land_use <- relevel(factor(chao1_filtered$Prior_land_use), ref = "Erosion")
+
+res_ero <- rma.mv(yi = yi,  V = build_cov_matrix(chao1_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = chao1_filtered)
+
+## REPORTING TABLE
+estimates_df_chao1 <- rbind(get_results_prior_land_use(res_agri, chao1_filtered, "Agriculture"), get_results_prior_land_use(res_defor, chao1_filtered, "Deforestation"), get_results_prior_land_use(res_min, chao1_filtered, "Mining"),  get_results_prior_land_use(res_mon, chao1_filtered, "Monoculture plantation"),  get_results_prior_land_use(res_pat, chao1_filtered, "Pasture"), get_results_prior_land_use(res_ero, chao1_filtered, "Erosion")) %>%  mutate(Metrics = "Chao1 richness")
+print(estimates_df_chao1)
+```
+
+```{r}
+table(shannon_resvsdeg_df$Prior_land_use)
+res_shannon_init <- rma.mv( yi = yi,  V = build_cov_matrix(shannon_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = shannon_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_shannon_deg <- get_outliers(res_shannon_init, shannon_resvsdeg_df)
+shannon_filtered <- remove_outliers(shannon_resvsdeg_df, outlier_shannon_deg)
+
+shannon_filtered$Prior_land_use <- relevel(factor(shannon_filtered$Prior_land_use), ref = "Agriculture")
+res_agri <- rma.mv(yi = yi,  V = build_cov_matrix(shannon_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = shannon_filtered)
+
+shannon_filtered$Prior_land_use <- relevel(factor(shannon_filtered$Prior_land_use), ref = "Deforestation")
+res_defor <- rma.mv(yi = yi,  V = build_cov_matrix(shannon_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = shannon_filtered)
+
+shannon_filtered$Prior_land_use <- relevel(factor(shannon_filtered$Prior_land_use), ref = "Mining")
+res_min <- rma.mv(yi = yi,  V = build_cov_matrix(shannon_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = shannon_filtered)
+
+shannon_filtered$Prior_land_use <- relevel(factor(shannon_filtered$Prior_land_use), ref = "Monoculture plantation")
+res_mon <- rma.mv(yi = yi,  V = build_cov_matrix(shannon_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = shannon_filtered)
+
+shannon_filtered$Prior_land_use <- relevel(factor(shannon_filtered$Prior_land_use), ref = "Pasture")
+res_pat <- rma.mv(yi = yi,  V = build_cov_matrix(shannon_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = shannon_filtered)
+
+shannon_filtered$Prior_land_use <- relevel(factor(shannon_filtered$Prior_land_use), ref = "Erosion")
+res_ero <- rma.mv(yi = yi,  V = build_cov_matrix(shannon_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = shannon_filtered)
+
+## REPORTING TABLE
+estimates_df_shannon <- rbind(get_results_prior_land_use(res_agri, shannon_filtered, "Agriculture"),  get_results_prior_land_use(res_defor, shannon_filtered, "Deforestation"), get_results_prior_land_use(res_min, shannon_filtered, "Mining"), get_results_prior_land_use(res_mon, shannon_filtered, "Monoculture plantation"), get_results_prior_land_use(res_pat, shannon_filtered, "Pasture"), get_results_prior_land_use(res_ero, shannon_filtered, "Erosion")) %>%  mutate(Metrics = "Shannon index")
+print(estimates_df_shannon)
+```
+
+```{r}
+table(simpson_resvsdeg_df$Prior_land_use)
+res_simpson_init <- rma.mv(yi = yi,  V = build_cov_matrix(simpson_resvsdeg_df, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = simpson_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_simpson_deg <- get_outliers(res_simpson_init, simpson_resvsdeg_df)
+simpson_filtered <- remove_outliers(simpson_resvsdeg_df, outlier_simpson_deg)
+
+simpson_filtered$Prior_land_use <- relevel(factor(simpson_filtered$Prior_land_use), ref = "Agriculture")
+res_agri <- rma.mv(yi = yi,  V = build_cov_matrix(simpson_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = simpson_filtered)
+
+simpson_filtered$Prior_land_use <- relevel(factor(simpson_filtered$Prior_land_use), ref = "Deforestation")
+res_defor <- rma.mv(yi = yi,  V = build_cov_matrix(simpson_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = simpson_filtered)
+
+simpson_filtered$Prior_land_use <- relevel(factor(simpson_filtered$Prior_land_use), ref = "Mining")
+res_min <- rma.mv(yi = yi, V = build_cov_matrix(simpson_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = simpson_filtered)
+
+simpson_filtered$Prior_land_use <- relevel(factor(simpson_filtered$Prior_land_use), ref = "Pasture")
+res_pat <- rma.mv(yi = yi,  V = build_cov_matrix(simpson_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = simpson_filtered)
+
+## REPORTING TABLE
+estimates_df_simpson <- rbind(get_results_prior_land_use(res_agri, simpson_filtered, "Agriculture"),  get_results_prior_land_use(res_defor, simpson_filtered, "Deforestation"), get_results_prior_land_use(res_min, simpson_filtered, "Mining"), get_results_prior_land_use(res_pat, simpson_filtered, "Pasture")) %>%  mutate(Metrics = "Simpson index")
+print(estimates_df_simpson)
+```
+
+```{r}
+table(asco_resvsdeg_df$Prior_land_use)
+res_asco_init <- rma.mv(yi = yi,  V = build_cov_matrix(asco_resvsdeg_df, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = asco_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_asco_deg <- get_outliers(res_asco_init, asco_resvsdeg_df)
+asco_filtered <- remove_outliers(asco_resvsdeg_df, outlier_asco_deg)
+
+asco_filtered$Prior_land_use <- relevel(factor(asco_filtered$Prior_land_use), ref = "Agriculture")
+res_agri <- rma.mv(yi = yi,  V = build_cov_matrix(asco_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = asco_filtered)
+
+asco_filtered$Prior_land_use <- relevel(factor(asco_filtered$Prior_land_use), ref = "Deforestation")
+res_defor <- rma.mv(yi = yi,  V = build_cov_matrix(asco_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = asco_filtered)
+
+
+asco_filtered$Prior_land_use <- relevel(factor(asco_filtered$Prior_land_use), ref = "Mining")
+res_min <- rma.mv(yi = yi,  V = build_cov_matrix(asco_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = asco_filtered)
+
+asco_filtered$Prior_land_use <- relevel(factor(asco_filtered$Prior_land_use), ref = "Monoculture plantation")
+res_mon <- rma.mv(yi = yi,  V = build_cov_matrix(asco_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = asco_filtered)
+
+asco_filtered$Prior_land_use <- relevel(factor(asco_filtered$Prior_land_use), ref = "Pasture")
+res_pat <- rma.mv(yi = yi,  V = build_cov_matrix(asco_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = asco_filtered)
+
+asco_filtered$Prior_land_use <- relevel(factor(asco_filtered$Prior_land_use), ref = "Erosion")
+res_ero <- rma.mv(yi = yi,  V = build_cov_matrix(asco_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = asco_filtered)
+
+## REPORTING TABLE
+estimates_df_asco <- rbind(get_results_prior_land_use(res_agri, asco_filtered, "Agriculture"), get_results_prior_land_use(res_defor, asco_filtered, "Deforestation"), get_results_prior_land_use(res_min, asco_filtered, "Mining"), get_results_prior_land_use(res_mon, asco_filtered, "Monoculture plantation"), get_results_prior_land_use(res_pat, asco_filtered, "Pasture"), get_results_prior_land_use(res_ero, asco_filtered, "Erosion")) %>%  mutate(Metrics = "Ascomycota")
+print(estimates_df_asco)
+```
+
+```{r}
+table(basidio_resvsdeg_df$Prior_land_use)
+res_basidio_init <- rma.mv(yi = yi, V = build_cov_matrix(basidio_resvsdeg_df, rho = 0.5), mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time, random = ~ 1 | ID,  method = "REML",  data = basidio_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_basidio_deg <- get_outliers(res_basidio_init, basidio_resvsdeg_df)
+basidio_filtered <- remove_outliers(basidio_resvsdeg_df, outlier_basidio_deg)
+
+basidio_filtered$Prior_land_use <- relevel(factor(basidio_filtered$Prior_land_use), ref = "Agriculture")
+res_agri <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = basidio_filtered)
+
+basidio_filtered$Prior_land_use <- relevel(factor(basidio_filtered$Prior_land_use), ref = "Deforestation")
+res_defor <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = basidio_filtered)
+
+basidio_filtered$Prior_land_use <- relevel(factor(basidio_filtered$Prior_land_use), ref = "Mining")
+res_min <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = basidio_filtered)
+
+basidio_filtered$Prior_land_use <- relevel(factor(basidio_filtered$Prior_land_use), ref = "Monoculture plantation")
+res_mon <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = basidio_filtered)
+
+basidio_filtered$Prior_land_use <- relevel(factor(basidio_filtered$Prior_land_use), ref = "Pasture")
+res_pat <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = basidio_filtered)
+
+basidio_filtered$Prior_land_use <- relevel(factor(basidio_filtered$Prior_land_use), ref = "Erosion")
+res_ero <- rma.mv(yi = yi,  V = build_cov_matrix(basidio_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = basidio_filtered)
+
+## REPORTING TABLE
+estimates_df_basidio <- rbind(get_results_prior_land_use(res_agri, basidio_filtered, "Agriculture"),  get_results_prior_land_use(res_defor, basidio_filtered, "Deforestation"),  get_results_prior_land_use(res_min, basidio_filtered, "Mining"), get_results_prior_land_use(res_mon, basidio_filtered, "Monoculture plantation"), get_results_prior_land_use(res_pat, basidio_filtered, "Pasture"), get_results_prior_land_use(res_ero, basidio_filtered, "Erosion")) %>%  mutate(Metrics = "Basidiomycota")
+print(estimates_df_basidio)
+```
+
+```{r}
+table(beta_resvsdeg_df$Prior_land_use)
+res_beta_init <- rma.mv(yi = yi,  V = build_cov_matrix(beta_resvsdeg_df, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = beta_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_beta_deg <- get_outliers(res_beta_init, beta_resvsdeg_df)
+beta_filtered <- remove_outliers(beta_resvsdeg_df, outlier_beta_deg)
+
+beta_filtered$Prior_land_use <- relevel(factor(beta_filtered$Prior_land_use), ref = "Agriculture")
+res_agri <- rma.mv(yi = yi,  V = build_cov_matrix(beta_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = beta_filtered)
+
+beta_filtered$Prior_land_use <- relevel(factor(beta_filtered$Prior_land_use), ref = "Deforestation")
+res_defor <- rma.mv(yi = yi,  V = build_cov_matrix(beta_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = beta_filtered)
+
+beta_filtered$Prior_land_use <- relevel(factor(beta_filtered$Prior_land_use), ref = "Mining")
+res_min <- rma.mv(yi = yi,  V = build_cov_matrix(beta_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = beta_filtered)
+
+beta_filtered$Prior_land_use <- relevel(factor(beta_filtered$Prior_land_use), ref = "Monoculture plantation")
+res_mon <- rma.mv(yi = yi,  V = build_cov_matrix(beta_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = beta_filtered)
+
+
+beta_filtered$Prior_land_use <- relevel(factor(beta_filtered$Prior_land_use), ref = "Pasture")
+res_pat <- rma.mv(yi = yi,  V = build_cov_matrix(beta_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = beta_filtered)
+
+beta_filtered$Prior_land_use <- relevel(factor(beta_filtered$Prior_land_use), ref = "Erosion")
+res_ero <- rma.mv(yi = yi,  V = build_cov_matrix(beta_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = beta_filtered)
+
+## REPORTING TABLE
+estimates_df_beta <- rbind(get_results_prior_land_use(res_agri, beta_filtered, "Agriculture"),  get_results_prior_land_use(res_defor, beta_filtered, "Deforestation"),  get_results_prior_land_use(res_min, beta_filtered, "Mining"),  get_results_prior_land_use(res_mon, beta_filtered, "Monoculture plantation"),  get_results_prior_land_use(res_pat, beta_filtered, "Pasture"), get_results_prior_land_use(res_ero, beta_filtered, "Erosion")) %>%  mutate(Metrics = "Beta diversity")
+print(estimates_df_beta)
+```
+
+```{r}
+table(comp_resvsdeg_df$Prior_land_use)
+res_comp_init <- rma.mv(yi = yi,  V = build_cov_matrix(comp_resvsdeg_df, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = comp_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_comp_deg <- get_outliers(res_comp_init, comp_resvsdeg_df)
+comp_filtered <- remove_outliers(comp_resvsdeg_df, outlier_comp_deg)
+
+comp_filtered$Prior_land_use <- relevel(factor(comp_filtered$Prior_land_use), ref = "Agriculture")
+res_agri <- rma.mv(yi = yi,  V = build_cov_matrix(comp_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = comp_filtered)
+
+comp_filtered$Prior_land_use <- relevel(factor(comp_filtered$Prior_land_use), ref = "Deforestation")
+res_defor <- rma.mv(yi = yi,  V = build_cov_matrix(comp_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = comp_filtered)
+
+comp_filtered$Prior_land_use <- relevel(factor(comp_filtered$Prior_land_use), ref = "Mining")
+res_min <- rma.mv(yi = yi,  V = build_cov_matrix(comp_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = comp_filtered)
+
+comp_filtered$Prior_land_use <- relevel(factor(comp_filtered$Prior_land_use), ref = "Monoculture plantation")
+res_mon <- rma.mv(yi = yi,  V = build_cov_matrix(comp_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = comp_filtered)
+
+comp_filtered$Prior_land_use <- relevel(factor(comp_filtered$Prior_land_use), ref = "Pasture")
+res_pat <- rma.mv(yi = yi,  V = build_cov_matrix(comp_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = comp_filtered)
+
+comp_filtered$Prior_land_use <- relevel(factor(comp_filtered$Prior_land_use), ref = "Erosion")
+res_ero <- rma.mv(yi = yi,  V = build_cov_matrix(comp_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = comp_filtered)
+
+## REPORTING TABLE
+estimates_df_comp <- rbind(get_results_prior_land_use(res_agri, comp_filtered, "Agriculture"),  get_results_prior_land_use(res_defor, comp_filtered, "Deforestation"),  get_results_prior_land_use(res_min, comp_filtered, "Mining"),  get_results_prior_land_use(res_mon, comp_filtered, "Monoculture plantation"),  get_results_prior_land_use(res_pat, comp_filtered, "Pasture"), get_results_prior_land_use(res_ero, comp_filtered, "Erosion")) %>%  mutate(Metrics = "Community structure")
+print(estimates_df_comp)
+```
+
+```{r}
+table(plfa_resvsdeg_df$Prior_land_use)
+res_plfa_init <- rma.mv(yi = yi,  V = build_cov_matrix(plfa_resvsdeg_df, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = plfa_resvsdeg_df)
+
+## REMOVE OUTLIERS IF ANY
+outlier_plfa_deg <- get_outliers(res_plfa_init, plfa_resvsdeg_df)
+plfa_filtered <- remove_outliers(plfa_resvsdeg_df, outlier_plfa_deg)
+
+plfa_filtered$Prior_land_use <- relevel(factor(plfa_filtered$Prior_land_use), ref = "Agriculture")
+res_agri <- rma.mv(yi = yi,  V = build_cov_matrix(plfa_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = plfa_filtered)
+
+plfa_filtered$Prior_land_use <- relevel(factor(plfa_filtered$Prior_land_use), ref = "Deforestation")
+res_defor <- rma.mv(yi = yi,  V = build_cov_matrix(plfa_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = plfa_filtered)
+
+plfa_filtered$Prior_land_use <- relevel(factor(plfa_filtered$Prior_land_use), ref = "Mining")
+res_min <- rma.mv(yi = yi,  V = build_cov_matrix(plfa_filtered, rho = 0.5),  mods = ~ Restoration_strategy + Ecosystem + Prior_land_use + Restoration_time,  random = ~ 1 | ID,  method = "REML",  data = plfa_filtered)
+
+## REPORTING TABLE
+estimates_df_plfa <- rbind(get_results_prior_land_use(res_agri, plfa_filtered, "Agriculture"),  get_results_prior_land_use(res_defor, plfa_filtered, "Deforestation"),  get_results_prior_land_use(res_min, plfa_filtered, "Mining")) %>%  mutate(Metrics = "PLFA content")
+print(estimates_df_plfa)
+```
+
+```{r}
+all_results_df <- bind_rows(estimates_df_otu, estimates_df_chao1,  estimates_df_shannon,  estimates_df_simpson,  estimates_df_asco, estimates_df_basidio, estimates_df_beta,  estimates_df_comp,  estimates_df_plfa)
+```
+
+```{r}
+all_results_df$Metrics <- factor(all_results_df$Metrics, levels = c("OTU richness", "Chao1 richness", "Shannon index", "Simpson index", "Ascomycota", "Basidiomycota", "Beta diversity", "Community structure", "PLFA content"))
+
+prior_land_use_resvsdeg <- ggplot(all_results_df, aes(x = Estimate, y = Prior_land_use)) + geom_errorbar(aes(xmin = ci.lb, xmax = ci.ub), width = 0.2, alpha = 0.7) + geom_point(size = 2.5) + geom_vline(xintercept = 0, linetype = "dashed", color = "red") + facet_wrap(~ Metrics, scales = "free") + geom_text(aes(x = ci.lb, label = K), position = position_dodge(width = 0.5), hjust = 1.2, size = 3.2, show.legend = FALSE) + geom_text(aes(x = ci.ub, label = Percentage), position = position_dodge(width = 0.5), hjust = -0.2, size = 3.2, show.legend = FALSE) + labs(x = "lnRR", y = "") + theme_pubr(base_size = 12, border = TRUE) + theme(axis.text.y = element_text(size = 9), strip.text = element_text(face = "bold"), plot.title = element_text(hjust = 0.5, face = "bold")) + scale_x_continuous(expand = expansion(mult = c(0.4, 0.6)))
+prior_land_use_resvsdeg
+```
+
+```{r eval=FALSE}
+ggsave("../Figure_S4.jpg",  plot = prior_land_use_resvsdeg,  dpi = 800, height = 8, width = 11)
+```
+
+```{r}
+sessionInfo()
+```
