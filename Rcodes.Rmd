@@ -204,7 +204,7 @@ invisible(lapply(packages, function(pkg) {
 ## Study distribution map
 
 ```{r}
-distribution <- read.csv("data/data_overview/distribution.csv", header = TRUE)
+distribution <- read.csv("data_overview/distribution.csv", header = TRUE)
 
 # LOAD WORLD MAP
 world_map <- map_data("world")
@@ -233,7 +233,7 @@ ggsave("../Figure_1.tiff", plot = figure_1, dpi = 600, height = 7, width = 7)
 ## Data overview
 
 ```{r}
-data_overview <- read.csv("data/data_overview/data_overview.csv", header =TRUE)
+data_overview <- read.csv("data_overview/data_overview.csv", header =TRUE)
 # ECOSYSTEM TYPE
 df_ecosystem <- data_overview[1:2,]
 df_restoration <- data_overview[3:4,]
@@ -250,7 +250,7 @@ strategy_overview_plot <- ggplot(df_restoration, aes(x = Types, y = n, fill = Ty
 strategy_overview_plot
 
 # RESTORATION TIME
-restoration_time <- read.csv("data/data_overview/restoration_time.csv", header = TRUE)
+restoration_time <- read.csv("data_overview/restoration_time.csv", header = TRUE)
 restoration_time <- restoration_time %>% mutate(Restoration_strategy = recode(Restoration_strategy, "Active" = "Active restoration", "Passive" = "Natural regeneration"))
 median(restoration_time$Restoration_time)
 
@@ -277,7 +277,7 @@ ggsave("../Figure_2.tiff", plot = figure_2, dpi = 600, height = 5, width = 6)
 
 ```{r warning=FALSE}
 # ECOSYSTEM TYPE
-ecosystem_summary <- read.csv("data/data_overview/ecosystem_summary.csv", header = TRUE)
+ecosystem_summary <- read.csv("data_overview/ecosystem_summary.csv", header = TRUE)
 
 # ECOSYSTEM TYPE
 data_segmented_ecosystem <- ecosystem_summary %>% mutate( Metrics = factor(Metrics, levels = c("OTU richness","Chao1 richness", "Shannon index", "Simpson index", "Ascomycota","Basidiomycota", "Beta diversity", "Structure", "PLFA content")),Ecosystem = factor(Ecosystem, levels = c("Forest","Grassland")))
@@ -296,7 +296,7 @@ overview_ecosystem <- ggplot(data_segmented_ecosystem, aes(x = center_x, y = 0))
 
 ```{r}
 # RESTORATION STRATEGY
-restoration_strategy_summary <- read.csv("data/data_overview/restoration_strategy_summary.csv", header = TRUE)
+restoration_strategy_summary <- read.csv("data_overview/restoration_strategy_summary.csv", header = TRUE)
 
 # RESTORATION STRATEGY
 restoration_metrics_summary <- restoration_strategy_summary %>% mutate(Restoration_strategy = recode(Restoration_strategy, "Active" = "Active restoration", "Passive" = "Natural regeneration"))
@@ -318,7 +318,7 @@ overview_restoration <- ggplot(data_segmented_restoration, aes(x = center_x, y =
 
 ```{r}
 # PRIOR LAND USE
-prior_land_use_summary <- read.csv("data/data_overview/prior_land_use_summary.csv", header = TRUE)
+prior_land_use_summary <- read.csv("data_overview/prior_land_use_summary.csv", header = TRUE)
 
 # PRIOR LAND USE
 prior_land_use_summary$Metrics <- factor(prior_land_use_summary$Metrics, levels = c("OTU richness", "Chao1 richness","Shannon index", "Simpson index", "Ascomycota", "Basidiomycota","Beta diversity", "Structure", "PLFA content"))
@@ -365,21 +365,21 @@ load_data_deg <- function(file_path) {read.csv(file_path, header = TRUE) %>%muta
 
 # RESTORED VS DEGRADED DATA
 ## ALPHA DIVERSITY
-otu_resvsdeg_df      <- load_data_deg("data/original_data/otu_resvsdeg.csv")
-chao1_resvsdeg_df    <- load_data_deg("data/original_data/chao1_resvsdeg.csv")
-shannon_resvsdeg_df  <- load_data_deg("data/original_data/shannon_resvsdeg.csv")
-simpson_resvsdeg_df  <- load_data_deg("data/original_data/simpson_resvsdeg.csv")
+otu_resvsdeg_df      <- load_data_deg("original_data/otu_resvsdeg.csv")
+chao1_resvsdeg_df    <- load_data_deg("original_data/chao1_resvsdeg.csv")
+shannon_resvsdeg_df  <- load_data_deg("original_data/shannon_resvsdeg.csv")
+simpson_resvsdeg_df  <- load_data_deg("original_data/simpson_resvsdeg.csv")
 
 ## RELATIVE ABUNDANCE
-asco_resvsdeg_df     <- load_data_deg("data/original_data/asco_resvsdeg.csv")
-basidio_resvsdeg_df  <- load_data_deg("data/original_data/basidio_resvsdeg.csv")
+asco_resvsdeg_df     <- load_data_deg("original_data/asco_resvsdeg.csv")
+basidio_resvsdeg_df  <- load_data_deg("original_data/basidio_resvsdeg.csv")
 
 ## COMPOSITION
-beta_resvsdeg_df     <- load_data_deg("data/original_data/beta_resvsdeg.csv")
-comp_resvsdeg_df     <- load_data_deg("data/original_data/comp_resvsdeg.csv")
+beta_resvsdeg_df     <- load_data_deg("original_data/beta_resvsdeg.csv")
+comp_resvsdeg_df     <- load_data_deg("original_data/comp_resvsdeg.csv")
 
 ## BIOMASS
-plfa_resvsdeg_df     <- load_data_deg("data/original_data/PLFA_resvsdeg.csv")
+plfa_resvsdeg_df     <- load_data_deg("original_data/PLFA_resvsdeg.csv")
 ```
 
 ### Response ratio
@@ -465,21 +465,21 @@ load_data_ref <- function(file_path) {read.csv(file_path, header = TRUE) %>%    
 
 # RESTORED VS REFERENCE DATA
 ## ALPHA DIVERSITY
-otu_resvsref_df     <- load_data_ref("data/original_data/otu_resvsref.csv")
-chao1_resvsref_df   <- load_data_ref("data/original_data/chao1_resvsref.csv")
-shannon_resvsref_df <- load_data_ref("data/original_data/shannon_resvsref.csv")
-simpson_resvsref_df <- load_data_ref("data/original_data/simpson_resvsref.csv")
+otu_resvsref_df     <- load_data_ref("original_data/otu_resvsref.csv")
+chao1_resvsref_df   <- load_data_ref("original_data/chao1_resvsref.csv")
+shannon_resvsref_df <- load_data_ref("original_data/shannon_resvsref.csv")
+simpson_resvsref_df <- load_data_ref("original_data/simpson_resvsref.csv")
 
 ## RELATIVE ABUNDANCE
-asco_resvsref_df    <- load_data_ref("data/original_data/asco_resvsref.csv")
-basidio_resvsref_df <- load_data_ref("data/original_data/basidio_resvsref.csv")
+asco_resvsref_df    <- load_data_ref("original_data/asco_resvsref.csv")
+basidio_resvsref_df <- load_data_ref("original_data/basidio_resvsref.csv")
 
 ## COMPOSITION
-beta_resvsref_df    <- load_data_ref("data/original_data/beta_resvsref.csv")
-comp_resvsref_df    <- load_data_ref("data/original_data/comp_resvsref.csv")
+beta_resvsref_df    <- load_data_ref("original_data/beta_resvsref.csv")
+comp_resvsref_df    <- load_data_ref("original_data/comp_resvsref.csv")
 
 ## BIOMASS
-plfa_resvsref_df    <- load_data_ref("data/original_data/plfa_resvsref.csv")
+plfa_resvsref_df    <- load_data_ref("original_data/plfa_resvsref.csv")
 
 ```
 
@@ -827,7 +827,7 @@ print(metrics_resvsdeg_df)
 ```
 
 ```{r}
-write.csv(file = "data/figure_data/overall_resvsdeg_df.csv", metrics_resvsdeg_df, row.names = FALSE )
+write.csv(file = "figure_data/overall_resvsdeg_df.csv", metrics_resvsdeg_df, row.names = FALSE )
 
 ```
 
@@ -835,7 +835,7 @@ write.csv(file = "data/figure_data/overall_resvsdeg_df.csv", metrics_resvsdeg_df
 
 ```{r warning=FALSE}
 # LOAD DATA
-metrics_resvsdeg_df <- read.csv("data/figure_data/overall_resvsdeg_df.csv", header = TRUE)
+metrics_resvsdeg_df <- read.csv("figure_data/overall_resvsdeg_df.csv", header = TRUE)
 
 # SEPARATE DATA
 alpha_diversity_deg <- metrics_resvsdeg_df[1:8,]
@@ -1120,13 +1120,13 @@ print(metrics_resvsref_df)
 ```
 
 ```{r eval=FALSE}
-write.csv(file = "data/figure_data/overall_resvsref_df.csv", metrics_resvsref_df, row.names = FALSE )
+write.csv(file = "figure_data/overall_resvsref_df.csv", metrics_resvsref_df, row.names = FALSE )
 ```
 
 ### Figure 3.2
 
 ```{r}
-metrics_resvsref_df <- read.csv("data/figure_data/overall_resvsref_df.csv",  header = TRUE)
+metrics_resvsref_df <- read.csv("figure_data/overall_resvsref_df.csv",  header = TRUE)
 
 alpha_diversity_ref <- metrics_resvsref_df[1:8,]
 relabun_ref         <- metrics_resvsref_df[9:12,]
@@ -1407,13 +1407,13 @@ print(strategy_resvsdeg_df)
 ```
 
 ```{r eval=FALSE}
-write.csv(file = "data/figure_data/strategy_resvsdeg_df.csv", strategy_resvsdeg_df, row.names = FALSE )
+write.csv(file = "figure_data/strategy_resvsdeg_df.csv", strategy_resvsdeg_df, row.names = FALSE )
 ```
 
 #### Figure 4.1
 
 ```{r warning=FALSE}
-strategy_resvsdeg_df <- read.csv("data/figure_data/strategy_resvsdeg_df.csv", header = TRUE)
+strategy_resvsdeg_df <- read.csv("figure_data/strategy_resvsdeg_df.csv", header = TRUE)
 
 alpha_restoration_deg          <- strategy_resvsdeg_df[1:8,]
 relabund_restoration_deg         <- strategy_resvsdeg_df[9:12,]
@@ -1689,13 +1689,13 @@ print(strategy_resvsref_df)
 ```
 
 ```{r eval=FALSE}
-write.csv(file = "data/figure_data/strategy_resvsref_df.csv", strategy_resvsref_df, row.names = FALSE )
+write.csv(file = "figure_data/strategy_resvsref_df.csv", strategy_resvsref_df, row.names = FALSE )
 ```
 
 #### Figure 4.2
 
 ```{r}
-strategy_resvsref_df <- read.csv("data/figure_data/strategy_resvsref_df.csv", header = TRUE)
+strategy_resvsref_df <- read.csv("figure_data/strategy_resvsref_df.csv", header = TRUE)
 alpha_ref <- strategy_resvsref_df[1:8,]
 relabun_ref         <- strategy_resvsref_df[9:12,]
 comm_ref            <- strategy_resvsref_df[13:16,]
@@ -2356,7 +2356,7 @@ ggsave("../Figure_5.2.jpg", plot = resvsref_restoration_time_plot, dpi = 800, he
 
 ```{r}
 # Read and prepare data
-beta_resvsdeg_df <- read.csv("data/original_data/ord_test_resvsdeg.csv", header = TRUE) %>%  mutate(across(c(ID, Method, Restoration_strategy, Ecosystem, Prior_land_use), as.factor), Restoration_time = as.numeric(Restoration_time),         ControlID = paste(ID, Degraded_Mean, Degraded_SD, Degraded_SS, sep = "_")) %>%  mutate(ControlID = as.character(ControlID))
+beta_resvsdeg_df <- read.csv("original_data/ord_test_resvsdeg.csv", header = TRUE) %>%  mutate(across(c(ID, Method, Restoration_strategy, Ecosystem, Prior_land_use), as.factor), Restoration_time = as.numeric(Restoration_time),         ControlID = paste(ID, Degraded_Mean, Degraded_SD, Degraded_SS, sep = "_")) %>%  mutate(ControlID = as.character(ControlID))
 
 # Compute effect sizes (log response ratio)
 beta_resvsdeg_df <- escalc(measure = "ROM",  n1i = Restored_SS, n2i = Degraded_SS, m1i = Restored_Mean, m2i = Degraded_Mean, sd1i = Restored_SD, sd2i = Degraded_SD, data = beta_resvsdeg_df)
