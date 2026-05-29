@@ -96,8 +96,11 @@ The analyses in `Rcodes.Rmd` were tested and executed on the following systems:
 - **RStudio Version:** 2026.04.0
 
 ### macOS System
-- **Machine:** MacBook Pro M3
+- **Machine:** MacBook Pro
+- **Chip:** Apple M3
 - **Operating System:** macOS Sonoma
+- **Architecture:** ARM64
+- **RAM:** 18 GB
 - **R Version:** 4.5.3
 - **RStudio Version:** 2026.04.0
 
