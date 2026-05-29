@@ -57,13 +57,28 @@ Meta-analysis of soil fungal community recovery during vegetation restoration in
 
 
 # How to use execute
-Download meta-analysis-restoration-fungi.zip this will download all files associated with this repository.
-Afterward, download **R version 4.5.3** from https://cran.rstudio.com/ according to your operating system (Windows, macOS, or Linux). Similarly, download **RStudio 2026.04.0** from https://posit.co/download/rstudio-desktop/ according to your operating system (Windows, macOS, or Linux).
 
+Download `meta-analysis-restoration-fungi.zip`, which contains all files associated with this repository.
 
-Now open Rcodes.Rmd this will open in RStudio.
-NOw click Knit <img width="1405" height="1120" alt="image" src="https://github.com/user-attachments/assets/328d5f83-e251-4108-bfe3-6f49e4fe4e77" /> 
- 
+Next, download **R version 4.5.3** from https://cran.rstudio.com/ according to your operating system (Windows, macOS, or Linux).
+
+Then, download **RStudio 2026.04.0** from https://posit.co/download/rstudio-desktop/ according to your operating system (Windows, macOS, or Linux).
+
+After downloading, navigate to the folder containing `meta-analysis-restoration-fungi.zip` and extract the archive. Inside the extracted folder, you will find:
+
+- `Rcodes.Rmd`
+- `README.md`
+- `data_overview/`
+- `figure_data/`
+- `original_data/`
+
+Open `Rcodes.Rmd` in RStudio. Once opened, click the Knit button.
+
+<img width="40" height="30" alt="Knit button" src="https://github.com/user-attachments/assets/328d5f83-e251-4108-bfe3-6f49e4fe4e77" />
+
+This will execute the `Rcodes.Rmd` file. The runtime is approximately one hour, depending on your computer specifications.
+
+After the analysis is completed, an `Rcodes.html` file will be generated and saved in the same folder. Open `Rcodes.html` in any web browser to view all outputs, messages, and figures.
 
 
 
