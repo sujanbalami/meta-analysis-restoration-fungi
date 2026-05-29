@@ -1,0 +1,14 @@
+{
+  "name": "R Environment",
+  "image": "rocker/tidyverse:latest",
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "REditorSupport.r",
+        "RDebugger.r-debugger",
+        "quarto.quarto"
+      ]
+    }
+  }
+}
