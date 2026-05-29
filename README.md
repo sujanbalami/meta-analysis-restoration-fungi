@@ -54,3 +54,17 @@ Email: balamisujan@gmail.com
 ## Description
 
 Meta-analysis of soil fungal community recovery during vegetation restoration in forest and grassland ecosystems.
+
+
+# How to use execute
+Download meta-analysis-restoration-fungi.zip this will download all files associated with this repository.
+Afterward, download **R version 4.5.3** from https://cran.rstudio.com/ according to your operating system (Windows, macOS, or Linux). Similarly, download **RStudio 2026.04.0** from https://posit.co/download/rstudio-desktop/ according to your operating system (Windows, macOS, or Linux).
+
+
+Now open Rcodes.Rmd this will open in RStudio.
+NOw click Knit <img width="1405" height="1120" alt="image" src="https://github.com/user-attachments/assets/328d5f83-e251-4108-bfe3-6f49e4fe4e77" /> 
+ 
+
+
+
+
